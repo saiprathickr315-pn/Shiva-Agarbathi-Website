@@ -30,62 +30,58 @@
     }
 
     /* --- MODERN GLASSMORPHIC HEADER --- */
-    .navbar {
-      background: rgba(15, 23, 42, 0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 20px 40px; 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
+  .navbar {
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px 40px; 
+  display: flex; 
+  flex-direction: row-reverse; /* Keeps Brand on Right, Button on Left */
+  align-items: center; 
+  justify-content: space-between; 
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
 
-    .navbar-brand h1 {
-      color: #ffffff; 
-      margin: 0; 
-      font-size: 22px; 
-      font-weight: 700; 
-      letter-spacing: 0.5px; 
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.navbar-brand h1 {
+  color: #ffffff; 
+  margin: 0; 
+  font-size: 22px; 
+  font-weight: 700; 
+  letter-spacing: 0.5px; 
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .navbar-brand h1 i {
-      color: var(--accent-gold);
-      font-size: 20px;
-    }
+/* Fixed class name from back-home-btn to back-btn */
+.back-btn {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
 
-    .back-home-btn {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 30px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .back-home-btn:hover {
-      background: var(--accent-gold);
-      color: var(--bg-dark);
-      border-color: var(--accent-gold);
-      transform: translateX(-3px);
-    }
-
+.back-btn:hover {
+  background: var(--accent-gold);
+  color: var(--bg-dark);
+  border-color: var(--accent-gold);
+  transform: translateX(3px); /* Shifts outward to the left on hover */
+}
     /* --- PAGE HEADER TITLE --- */
     .page-title-section {
       text-align: center;
@@ -354,13 +350,15 @@
 </head>
 <body>
 
-  <div class="navbar">
-    <div class="navbar-brand">
-      <h1><i class="fas fa-industry"></i> Shri Shiva Works</h1>
-    </div>
-    <a href="index.html" class="back-home-btn"><i class="fas fa-arrow-left"></i> Home</a>
+ <div class="navbar">
+  <div class="navbar-brand">
+    <h1>
+      <img src="logo1.png" alt="SSAW Logo" style="height: 26px; width: auto; object-fit: contain;">
+      SSAW
+    </h1>
   </div>
-
+  <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> HOME</a>
+</div>
   <div class="page-title-section">
     <h2>Industrial Products Portfolio</h2>
     <p>Explore complete factory systems, custom deployment machinery, and high-precision replacement spare tooling setups.</p>
