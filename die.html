@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partition Dies Sizes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .left-image {
+      flex: 1 1 300px;
+      background: #fafafa;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .content {
+      flex: 2 1 500px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    h2 {
+      color: #c62828;
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #eee;
+    }
+
+    .video-section {
+      margin-top: 30px;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-image, .content {
+        flex: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="left-image">
+      <img src="dies.jpg" alt="Partition Dies Chart">
+    </div>
+
+    <div class="content">
+      <h2>Partition Dies (Sizes)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Die Name</th>
+            <th>Number of Partitions</th>
+            <th>Paper Roll Size</th>
+            <th>Ready Size (Corner to Corner)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PARTITION DIE 8 INCH</td>
+            <td>2</td>
+            <td>8 INCH</td>
+            <td>6.5 INCH</td>
+          </tr>
+          <tr>
+            <td>PARTITION DIE 10 INCH</td>
+            <td>3</td>
+            <td>10 INCH</td>
+            <td>8.4 INCH</td>
+          </tr>
+          <tr>
+            <td>PARTITION DIE 11 INCH</td>
+            <td>3</td>
+            <td>11 INCH</td>
+            <td>9.4 INCH</td>
+          </tr>
+          <tr>
+            <td>PARTITION DIE 12 INCH</td>
+            <td>3 OR 4</td>
+            <td>12 INCH</td>
+            <td>10 INCH</td>
+          </tr>
+          <tr>
+            <td>PARTITION DIE 13 INCH</td>
+            <td>3 OR 4</td>
+            <td>13 INCH</td>
+            <td>11.5 INCH</td>
+          </tr>
+          <tr>
+            <td>PARTITION DIE 14 INCH</td>
+            <td>3 OR 4</td>
+            <td>14 INCH</td>
+            <td>12.5 INCH</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="video-section">
+        <h2>Watch Partition Die Video</h2>
+        <video controls>
+          <source src="paper plate.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Our Machinery Ecosystem | Shri Shiva Agarbathi Works</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0f172a;        
+      --card-bg: #1e293b;        
+      --accent-gold: #f59e0b;    
+      --accent-gold-hover: #d97706;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --body-bg: #f8fafc;
+      --primary-color: #0f172a;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--body-bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.02) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.02) 0px, transparent 50%);
+      margin: 0; padding: 0;
+      color: var(--primary-color);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- MODERN GLASSMORPHIC HEADER --- */
+    .navbar {
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 20px 40px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .navbar-brand h1 {
+      color: #ffffff; 
+      margin: 0; 
+      font-size: 22px; 
+      font-weight: 700; 
+      letter-spacing: 0.5px; 
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar-brand h1 i {
+      color: var(--accent-gold);
+      font-size: 20px;
+    }
+
+    .back-home-btn {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .back-home-btn:hover {
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+      border-color: var(--accent-gold);
+      transform: translateX(-3px);
+    }
+
+    /* --- PAGE HEADER TITLE --- */
+    .page-title-section {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+
+    .page-title-section h2 {
+      font-size: 36px;
+      color: var(--primary-color);
+      margin: 0 0 10px 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .page-title-section p {
+      color: #64748b;
+      font-size: 16px;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    .title-divider {
+      width: 60px;
+      height: 4px;
+      background: var(--accent-gold);
+      margin: 20px auto 0;
+      border-radius: 10px;
+    }
+
+    /* --- INDUSTRIAL CATEGORY FILTERS --- */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 10px 20px 40px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .filter-btn {
+      background: white;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      color: #475569;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent-gold);
+      color: var(--primary-color);
+      transform: translateY(-1px);
+    }
+
+    .filter-btn.active {
+      background: var(--bg-dark);
+      color: var(--accent-gold);
+      border-color: var(--bg-dark);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    /* --- PRODUCT ECOSYSTEM GRID --- */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 40px 80px;
+      max-width: 1340px;
+      margin: 0 auto;
+    }
+
+    /* --- PREMIUM TECH PRODUCT CARDS --- */
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(15, 23, 42, 0.04);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+    }
+
+    .product-image-container {
+      width: 100%;
+      height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 14px;
+      background-color: #f8fafc;
+      margin-bottom: 18px;
+    }
+
+    .product-image {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.06);
+    }
+
+    /* --- PREMIUM BRAND BADGES --- */
+    .product-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-bestseller { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); }
+    .badge-automation { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+    .badge-trending { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); }
+    .badge-popular { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .badge-packaging { background: linear-gradient(135deg, #10b981 0%, #047857 100%); }
+    .badge-spare { background: linear-gradient(135deg, #64748b 0%, #475569 100%); }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 8px 0;
+      min-height: 44px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+
+    /* --- LIVE PRICING TAG ENGINE STYLES --- */
+    .price-tag {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 12px;
+      background: var(--bg-dark);
+      padding: 8px 20px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover .price-tag {
+      background: var(--card-bg);
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    footer { 
+      text-align: center; 
+      padding: 28px 0; 
+      background-color: var(--bg-dark); 
+      color: var(--text-muted); 
+      font-size: 13px; 
+      border-top: 1px solid #1e293b; 
+      letter-spacing: 0.3px; 
+    }
+
+    /* --- RESPONSIVE SMARTPHONE LAYOUT (Seamless 2-Column Responsive Grid Architecture) --- */
+    @media screen and (max-width: 768px) {
+      .navbar {
+        padding: 16px 20px;
+      }
+
+      .navbar-brand h1 {
+        font-size: 17px;
+      }
+
+      .back-home-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+
+      .page-title-section {
+        padding: 35px 15px 20px;
+      }
+
+      .page-title-section h2 {
+        font-size: 24px;
+      }
+
+      .page-title-section p {
+        font-size: 14px;
+      }
+
+      .filter-container {
+        padding: 5px 10px 25px;
+        gap: 8px;
+      }
+
+      .filter-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 0 14px 60px;
+      }
+
+      .product-card {
+        padding: 14px;
+        border-radius: 16px;
+      }
+
+      .product-image-container {
+        height: 125px;
+        margin-bottom: 10px;
+      }
+
+      .product-name {
+        font-size: 13px;
+        min-height: 38px;
+        margin: 6px 0;
+        line-height: 1.4;
+      }
+
+      .price-tag {
+        font-size: 12px;
+        padding: 6px 14px;
+        margin-top: 8px;
+      }
+
+      .product-badge {
+        font-size: 9px;
+        padding: 4px 10px;
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-brand">
+      <h1><i class="fas fa-industry"></i> Shri Shiva Works</h1>
+    </div>
+    <a href="index.html" class="back-home-btn"><i class="fas fa-arrow-left"></i> Home</a>
+  </div>
+
+  <div class="page-title-section">
+    <h2>Industrial Products Portfolio</h2>
+    <p>Explore complete factory systems, custom deployment machinery, and high-precision replacement spare tooling setups.</p>
+    <div class="title-divider"></div>
+  </div>
+
+  <div class="filter-container">
+    <button class="filter-btn active" onclick="filterEcosystem('all')"><i class="fas fa-th-large"></i> All Inventory</button>
+    <button class="filter-btn" onclick="filterEcosystem('machine')"><i class="fas fa-cogs"></i> Production Lines</button>
+    <button class="filter-btn" onclick="filterEcosystem('automation')"><i class="fas fa-robot"></i> Advanced Automation</button>
+    <button class="filter-btn" onclick="filterEcosystem('packaging')"><i class="fas fa-box-open"></i> Packaging Systems</button>
+    <button class="filter-btn" onclick="filterEcosystem('spare')"><i class="fas fa-tools"></i> Tools & Spares</button>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card" data-category="machine" onclick="window.location.href='agarbathi.html'">
+      <div class="product-image-container">
+        <img src="https://m.media-amazon.com/images/I/31xzTcWGBzL._AC_SY200_QL15_.jpg" alt="Agarbatti Making Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-bestseller">🔥 Best Seller</div>
+      <div class="product-name">Agarbatti Making Machine (High Speed 8G)</div>
+      <div class="price-tag" id="price-Agarbatti Making Machine (High Speed 8G model)">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="automation" onclick="window.location.href='cottonwick.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2022/11/BJ/SG/VZ/142518361/fully-automatic-long-cotton-wick-making-machine-250x250.jpg" alt="Cotton Wick Making Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-automation">🤖 Automation</div>
+      <div class="product-name">Long Cotton Wicks Making Machine</div>
+      <div class="price-tag" id="price-Long Cotton Wick Making Machine">💰 Loading...</div>
+    </div>
+    
+    <div class="product-card" data-category="machine" onclick="window.location.href='dhoop.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2022/6/MM/OJ/TE/2380553/bullet-dhoop-making-machine-500x500.png" alt="Dhoopbatti Making Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-trending">🚀 Trending</div>
+      <div class="product-name">Bullet Dhoop Making Machine</div>
+      <div class="price-tag" id="price-Bullet Dhoop Making Machine">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="machine" onclick="window.location.href='sambrani.html'">
+      <div class="product-image-container">
+        <img src="https://camphormachine.in/wp-content/uploads/2022/09/cup-sambrani-machine.jpg" alt="Dhoopbatti Making Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-popular">⭐ Popular</div>
+      <div class="product-name">Dhoop Sambrani Cup Making Machine</div>
+      <div class="price-tag" id="price-Sambrani Cup Making Machine">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="automation" onclick="window.location.href='shifter.html'">
+      <div class="product-image-container">
+        <img src="shiffter.jpg" alt="Vibro Shifter Machine" class="product-image" onerror="this.src='https://placehold.co/300?text=Vibro+Shifter'">
+      </div>
+      <div class="product-badge badge-automation">🤖 Automation</div>
+      <div class="product-name">Vibro Shifter Filtering Machine</div>
+      <div class="price-tag" id="price-Mini Agarbatti Powder Filtering Machine">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="machine" onclick="window.location.href='cotton.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2023/9/344650723/JK/ND/IM/106775518/camphor-machine-250x250.jpeg" alt="Camphor Making Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-bestseller">🔥 Best Seller</div>
+      <div class="product-name">Camphor Tablet Making Machine</div>
+      <div class="price-tag" id="price-Camphor Making Machine">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="machine" onclick="window.location.href='dryer.html'">
+      <div class="product-image-container">
+        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSRXpwdlDzCj5Akr5yPWBpRfeI6WrfjXdsLhJqzfVpU3rKgU7wpi6Di9W4EL4ObCxmBAo2DgcFnwu-BGLobi2L3wuF0Jf2pPbxA5BkYiiI" alt="Dryer Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-trending">🚀 Trending</div>
+      <div class="product-name">Incense Stick Dryer Machine with Heater</div>
+      <div class="price-tag" id="price-Incense Stick Dryer Machine / Dryer with Heater">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="packaging" onclick="window.location.href='blister.html'">
+      <div class="product-image-container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLn-kjOSRZshvXmEzFI67l-aFODJtI1qtH6A&s" alt="Blister Packing Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-packaging">📦 Packaging</div>
+      <div class="product-name">Blister Pouch Sealing Packing Machine</div>
+      <div class="price-tag" id="price-Agarbatti Pouch Sealing Machine">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/ANDROID/Default/2021/11/CZ/FA/HN/115530652/product-jpeg-500x500.jpeg" alt="SS Scrubber Tool" class="product-image">
+      </div>
+      <div class="product-badge badge-popular">⭐ Popular</div>
+      <div class="product-name">Stainless Steel Metal Scrubber Unit</div>
+      <div class="price-tag" id="price-Machine spare parts-1">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="packaging" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="ex.jpg" alt="Printable Blister Sheet" class="product-image" onerror="this.src='https://placehold.co/300?text=Blister+Sheet'">
+      </div>
+      <div class="product-badge badge-packaging">📦 Packaging</div>
+      <div class="product-name">Printable Industrial Blister Sheets</div>
+      <div class="price-tag" id="price-Machine spare parts-2">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="machine" onclick="window.location.href='plate.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/RM/YX/MY-12813987/semi-automatic-paper-plate-making-machine-500x500.jpg" alt="Paper Plate Machine" class="product-image">
+      </div>
+      <div class="product-badge badge-automation">🤖 Automation</div>
+      <div class="product-name">Hydraulic Paper Plate Making Machine</div>
+      <div class="price-tag" id="price-Paper Plate Making Machine / Hydraulic paper plate machine">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='die.html'">
+      <div class="product-image-container">
+        <img src="die.jpg" alt="Molding Matrix Die" class="product-image" onerror="this.src='https://placehold.co/300?text=Plate+Die'">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Paper Plate Mold Precision Matrix Die</div>
+      <div class="price-tag" id="price-Machine spare parts-3">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2021/11/UB/OD/TO/91428096/cotton-wick-making-machine-conveyor-belt.jpg" alt="Conveyor Belt" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Long Cotton Wick Conveyor Drive Belt</div>
+      <div class="price-tag" id="price-Machine spare parts-4">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="packaging" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="SS2.jpg" alt="Raw Cotton Material" class="product-image" onerror="this.src='https://placehold.co/300?text=Raw+Cotton'">
+      </div>
+      <div class="product-badge badge-packaging">📦 Packaging</div>
+      <div class="product-name">Premium Raw Cotton Material Line</div>
+      <div class="price-tag" id="price-Cotton wicks / raw cotton material">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="packaging" onclick="window.location.href='blisteric.html'">
+      <div class="product-image-container">
+        <img src="https://www.unoplast.in/img/shop/scrub-1.webp" alt="Blister Raw Material" class="product-image">
+      </div>
+      <div class="product-badge badge-packaging">📦 Packaging</div>
+      <div class="product-name">Blister Thermoformed Raw Clamshells</div>
+      <div class="price-tag" id="price-Machine spare parts-5">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='77die.html'">
+      <div class="product-image-container">
+        <img src="die11.jpg" alt="Agarbatti Die" class="product-image" onerror="this.src='https://placehold.co/300?text=Agarbatti+Die'">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">High-Speed Extrusion Agarbatti Die</div>
+      <div class="price-tag" id="price-Machine spare parts-6">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='racket.html'">
+      <div class="product-image-container">
+        <img src="https://m.media-amazon.com/images/I/51mClRyVt-L.jpg" alt="Machine Racket" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Reciprocating Mechanical Racket Arm</div>
+      <div class="price-tag" id="price-Machine spare parts-7">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/ANDROID/Default/2022/9/GG/ZW/YO/153600630/product-jpeg-500x500.jpg" alt="Gear Motor" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Cotton Wick High-Torque Drive Motor</div>
+      <div class="price-tag" id="price-Machine spare parts-8">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='112.html'">
+      <div class="product-image-container">
+        <img src="https://2.wlimg.com/product_images/bc-full/2022/4/4048198/camphor-tablet-slab-dies-1650369285-6297248.jpeg" alt="Camphor Die" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Camphor Tablet Multi-Slab Compacting Die</div>
+      <div class="price-tag" id="price-Camphor Tablet Making Machine">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="packaging" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2021/8/JZ/QI/AY/13465910/agarbatti-perfumes.jpeg" alt="Concentrated Perfume" class="product-image">
+      </div>
+      <div class="product-badge badge-popular">⭐ Popular</div>
+      <div class="product-name">Concentrated Industrial Aroma Compounded Oil</div>
+      <div class="price-tag" id="price-Machine spare parts-9">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://m.media-amazon.com/images/I/81W1ImR1CSL._AC_UF894,1000_QL80_.jpg" alt="Spanner Wrench" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Heavy Duty Carbon Steel Setup Spanner</div>
+      <div class="price-tag" id="price-Machine spare parts-10">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://m.media-amazon.com/images/I/81u1yqV8SnL.jpg" alt="Eye Bearing" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Spherical Rod End Articulated Eye Bearing</div>
+      <div class="price-tag" id="price-Machine spare parts-11">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://ashishprofessionalsales.com/wp-content/uploads/2022/03/Pressure-Bolt.png" alt="Pressure Bolt" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">High-Tensile Mechanical Alignment Pressure Bolt</div>
+      <div class="price-tag" id="price-Machine spare parts-12">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/7/434225518/SR/XJ/AA/83794870/agarbatti-machine-ball-bearing.jpeg" alt="Ball Bearing" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">High-Speed Deep Groove Outer Bearing Ring</div>
+      <div class="price-tag" id="price-Machine spare parts-13">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2021/6/RY/LU/VH/5619661/ecentric-dish-23-500x500.jpg" alt="Eccentric Dish" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Industrial Reciprocating Eccentric Cam Dish</div>
+      <div class="price-tag" id="price-Machine spare parts-14">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://www.dkbonline.co.in/cdn/shop/files/P1.png?v=1722353075" alt="Piston Set" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Hardened Steel Solid Compression Piston Set</div>
+      <div class="price-tag" id="price-Machine spare parts-15">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2020/9/MM/AV/ZW/2539137/piston-guide-set-for-agarbatti-machine-500x500.jpg" alt="Piston Guide" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Linear Motion Cylinder Piston Guide Module</div>
+      <div class="price-tag" id="price-Machine spare parts-16">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://m.media-amazon.com/images/I/41JOVGsaEoL._AC_UF894,1000_QL80_.jpg" alt="Feed Hopper" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Stainless Steel Powder Sloped Feed Hopper</div>
+      <div class="price-tag" id="price-Machine spare parts-17">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="automation" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/ANDROID/Default/2023/1/IJ/AB/BL/13001433/product-jpeg-500x500.jpg" alt="AC Drive" class="product-image">
+      </div>
+      <div class="product-badge badge-automation">🤖 Automation</div>
+      <div class="product-name">Variable Frequency Micro-Controller AC Drive</div>
+      <div class="price-tag" id="price-Machine spare parts-18">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/3/398292565/KD/FI/QI/131659402/agarbatti-machine-feeder-circuit-board-500x500.png" alt="Circuit Board" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Automated Material Feeder Motherboard PCB</div>
+      <div class="price-tag" id="price-Machine spare parts-19">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://m.media-amazon.com/images/I/41VJp8QGbiL._AC_UF1000,1000_QL80_.jpg" alt="Proximity Sensor" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Infrared Inductive Proximity Limit Sensor</div>
+      <div class="price-tag" id="price-Machine spare parts-20">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://roboway.in/wp-content/uploads/2024/07/WhatsApp_Image_2024-07-09_at_12.04.46_AM__2_-removebg-preview.png" alt="Gear Motor" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">DC Reduction Gearbox Feeding Synchronous Motor</div>
+      <div class="price-tag" id="price-Machine spare parts-21">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/2/383619492/VW/TN/CD/10947587/iron-agarbatti-machine-blocks-2.jpeg" alt="Casting Block" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Cast Iron Heavy Counterweight Stabilizer Block</div>
+      <div class="price-tag" id="price-Machine spare parts-22">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="automation" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2021/5/LM/GF/VU/36646525/automatic-feeders-500x500.jpeg" alt="Auto Feeder" class="product-image">
+      </div>
+      <div class="product-badge badge-automation">🤖 Automation</div>
+      <div class="product-name">Fully Automated High-Speed Stick Feeder System</div>
+      <div class="price-tag" id="price-Machine spare parts-23">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2023/5/304910901/ML/AQ/QE/60853038/rubber-oil-seal-500x500.jpg" alt="Oil Seal" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Nitrile Rubber High-Temperature Shaft Oil Seal</div>
+      <div class="price-tag" id="price-Machine spare parts-24">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2023/4/298164329/IZ/HY/JT/108637685/4-inch-ac-axial-fan-exhaust-fan.jpg" alt="AC Axial Fan" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Panel Enclosure Thermal Control AC Axial Fan</div>
+      <div class="price-tag" id="price-Machine spare parts-25">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="spare" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://cpimg.tistatic.com/6199959/b/1/machines-auto-feeder-for-agarbatti-machine.jpg" alt="Feeder Dish" class="product-image">
+      </div>
+      <div class="product-badge badge-spare">⚙ Spare Part</div>
+      <div class="product-name">Rotary Centrifugal Mechanical Auto Feeder Dish</div>
+      <div class="price-tag" id="price-Machine spare parts-26">💰 Loading...</div>
+    </div>
+
+    <div class="product-card" data-category="packaging" onclick="window.location.href='contact.html'">
+      <div class="product-image-container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV_i2UhT0pGi6WxUmMUA3rw21Hitu1wCCY9g&s" alt="Hydraulic Blister Packing" class="product-image">
+      </div>
+      <div class="product-badge badge-bestseller">🔥 Best Seller</div>
+      <div class="product-name">Heavy Duty Hydraulic Blister Packing Machine</div>
+      <div class="price-tag" id="price-Machine spare parts-27">💰 Loading...</div>
+    </div>
+  </div>
+
+  <footer>© 2026 Shri Shiva Agarbathi Works. All rights reserved.</footer>
+
+  <script>
+    // 1. ECOSYSTEM FILTER CATEGORIES CONTROLLER
+    function filterEcosystem(categoryName) {
+      // Update Active Status on Buttons
+      const targetButtons = document.querySelectorAll('.filter-btn');
+      targetButtons.forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      // Sort Card Elements
+      const individualCards = document.querySelectorAll('.product-card');
+      individualCards.forEach(card => {
+        if(categoryName === 'all') {
+          card.style.display = 'flex';
+        } else {
+          if(card.getAttribute('data-category') === categoryName) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // 2. INDUSTRIAL LIVE PRICING FETCH INTEGRATION ENGINE
+    fetch("https://script.google.com/macros/s/AKfycbya-5GK0ZeTZfdJQQQYsUMklxEcNtcMSzEUYMd6fj7_8dDQoBmkhllxqdM5d8kepPHQIA/exec")
+    .then(response => response.json())
+    .then(data => {
+      if(data.result === "success") {
+        let prices = data.data;
+
+        // Custom Key-to-Array row mapping interface explicitly aligned to Apps Script pre-population entries
+        const targetMapping = {
+          "price-Agarbatti Making Machine (High Speed 8G model)": ["Agarbatti Making Machine (High Speed 8G model)", "Semi Automatic Agarbatti Making Machine"],
+          "price-Long Cotton Wick Making Machine": ["Long Cotton Wick Making Machine", "Cotton Wick Making Machine (single needle/long)"],
+          "price-Bullet Dhoop Making Machine": ["Bullet Dhoop Making Machine", "Dhoop Stick Making Machine"],
+          "price-Sambrani Cup Making Machine": ["Sambrani Cup Making Machine"],
+          "price-Mini Agarbatti Powder Filtering Machine": ["Mini Agarbatti Powder Filtering Machine", "Incense Powder Mixing Machine"],
+          "price-Camphor Making Machine": ["Camphor Making Machine"],
+          "price-Incense Stick Dryer Machine / Dryer with Heater": ["Incense Stick Dryer Machine / Dryer with Heater"],
+          "price-Agarbatti Pouch Sealing Machine": ["Agarbatti Pouch Sealing Machine", "Spices Packing & Sealing Machine"],
+          "price-Paper Plate Making Machine / Hydraulic paper plate machine": ["Paper Plate Making Machine / Hydraulic paper plate machine"],
+          "price-Cotton wicks / raw cotton material": ["Cotton wicks / raw cotton material"],
+          "price-Camphor Tablet Making Machine": ["Camphor Tablet Making Machine"]
+        };
+
+        // Populate designated primary machine components
+        Object.keys(targetMapping).forEach(domElementId => {
+          let cardPriceBadge = document.getElementById(domElementId);
+          if(cardPriceBadge) {
+            let possibleSheetKeys = targetMapping[domElementId];
+            let detectedValue = null;
+            
+            for(let lookupKey of possibleSheetKeys) {
+              if(prices[lookupKey] !== undefined && prices[lookupKey] !== null && prices[lookupKey] !== "") {
+                detectedValue = prices[lookupKey];
+                break;
+              }
+            }
+            if(detectedValue !== null) {
+              cardPriceBadge.innerHTML = isNaN(detectedValue) ? "💰 " + detectedValue : "💰 ₹ " + Number(detectedValue).toLocaleString('en-IN');
+            } else {
+              cardPriceBadge.innerHTML = "💰 Quote on Call";
+            }
+          }
+        });
+
+        // Loop fallback engine to smoothly catch, intercept, and process all extended custom Spares under "Machine spare parts" entry row
+        let universalSpareValue = prices["Machine spare parts"] || "Quote on Call";
+        let allPriceElements = document.querySelectorAll('.price-tag');
+        
+        allPriceElements.forEach(badgeElement => {
+          if(badgeElement.innerHTML.includes("Loading...")) {
+            let extractedSheetKey = badgeElement.id.replace("price-", "");
+            
+            if(prices[extractedSheetKey] !== undefined && prices[extractedSheetKey] !== "") {
+              badgeElement.innerHTML = isNaN(prices[extractedSheetKey]) ? "💰 " + prices[extractedSheetKey] : "💰 ₹ " + Number(prices[extractedSheetKey]).toLocaleString('en-IN');
+            } else {
+              badgeElement.innerHTML = isNaN(universalSpareValue) ? "💰 " + universalSpareValue : "💰 ₹ " + Number(universalSpareValue).toLocaleString('en-IN');
+            }
+          }
+        });
+      }
+    })
+    .catch(err => {
+      console.error("Pricing Execution Blocked: ", err);
+      document.querySelectorAll('.price-tag').forEach(badgeElement => {
+        if(badgeElement.innerHTML.includes("Loading...")) {
+          badgeElement.innerHTML = "💰 Quote on Call";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

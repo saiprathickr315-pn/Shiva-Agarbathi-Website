@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Dhoopbatti Making Machine | Shri Shiva Agarbathi Works</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0f172a;        
+      --card-bg: #1e293b;        
+      --accent-gold: #f59e0b;    
+      --accent-gold-hover: #d97706;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --body-bg: #f8fafc;
+      --primary-color: #0f172a;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--body-bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.01) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.02) 0px, transparent 50%);
+      margin: 0; padding: 0;
+      color: var(--primary-color);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- PREMIUM NAVIGATION HEADER --- */
+    .navbar {
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 20px 40px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .navbar-brand h1 {
+      color: #ffffff; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; 
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .navbar-brand h1 i { color: var(--accent-gold); font-size: 20px; }
+
+    .back-btn {
+      color: var(--text-light); text-decoration: none; font-size: 14px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;
+    }
+
+    .back-btn:hover { background: var(--accent-gold); color: var(--bg-dark); border-color: var(--accent-gold); transform: translateX(-3px); }
+
+    /* --- PAGE STRUCTURE --- */
+    .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
+    .heading { font-size: 32px; font-weight: 700; margin-bottom: 30px; color: var(--primary-color); letter-spacing: -0.5px; }
+
+    /* --- PRODUCT VIEW GRID --- */
+    .product-section { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+    .product-media-block { flex: 1 1 42%; min-width: 320px; }
+
+    .main-image-viewport {
+      width: 100%; border-radius: 20px; overflow: hidden; background: white;
+      border: 1px solid rgba(15, 23, 42, 0.06); box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; margin-bottom: 20px;
+    }
+
+    .main-image-viewport img { width: 100%; max-height: 400px; object-fit: contain; border-radius: 12px; }
+
+    /* --- GALLERY THUMBNAIL GRID --- */
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gallery-thumb-card {
+      background: white; border: 1px solid rgba(15, 23, 42, 0.06); border-radius: 14px;
+      padding: 8px; text-align: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    }
+    .gallery-thumb-card:hover { transform: translateY(-3px); border-color: var(--accent-gold); }
+    .gallery-thumb-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+    .gallery-thumb-card p { font-size: 11px; font-weight: 600; color: #475569; margin: 6px 0 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* --- DETAILS SIDEBAR --- */
+    .product-details { flex: 1 1 50%; min-width: 320px; }
+    .overview-card { background: white; border-radius: 20px; padding: 30px; border: 1px solid rgba(15, 23, 42, 0.04); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02); margin-bottom: 25px; }
+    .overview-card h3 { margin-top: 0; font-size: 20px; font-weight: 700; color: var(--bg-dark); border-left: 4px solid var(--accent-gold); padding-left: 12px; margin-bottom: 15px; }
+    .overview-card p { font-size: 14px; color: #475569; line-height: 1.6; }
+
+    /* --- INFO CARDS --- */
+    .spec-group-box { background: white; border-radius: 20px; padding: 30px; border: 1px solid rgba(15, 23, 42, 0.04); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02); margin-bottom: 25px; }
+    .spec-group-box h4 { margin: 0 0 15px 0; font-size: 16px; font-weight: 700; color: var(--bg-dark); display: flex; align-items: center; gap: 8px; }
+    .spec-group-box h4 i { color: var(--accent-gold); }
+    .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .spec-item { font-size: 13px; color: #334155; line-height: 1.5; padding: 8px 12px; background: #f8fafc; border-radius: 8px; border-left: 2px solid rgba(15, 23, 42, 0.1); }
+    .spec-item strong { color: var(--bg-dark); }
+
+    /* --- LIVE PRICING COMPONENT --- */
+    .live-pricing-dock {
+      background: var(--bg-dark); color: white; border-radius: 16px; padding: 16px 24px; margin-top: 10px;
+      display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .live-pricing-dock .price-lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 2px; }
+    .live-pricing-dock .price-value { font-size: 22px; font-weight: 700; color: var(--accent-gold); }
+
+    /* --- NEW E-COMMERCE HUB ACTIONS WITH INTERACTIVE LOCK SYSTEM --- */
+    .ecommerce-action-hub {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    .btn-buy-now {
+      flex: 1;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 25px;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--card-bg) 100%); color: var(--accent-gold);
+      font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12); border: 1px solid rgba(245, 158, 11, 0.3);
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer;
+    }
+    .btn-buy-now:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(245, 158, 11, 0.15); background: var(--accent-gold); color: var(--bg-dark); border-color: var(--accent-gold); }
+
+    .btn-add-cart {
+      flex: 1;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 25px;
+      background: #ffffff; color: var(--bg-dark);
+      font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 2px solid var(--bg-dark);
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer;
+    }
+    .btn-add-cart:hover:not(:disabled) { transform: translateY(-2px); background: var(--bg-dark); color: #ffffff; }
+
+    /* Programmatic Safety Overrides */
+    .btn-buy-now:disabled, .btn-add-cart:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+      border-color: #cbd5e1 !important;
+      background: #e2e8f0 !important;
+      color: #94a3b8 !important;
+    }
+
+    /* --- VIDEO SYSTEM DISPLAY --- */
+    .video-console-unit { margin-top: 50px; text-align: center; }
+    .video-console-unit h3 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 25px; color: var(--bg-dark); }
+    .video-frame-box { max-width: 800px; margin: 0 auto; background: #000; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); border: 1px solid rgba(15, 23, 42, 0.05); }
+    .video-frame-box video { width: 100%; display: block; height: auto; max-height: 450px; }
+
+    /* --- BROCHURE LINE --- */
+    .brochure-download-strip { background: white; border: 1px solid rgba(15, 23, 42, 0.04); padding: 40px 20px; border-radius: 20px; text-align: center; margin-top: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+    .brochure-download-strip h3 { margin: 0 0 15px 0; font-size: 18px; font-weight: 700; }
+    .btn-brochure { display: inline-flex; align-items: center; gap: 8px; background-color: var(--bg-dark); color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-size: 14px; font-weight: 600; transition: all 0.3s ease; border: 1px solid transparent; }
+    .btn-brochure:hover { background-color: transparent; color: var(--bg-dark); border-color: var(--bg-dark); }
+
+    /* --- CONDITIONS CARD --- */
+    .legal-terms-card { background: white; border-radius: 20px; padding: 35px; margin-top: 50px; border: 1px solid rgba(15, 23, 42, 0.06); }
+    .legal-terms-card h3 { margin-top: 0; font-size: 16px; font-weight: 700; color: var(--bg-dark); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .legal-terms-list { list-style-type: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .legal-terms-list li { font-size: 12px; color: #475569; line-height: 1.6; padding-left: 18px; position: relative; }
+    .legal-terms-list li::before { content: "\f054"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 2px; font-size: 9px; color: var(--accent-gold); }
+
+    /* --- POPUP LIGHTBOX --- */
+    .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; height: 100%; width: 100%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); justify-content: center; align-items: center; }
+    .lightbox img { max-width: 85%; max-height: 80vh; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .lightbox .close-trigger { position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; cursor: pointer; transition: color 0.2s; }
+    .lightbox .close-trigger:hover { color: var(--accent-gold); }
+
+    /* --- RESPONSIVE MOBILE FIXES --- */
+    @media screen and (max-width: 768px) {
+      .navbar { padding: 16px 20px; } .navbar-brand h1 { font-size: 17px; } .back-btn { padding: 8px 14px; font-size: 12px; }
+      .container { padding: 25px 15px; } .heading { font-size: 24px; margin-bottom: 20px; }
+      .product-section { flex-direction: column; gap: 25px; } .product-media-block, .product-details { flex: 1 1 100%; width: 100%; }
+      .main-image-viewport { padding: 10px; margin-bottom: 15px; } .main-image-viewport img { max-height: 280px; }
+      .gallery-grid { grid-template-columns: 1fr; gap: 8px; } .gallery-thumb-card img { height: 140px; }
+      .spec-grid { grid-template-columns: 1fr; gap: 10px; } .overview-card, .spec-group-box, .legal-terms-card { padding: 20px; }
+      .live-pricing-dock { flex-direction: column; text-align: center; gap: 10px; }
+      .legal-terms-list { grid-template-columns: 1fr; }
+      .ecommerce-action-hub { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-brand">
+      <h1><i class="fas fa-industry"></i> Shri Shiva Works</h1>
+    </div>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Products</a>
+  </div>
+
+  <div class="container">
+    <h2 class="heading">Dhoopbatti Making Machine</h2>
+
+    <div class="product-section">
+      <div class="product-media-block">
+        <div class="main-image-viewport">
+          <img src="https://5.imimg.com/data5/SELLER/Default/2022/6/MM/OJ/TE/2380553/bullet-dhoop-making-machine-500x500.png" id="main-product-image" alt="Dhoopbatti Making Machine">
+        </div>
+        
+        <div class="gallery-grid">
+          <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
+            <img src="dhoop1.jpg" alt="Dhoop Machine With Conveyor">
+            <p>With Conveyor Assembly</p>
+          </div>
+          <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
+            <img src="https://5.imimg.com/data5/UP/UJ/MY-10183492/dhoop-stick-making-machine-in-bhavnagar-500x500.jpg" alt="Dhoop Stick Without Conveyor">
+            <p>Standard Compact Setup</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-details">
+        <div class="overview-card">
+          <h3>Product Overview</h3>
+          <p><strong>Prominent & Leading Manufacturer from Bengaluru:</strong> We offer high-quality Dhoopbatti making machines engineered for industrial precision, exceptional framing durability, and continuous high-speed production configurations.</p>
+          
+          <div class="live-pricing-dock">
+            <div>
+              <div class="price-lbl">Real-time Machine Price</div>
+              <div class="price-value" id="price-target-element">Loading...</div>
+            </div>
+            <i class="fas fa-tag" style="color: var(--accent-gold); font-size: 24px;"></i>
+          </div>
+
+          <div class="ecommerce-action-hub">
+            <button class="btn-buy-now" id="buy-now-btn" onclick="sendToCartPipeline()" disabled>
+              <i class="fas fa-bolt"></i> Loading Price...
+            </button>
+            <button class="btn-add-cart" id="add-cart-btn" onclick="sendToCartPipeline()" disabled>
+              <i class="fas fa-shopping-cart"></i> Loading Price...
+            </button>
+          </div>
+        </div>
+
+        <div class="spec-group-box">
+          <h4><i class="fas fa-sliders-h"></i> Operational Specifications</h4>
+          <div class="spec-grid">
+            <div class="spec-item"><strong>Production Output:</strong> 10–15 kg/hr</div>
+            <div class="spec-item"><strong>Machine Speed:</strong> 150–200 strokes/min</div>
+            <div class="spec-item"><strong>Chassis Material:</strong> Heavy Duty Mild Steel</div>
+            <div class="spec-item"><strong>Automation Grade:</strong> Semi-Automatic Setup</div>
+            <div class="spec-item"><strong>Power Capacity Required:</strong> 4 HP Systems</div>
+            <div class="spec-item"><strong>Dhoop Thickness Scale:</strong> 6mm to 12mm Size</div>
+            <div class="spec-item"><strong>Dhoop Cutting Length:</strong> 75mm (Stick Dependent)</div>
+            <div class="spec-item"><strong>Motor Configuration:</strong> 1 HP or 1.5 HP Line</div>
+            <div class="spec-item"><strong>Power Connection:</strong> Single Phase AC Line</div>
+            <div class="spec-item"><strong>System Protection:</strong> 6 Mo. Motor & Gearbox Warranty</div>
+          </div>
+        </div>
+
+        <div class="spec-group-box">
+          <h4><i class="fas fa-info-circle"></i> Technical System Notes</h4>
+          <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.6;">Production capacities vary based on the structural viscosity of your custom raw material blend formulation. Note that operational warranty rules exclude electronic system components. For precise customized engineering, call direct: <strong>9342426468</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-console-unit">
+      <h3>Watch the Machinery Lines in Real-Time Action</h3>
+      <div class="video-frame-box">
+        <video controls>
+          <source src="dhoop12.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <div class="brochure-download-strip">
+      <h3>Access Digital Layout Blueprints</h3>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">Download complete technical asset specifications documentation sheets.</p>
+      <a href="https://www.indiamart.com/srishivaagarbathiworks/enquiry.html" target="_blank" class="btn-brochure">
+        <i class="fas fa-file-pdf"></i> Download Official Product Brochure
+      </a>
+    </div>
+
+    <div class="legal-terms-card">
+      <h3>Working Rules & Order Conditions</h3>
+      <ul class="legal-terms-list">
+        <li>Standard GST tax rules apply at 18% on all manufacturing machinery.</li>
+        <li>Transportation delivery charges calculated separately based on your factory location.</li>
+        <li>Standard Delivery Timeline: 15 to 30 Business Days from date of advance.</li>
+        <li>Payment Terms: 75% advance required, balance must be cleared before loading/delivery.</li>
+        <li>Price quotes are strictly valid for 10 calendar days from issue date.</li>
+        <li>On-site machine setup and technical installation work carries extra standard charges.</li>
+        <li>Extra training visits to your site will carry a standard service call charge.</li>
+        <li>Final pricing structure changes directly with your custom sizing setup choices.</li>
+        <li>Machinery once loaded and dispatched from factory gates cannot be returned or replaced.</li>
+        <li>100% formal billing processed strictly against verified customer GST or PAN configurations.</li>
+        <li>All legal agreements fall under local Bangalore City legal jurisdiction lines.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="lightbox" id="modal-viewport">
+    <span class="close-trigger" onclick="closeLightbox()">&times;</span>
+    <img id="modal-image-source" src="" alt="Expanded View">
+  </div>
+
+  <script>
+    function openLightbox(imgUrl) {
+      document.getElementById('modal-image-source').src = imgUrl;
+      document.getElementById('modal-viewport').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('modal-viewport').style.display = 'none';
+    }
+
+    // CENTRALIZED PIPELINE INTERFACE RE-ROUTING TO CART
+    function sendToCartPipeline() {
+      const productName = "Dhoopbatti Making Machine";
+      const priceText = document.getElementById("price-target-element").innerText;
+      const productImage = document.getElementById("main-product-image").src;
+      
+      const cartUrl = `cart.html?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(priceText)}&image=${encodeURIComponent(productImage)}`;
+      window.location.href = cartUrl;
+    }
+
+    // UNLOCK INTERACTIVE BUTTON WORKFLOWS SAFELY
+    function enablePurchaseWorkflow() {
+      const buyBtn = document.getElementById("buy-now-btn");
+      const cartBtn = document.getElementById("add-cart-btn");
+      
+      if (buyBtn && cartBtn) {
+        buyBtn.disabled = false;
+        buyBtn.innerHTML = `<i class="fas fa-bolt"></i> Order Now`;
+        
+        cartBtn.disabled = false;
+        cartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Add to Cart`;
+      }
+    }
+
+    // WEB APPLICATION FETCH INTERFACE SYNCHRONIZER
+    fetch("https://script.google.com/macros/s/AKfycbya-5GK0ZeTZfdJQQQYsUMklxEcNtcMSzEUYMd6fj7_8dDQoBmkhllxqdM5d8kepPHQIA/exec")
+    .then(response => response.json())
+    .then(data => {
+      if(data.result === "success") {
+        let sheetPrices = data.data;
+        let priceTag = document.getElementById("price-target-element");
+
+        // DYNAMIC PRICING ENGINE LOOKUP RULES
+        const matchingKeys = [
+          "Dhoopbatti Making Machine",
+          "Dhoop Making Machine",
+          "Bullet Dhoop Making Machine"
+        ];
+
+        let pickedPrice = null;
+        for(let key of matchingKeys) {
+          if(sheetPrices[key] !== undefined && sheetPrices[key] !== null && sheetPrices[key] !== "") {
+            pickedPrice = sheetPrices[key];
+            break;
+          }
+        }
+
+        if(pickedPrice !== null) {
+          priceTag.innerText = isNaN(pickedPrice) ? pickedPrice : "₹ " + Number(pickedPrice).toLocaleString('en-IN');
+        } else {
+          priceTag.innerText = "Quote on Call";
+        }
+      }
+      enablePurchaseWorkflow();
+    })
+    .catch(err => {
+      console.error("Live System Interface Load Timeout: ", err);
+      document.getElementById("price-target-element").innerText = "Quote on Call";
+      enablePurchaseWorkflow();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Machine Details Hub | Shri Shiva Agarbathi Works</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0f172a;        
+      --card-bg: #1e293b;        
+      --accent-gold: #f59e0b;    
+      --text-light: #f8fafc;
+      --text-muted: #64748b;
+      --body-bg: #f8fafc;
+      --primary-color: #0f172a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--body-bg);
+      margin: 0; padding: 0;
+      color: var(--primary-color);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- NAVIGATION HEAD BAR --- */
+    .navbar {
+      background: var(--bg-dark);
+      padding: 15px 30px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: sticky; top: 0; z-index: 1000;
+    }
+
+    .navbar-brand h1 {
+      color: #ffffff; margin: 0; font-size: 20px; font-weight: 700;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .navbar-brand h1 i { color: var(--accent-gold); }
+
+    .back-btn {
+      color: var(--text-light); text-decoration: none; font-size: 13px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover { background: var(--accent-gold); color: var(--bg-dark); border-color: var(--accent-gold); }
+
+    /* --- DUAL PANEL SPLIT WORKspace --- */
+    .main-workspace {
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px 20px 120px 20px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 30px;
+      flex-grow: 1;
+    }
+
+    /* --- TECHNICAL MATRIX PANEL --- */
+    .info-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+      border: 1px solid #e2e8f0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .info-header {
+      border-bottom: 2px solid var(--bg-dark);
+      padding-bottom: 15px;
+    }
+    .info-header h2 {
+      margin: 0; font-size: 24px; font-weight: 700; color: var(--bg-dark);
+    }
+
+    /* TYPING TEXT TERMINAL BLOCKS */
+    .description-box {
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: #1e293b;
+      background: #f8fafc;
+      padding: 18px;
+      border-left: 4px solid var(--accent-gold);
+      border-radius: 4px;
+      min-height: 60px;
+      position: relative;
+    }
+    
+    /* Elegant flashing cursor for ChatGPT typing feedback */
+    .typing-cursor::after {
+      content: '▋';
+      color: var(--accent-gold);
+      animation: flash 0.6s infinite;
+      font-size: 14px;
+      margin-left: 2px;
+    }
+    @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .table-title {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 10px 0 0 0;
+      color: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    /* --- MAXIMUM CONTRAST MATRIX SPREADSHEETS --- */
+    .specs-table-wrapper {
+      width: 100%; 
+      border-radius: 12px;
+      border: 2.5px solid var(--bg-dark); 
+      box-shadow: 0 6px 15px rgba(15, 23, 42, 0.06);
+      background: white;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    table { width: 100%; border-collapse: collapse; font-size: 15px; text-align: left; }
+    
+    th { 
+      background: var(--bg-dark); 
+      color: #ffffff; 
+      padding: 16px 20px; 
+      font-weight: 700; 
+      text-transform: uppercase; 
+      letter-spacing: 0.75px; 
+      font-size: 13px;
+      border-bottom: 3px solid var(--accent-gold);
+    }
+    
+    /* Cascading entry animation for distinct row elements */
+    tr.stream-row {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    tr.stream-row.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    td { 
+      padding: 16px 20px; 
+      border-bottom: 1px solid #cbd5e1; 
+      color: #000000; 
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #f1f5f9; }
+    
+    td .spec-label { color: #334155; font-weight: 700; font-size: 14.5px; }
+    td .spec-value { color: #000000; font-weight: 700; font-size: 15.5px; }
+
+    /* --- RIGHT WORKSPACE BLUEPRINT VIEWS --- */
+    .image-stream-desk {
+      display: flex; flex-direction: column; gap: 16px; width: 100%;
+    }
+    .image-stream-title {
+      font-size: 14px; font-weight: 700; color: var(--bg-dark);
+      text-transform: uppercase; letter-spacing: 0.5px; margin: 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .image-stream-title i { color: var(--accent-gold); }
+
+    .media-layout-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%;
+    }
+    
+    .interactive-img-card {
+      background: white; border-radius: 12px; border: 1px solid #e2e8f0;
+      padding: 8px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+      cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 1 / 1; width: 100%; opacity: 0; transform: scale(0.95);
+      transition: transform 0.3s, opacity 0.4s ease;
+    }
+    .interactive-img-card.visible { opacity: 1; transform: scale(1); }
+    .interactive-img-card img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; transition: transform 0.3s; }
+    .interactive-img-card:hover img { transform: scale(1.05); }
+
+    /* --- FIXED COMFORT ACCESS CONTROL BAR --- */
+    .bottom-action-dock {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #ffffff; border-top: 2px solid var(--bg-dark);
+      padding: 16px 30px; display: flex; justify-content: center; z-index: 1100;
+      box-shadow: 0 -8px 30px rgba(15, 23, 42, 0.12);
+    }
+    .dock-container {
+      max-width: 1260px; width: 100%; display: flex; gap: 16px; align-items: center;
+    }
+    .dock-container input {
+      flex-grow: 1; padding: 14px 18px; border-radius: 10px;
+      border: 1px solid #94a3b8; font-family: inherit; font-size: 14.5px;
+      outline: none; background: #f8fafc; color: var(--primary-color); font-weight: 600;
+    }
+    .dock-container input:focus { border-color: var(--bg-dark); background: white; }
+    
+    .dock-container button {
+      padding: 14px 28px; background: var(--bg-dark); color: var(--accent-gold);
+      border: 1px solid var(--accent-gold); font-weight: 700; font-family: inherit;
+      border-radius: 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
+      font-size: 13.5px; display: flex; align-items: center; gap: 8px; white-space: nowrap;
+    }
+    .dock-container button:hover { background: var(--accent-gold); color: var(--bg-dark); }
+
+    /* --- EXPANSION DISPLAY VIEWPORT --- */
+    .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; height: 100%; width: 100%; background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(8px); justify-content: center; align-items: center; }
+    .lightbox img { max-width: 90%; max-height: 85vh; border-radius: 8px; object-fit: contain; }
+    .close-trigger { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+
+    /* --- DUAL DEVICE ADAPTIVE MEDIA BREAKPOINTS --- */
+    @media screen and (max-width: 992px) {
+      .main-workspace { grid-template-columns: 1fr; gap: 30px; padding: 20px 12px 140px 12px; }
+      .bottom-action-dock { padding: 12px 16px; }
+      
+      /* Collapse layout tables cleanly into massive text blocks on phones */
+      table, thead, tbody, th, td, tr { display: block; width: 100%; }
+      thead { display: none; }
+      
+      tr.stream-row {
+        border-bottom: 2.5px solid var(--bg-dark);
+        padding: 10px 4px;
+        background: #ffffff !important;
+      }
+      tr:last-child { border-bottom: none; }
+      
+      td { display: flex; flex-direction: column; padding: 6px 12px; border: none; }
+      td .spec-label { font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+      td .spec-value { font-size: 16px; color: #000000; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-brand">
+      <h1><i class="fas fa-industry"></i> Shri Shiva Works</h1>
+    </div>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Systems Catalog</a>
+  </div>
+
+  <div class="main-workspace">
+    
+    <div class="info-card">
+      <div class="info-header">
+        <h2 id="machine-title">Identifying Machine...</h2>
+      </div>
+      
+      <div class="description-box typing-cursor" id="machine-description">
+        </div>
+
+      <h4 class="table-title" id="table-heading"><i class="fas fa-layer-group"></i> Engineering Specification Matrix</h4>
+      <div class="specs-table-wrapper" id="table-wrapper">
+        <table id="specs-table">
+          </table>
+      </div>
+    </div>
+
+    <div class="image-stream-desk">
+      <h3 class="image-stream-title"><i class="fas fa-camera-retro"></i> Technical Blueprint Viewports</h3>
+      <div class="media-layout-grid" id="imageSection">
+        </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-action-dock">
+    <div class="dock-container">
+      <input type="text" id="userInput" placeholder="Type your custom production requirements here..." />
+      <button onclick="handleInquiry()">Submit Request <i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <div class="lightbox" id="modal-viewport">
+    <span class="close-trigger" onclick="closeLightbox()">&times;</span>
+    <img id="modal-image-source" src="" alt="Expanded Blueprint Profile">
+  </div>
+
+  <script>
+    const machineDetails = {
+      "Agarbathi Making Machine": {
+        "description": "We are a prominent and leading manufacturer from Bengaluru, offering the Agarbatti Making Machine (High-Speed 8g Model), Incense Stick Dryer Machine, and Dhoop Stick Making Machine. This high-performance, automated incense stick production machine ensures precision rolling and cutting, capable of producing incense sticks from 20 cm to 50 cm in length, supporting different stick diameters and powder options.",
+        "specs": [
+          ["Processor Speed", "150-260 Sticks/Min"],
+          ["Motor Power", "1 HP (0.75 KW)"],
+          ["Frequency", "50-60 Hz"],
+          ["Dimensions", "150 cm x 700 cm x 100 cm"],
+          ["Power Supply", "AC 220 Volts (Single Phase)"],
+          ["Incense Stick Length", "20 cm to 50 cm"],
+          ["Bamboo Stick Diameter", "0.5 mm to 2 mm"],
+          ["Incense Stick Diameter", "2.5 mm to 5.5 mm"],
+          ["Powder Options", "Wood Powder, Coal Powder"],
+          ["Bamboo Stick Type", "Round Only"],
+          ["Machine Price (HT Type, Indian Make)", "Price ON request"],
+          ["Machine Price (HAILON, Vietnam)", "Price ON request"],
+          ["Machine Price (NAVI-TECH, Vietnam)", "Price on Request"],
+          ["Machine Price (A.CAO, Vietnam)", "Price on Request"],
+          ["Item Code", "005"]
+        ],
+        "images": [
+          "https://4.imimg.com/data4/ON/LL/MY-2380553/agarbathi-making-machine-high-speed-8g-model-250x250.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2020/12/WC/MS/IP/2380553/incense-stick-making-machine-500x500.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2020/12/ID/KW/FA/2380553/incense-stick-making-machine-500x500.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/UA/ZH/WL/2380553/agarbati-making-machine-high-speed-8g-model-500x500.jpeg"
+        ]
+      },
+      "Camphor Making Machine": {
+        "description": "Semi-automatic camphor tablet machine ideal for industrial and domestic use. Durable mild steel build with multiple dye options and single-phase power support.",
+        "specs": [
+          ["Brand", "Slatc"],
+          ["Capacity", "10 kgs"],
+          ["Model Name/Number", "SLATCCMM"],
+          ["Automation Grade", "Semi"],
+          ["Power Source", "240V"],
+          ["Voltage", "220V"],
+          ["Usage", "Industrial & Domestic use"],
+          ["Motor Warranty", "1 Year"],
+          ["Available Phase", "Single Phase"],
+          ["Body Material", "Metal"],
+          ["Driven Type", "Belt Driven"],
+          ["Frequency", "50Hz"],
+          ["Finishing", "Metal"],
+          ["Material", "Iron / Mild Steel"],
+          ["Number of Dies", "Multiple (as per customer requirement)"],
+          ["Motor Power", "0.5 HP"],
+          ["Operation Mode", "Automatic"],
+          ["Production Capacity", "30-60 kgs/hr (depends on model)"],
+          ["Weight", "82–150 Kgs"],
+          ["Country of Origin", "Made in India"],
+          ["Tablet Dye Sizes", "7x14, 8x16, 9x18, 10x20 (Tablet), 8-24mm (Round), 25x25, 35x30 (Square)"],
+          ["Item Code", "005"],
+          ["Delivery Time", "15-30 Days"],
+          ["Packaging", "Wooden Box"]
+        ],
+        "images": [
+          "https://5.imimg.com/data5/SELLER/Default/2020/12/KQ/CD/AA/2380553/camphor-making-machine-500x500.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2020/12/VD/FC/HI/2380553/camphor-tablet-making-machine-500x500.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2021/2/UD/MX/TP/2380553/camphor-making-machine-500x500.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/LN/NV/BP/2380553/camphor-making-machine-500x500.jpeg"
+        ]
+      },
+      "Cotton Wick Making Machine": {
+        "description": "Providing you the best range of long cotton wick making machine with cutter machine, cotton wick making machine (single needle long), and camphor tablet making machine with effective & timely delivery. The long cotton wick making machine allows you to produce wicks from 1\" to 4\". Available in semi-automatic and automatic versions, the machine runs on 220V single-phase power.",
+        "specs": [
+          ["Brand", "SLATC"],
+          ["Production Capacity", "4KGS/Day (depends on the operator)"],
+          ["Automation Grade", "Semi Automatic"],
+          ["Body Material", "MS"],
+          ["No of Persons", "1"],
+          ["Course Type", "Full Time"],
+          ["Machine Production", "Cotton Wicks"],
+          ["Course Duration", "6 days"],
+          ["Phase", "Single Phase"],
+          ["Machine Type", "Single"],
+          ["Motor Power", "Single Phase"],
+          ["Machine Weight", "16 kgs"],
+          ["Features", "Semi Automatic"],
+          ["Capacity", "Depending on the operator"],
+          ["Operation Type", "Automatic"],
+          ["Machine Price", "Price On Request"],
+          ["Delivery Time", "15 days"],
+          ["Packaging", "Carton Box"]
+        ],
+        "images": [
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/XH/KD/MX/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg",
+          "https://5.imimg.com/data5/VO/IM/WC/SELLER-2380553/cotton-wick-making-machine-500x500.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/QP/DA/XA/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/UP/AY/WD/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg"
+        ]
+      },
+      "Sambrani cup making machine": {
+        "description": "Our range of products includes Sambrani Cup Making Machine and Automatic Dhoop Cone Making Machine. Designed for user-friendly operation, these machines support hydraulic features and are capable of producing up to 50 strokes per minute. Ideal for small to medium-scale production, available in various levels of automation (Manual, Semi-Automatic, Fully Automatic, and Computerized).",
+        "specs": [
+          ["Machine Speed", "0-50 strokes/min"],
+          ["Material", "MS Iron & Steel"],
+          ["Usage/Application", "Friendly Use"],
+          ["Diameter of Cone", "Any One Size"],
+          ["Features", "Hydraulic"],
+          ["Count of Cones Per Minute", "50"],
+          ["Item Weight", "Greater than 150 Kg"],
+          ["Automation Grade", "Semi Automatic"],
+          ["Production Capacity", "1-5 kg/hr"],
+          ["Machine Type", "Dhoop Cone / Sambrani Cup Making"],
+          ["Available Versions", "Manual / Semi Automatic / Fully Automatic / Computerized"],
+          ["Delivery Time", "25-30 Days"],
+          ["Packaging Details", "Open"]
+        ],
+        "images": [
+          "https://5.imimg.com/data5/VS/JD/MY-2380553/sambrani-cup-making-machine-500x500.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/6/HY/AB/JA/2380553/sambrani-cup-making-machine-500x500.jpeg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/6/NK/MK/XF/2380553/sambrani-cup-making-machine-500x500.jpeg"
+        ]
+      },
+      "Powder Mixing Machines": {
+        "description": "We are a leading manufacturer of Mixing Machines for agarbatti raw materials and industrial powder mixing applications. Our product range includes Detergent Powder Mixing Machine and Incense Powder Mixing Machine. Designed for semi-automatic and automatic operation, these machines are built using MS or SS materials and are suitable for capacities ranging from 15 kg to 1000 kg. Though popularly known as 'Mixing Machine for Food Materials and Industries Purpose', these are exclusively supplied to agarbatti industries, not food industries.",
+        "specs": [
+          ["Usage/Application", "Incense Powder Mixing / Agarbatti Raw Material Preparation"],
+          ["Design Type", "Standard, Customized"],
+          ["Material", "MS or SS"],
+          ["Shape", "Square"],
+          ["Phase", "Single Phase / Three Phase (as required)"],
+          ["Automation Grade", "Semi-Automatic, Automatic"],
+          ["Capacity", "10, 25, 50, 100 kgs (up to 1000 kg available)"],
+          ["Voltage", "220V"],
+          ["Power Supply", "AC"],
+          ["Drive Motor Power", "0.5HP to 3HP"],
+          ["Brand", "SLATC"],
+          ["Powder Mixing", "Yes"],
+          ["Finishing", "Metal"],
+          ["Tilting/Non-Tilting", "Available in both options; non-tilting includes drain outlet"],
+          ["Model Name/Number", "SLATC"],
+          ["Country of Origin", "Made in India"]
+        ],
+        "images": [
+          "https://5.imimg.com/data5/ANDROID/Default/2025/3/495240234/YG/LZ/OV/2380553/product-jpeg-1000x1000.jpg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/HB/WN/SF/2380553/mixing-machine-for-agarbatti-raw-materials-500x500.jpeg",
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/ZF/LI/NM/2380553/mixing-machine-for-agarbatti-raw-materials-500x500.jpeg"
+        ]
+      },
+      "Agarbatti Dryer Machines": {
+        "description": "We manufacture and supply high-quality Dryer Machines with Heaters specifically designed for drying agarbatti sticks. Available in capacities ranging from 100 kg to 400 kg, these dryers are built with a durable mild steel body and are suitable for both commercial and domestic use. The machine operates on AC power with a temperature heater and lock system for controlled heating, supporting single-phase and three-phase input as per requirement.",
+        "specs": [
+          ["Brand", "SLATC"],
+          ["Material", "Mild Steel (MS)"],
+          ["Automation Grade", "Semi-Automatic"],
+          ["Capacity", "100 Kg to 400 Kg"],
+          ["Usage/Application", "For Agarbatti Drying (Commercial & Domestic)"],
+          ["Max Temperature", "50°C"],
+          ["Type", "Stand"],
+          ["Heating Resource", "Temperature Heater with Lock System"],
+          ["Power Source", "AC"],
+          ["Phase Type", "Single & Three Phase"],
+          ["Voltage", "220V"],
+          ["Tray", "According to Model"],
+          ["Design", "Standard"],
+          ["Body Material", "MS"],
+          ["Country of Origin", "Made in India"]
+        ],
+        "images": [
+          "https://5.imimg.com/data5/BS/KQ/XE/ANDROID-2380553/product-jpeg-500x500.jpg",
+          "https://4.imimg.com/data4/VC/EX/ANDROID-2380553/product-500x500.jpeg",
+          "https://5.imimg.com/data5/BS/KQ/XE/ANDROID-2380553/product-jpeg-500x500.jpg"
+        ]
+      },
+      "Paper Plate Making Machine": {
+        "description": "We offer high-performance Paper Plate Making Machines, including Hydraulic and Double Die variants. These machines are ideal for producing a variety of paper plate sizes and are available in single or multiple die stations. Operating on single-phase AC power and hydraulic oil mechanisms, they are semi-automatic in nature and suitable for small-scale to medium-scale production. The price depends on the machine's build quality and configuration.",
+        "specs": [
+          ["Product Type", "Hydraulic Paper Plate Making Machine / Double Die Machine"],
+          ["Price", "Price on Request"],
+          ["Minimum Order Quantity", "1 Piece"],
+          ["Production Capacity", "Up to 1000 plates/hr (Double Die), Up to 500 plates/hr (Hydraulic Manual)"],
+          ["Plate Size", "5 inch (varies by die)"],
+          ["Automation Grade", "Manual / Semi-Automatic"],
+          ["Paper Material", "PE Coated Paper"],
+          ["Power Source", "Single Phase A/C"],
+          ["Drive Type", "Hydraulic (uses hydraulic oil)"],
+          ["Stations", "Single or Multiple Die Stations"],
+          ["Application", "Paper Plate Production"],
+          ["Country of Origin", "Made in India"]
+        ],
+        "images": [
+          "https://5.imimg.com/data5/ANDROID/Default/2025/2/490458843/FJ/VZ/PL/2380553/product-jpeg-500x500.jpg",
+          "https://5.imimg.com/data5/ANDROID/Default/2025/3/495146163/TU/RM/VH/2380553/product-jpeg-500x500.jpg",
+          "https://5.imimg.com/data5/ANDROID/Default/2025/3/495144586/UT/FI/JO/2380553/product-jpeg-1000x1000.jpg"
+        ]
+      },
+      "Band Sealing Machine": {
+        "description": "This Band Sealing Machine is designed for efficient packing and sealing of spices, food items, and other products. With a production capacity of up to 500 carton boxes, it operates semi-automatically in a vertical mode and is ideal for small and medium-scale packaging setups. We also offer a variety of other sealing and packing solutions, including manual sealing machines, bale patti stapling machines, heat tunnel machines, and scrubber sealing machines. For more details, contact: 9342426468.",
+        "specs": [
+          ["Product Type", "Band Sealing Machine / Spices Packing and Sealing Machine"],
+          ["Price", "Price on Request"],
+          ["Minimum Order Quantity", "1 Unit"],
+          ["Production Capacity", "Up to 500 carton boxes"],
+          ["Automation Grade", "Semi-Automatic"],
+          ["Operational Mode", "Vertical"],
+          ["Phase", "Single Phase"],
+          ["Frequency", "50 Hz"],
+          ["Voltage", "220 V"],
+          ["Compatible Machines Offered", "Manual Sealing Machine, Bale Patti Stapling Machine, Heat Tunnel Machine, Scrubber Sealing Machine"],
+          ["Country of Origin", "Made in India"]
+        ],
+        "images": [
+          "https://5.imimg.com/data5/SELLER/Default/2022/5/KO/FQ/ME/2380553/cartoon-box-packing-machine-500x500.jpeg",
+          "https://5.imimg.com/data5/ANDROID/Default/2025/3/495246135/BI/IF/XN/2380553/product-jpeg-500x500.jpg"
+        ]
+      }
+    };
+
+    function startStreamingEngine(machineName) {
+      const data = machineDetails[machineName];
+      if (!data) return;
+
+      document.getElementById("machine-title").innerText = machineName;
+      
+      // 1. Clear out tables and images ready for dynamic loading
+      const table = document.getElementById("specs-table");
+      let tableHTML = "<thead><tr><th>Engineering Parameters</th><th>Verified Values</th></tr></thead><tbody>";
+      data.specs.forEach(([label, val]) => {
+        tableHTML += `<tr class="stream-row">
+          <td><span class="spec-label">${label}</span></td>
+          <td><span class="spec-value">${val}</span></td>
+        </tr>`;
+      });
+      tableHTML += "</tbody>";
+      table.innerHTML = tableHTML;
+
+      const imgContainer = document.getElementById("imageSection");
+      imgContainer.innerHTML = "";
+      data.images.forEach(src => {
+        const div = document.createElement("div");
+        div.className = "interactive-img-card";
+        div.onclick = () => openLightbox(src);
+        div.innerHTML = `<img src="${src}" alt="${machineName}">`;
+        imgContainer.appendChild(div);
+      });
+
+      // 2. Stream description paragraph letter-by-letter
+      const textContainer = document.getElementById("machine-description");
+      let fullText = data.description;
+      let currentCharIndex = 0;
+      textContainer.innerText = "";
+      textContainer.classList.add("typing-cursor");
+
+      function typeNextLetter() {
+        if (currentCharIndex < fullText.length) {
+          textContainer.innerText += fullText.charAt(currentCharIndex);
+          currentCharIndex++;
+          // Faster typing rate for smooth technical profile output
+          setTimeout(typeNextLetter, 12); 
+        } else {
+          // Finished text streaming -> kill flashing cursor indicator
+          textContainer.classList.remove("typing-cursor");
+          revealDataSpreadsheet();
+        }
+      }
+      setTimeout(typeNextLetter, 400);
+    }
+
+    // 3. Smooth row-by-row matrix cascading arrival effect
+    function revealDataSpreadsheet() {
+      document.getElementById("table-heading").style.opacity = "1";
+      document.getElementById("table-wrapper").style.opacity = "1";
+
+      const lines = document.querySelectorAll("tr.stream-row");
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          line.classList.add("revealed");
+        }, index * 60); // Clean incremental staggered speed reveal
+      });
+
+      // Stagger image cards simultaneously alongside content rows
+      setTimeout(() => {
+        const cards = document.querySelectorAll(".interactive-img-card");
+        cards.forEach((card, idx) => {
+          setTimeout(() => {
+            card.classList.add("visible");
+          }, idx * 100);
+        });
+      }, 200);
+    }
+
+    function handleInquiry() {
+      const field = document.getElementById("userInput");
+      if(field.value.trim() !== "") {
+        alert("Inquiry Logged! Connect specifications direct to production hub: +91 9342426468");
+        field.value = "";
+      }
+    }
+
+    function openLightbox(srcString) {
+      document.getElementById('modal-image-source').src = srcString;
+      document.getElementById('modal-viewport').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('modal-viewport').style.display = 'none';
+    }
+
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.search);
+      let selectedMachine = params.get("name") || "Agarbathi Making Machine";
+      startStreamingEngine(selectedMachine);
+    }
+  </script>
+</body>
+</html>

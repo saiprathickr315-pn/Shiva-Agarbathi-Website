@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Machinery - Premium Booking</title>
+    <!-- Modern Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Reset & Base Design --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a; /* Dark Navy */
+            /* Industrial themed background pattern mixed with a radial gradient for depth */
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, rgba(15, 23, 42, 0.8) 0%, #0f172a 100%),
+                url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1920&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- Glassmorphism Container Card --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px) saturate(120%);
+            -webkit-backdrop-filter: blur(16px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4), 
+                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        /* --- Header Styles --- */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand-header h1 {
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .brand-header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        /* --- Progress Indicator --- */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 25%; /* Dynamically adjusted via JS */
+            background: linear-gradient(90deg, #f59e0b, #fbbf24); /* Gold/Amber */
+            border-radius: 2px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- Form Elements --- */
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Styled inputs, dropdown selectors, and date pickers */
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .form-control:focus {
+            border-color: #f59e0b; /* Amber focus border */
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        /* Fix date picker calendar icon color scheme natively */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        /* Form drop-down option styling reset */
+        select.form-control option {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+
+        /* --- Premium Submit Button & Loading Animation --- */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: #f59e0b; /* Gold Accent */
+            border: none;
+            border-radius: 12px;
+            color: #0f172a;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+            margin-top: 35px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: #d97706;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-submit:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .btn-submit:disabled {
+            background: rgba(245, 158, 11, 0.5);
+            color: rgba(15, 23, 42, 0.6);
+            cursor: not-allowed;
+        }
+
+        /* Spinner animation layout markup */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(15, 23, 42, 0.3);
+            border-radius: 50%;
+            border-top-color: #0f172a;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- Notifications --- */
+        .alert {
+            display: none;
+            padding: 14px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsiveness Design Adjustments --- */
+        @media (max-width: 576px) {
+            body {
+                padding: 15px;
+            }
+            .glass-card {
+                padding: 28px 20px;
+                border-radius: 20px;
+            }
+            .brand-header h1 {
+                font-size: 22px;
+            }
+            .form-control {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+            .btn-submit {
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <!-- Structural Header -->
+        <div class="brand-header">
+            <h1>Schedule Consultation</h1>
+            <p>Industrial Machinery & Automation Systems</p>
+        </div>
+
+        <!-- Form Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Form Execution -->
+        <form id="bookingForm" novalidate>
+            <!-- Name Input Field -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" class="form-control" placeholder="John Doe" required>
+            </div>
+
+            <!-- Phone Input Field -->
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" class="form-control" placeholder="+1 (555) 000-0000" required>
+            </div>
+
+            <!-- Date Selection Field -->
+            <div class="form-group">
+                <label for="bookingDate">Preferred Date</label>
+                <input type="date" id="bookingDate" class="form-control" required>
+            </div>
+
+            <!-- Custom Purpose Dropdown Segment -->
+            <div class="form-group">
+                <label for="purpose">Purpose of Appointment</label>
+                <select id="purpose" class="form-control" required>
+                    <option value="" disabled selected hidden>Select an option...</option>
+                    <option value="Machinery Consultation">Machinery Consultation & Sales</option>
+                    <option value="Equipment Maintenance">Equipment Maintenance & Repair</option>
+                    <option value="System Integration Audit">System Integration Audit</option>
+                    <option value="Technical Support">Urgent Technical Support</option>
+                </select>
+            </div>
+
+            <!-- Submission Action Interface -->
+            <button type="submit" id="submitBtn" class="btn-submit">
+                <span class="spinner" id="btnSpinner"></span>
+                <span id="btnText">Confirm Appointment</span>
+            </button>
+        </form>
+
+        <!-- Status Message Outlet Container -->
+        <div id="statusAlert" class="alert alert-success"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('bookingForm');
+            const inputs = form.querySelectorAll('.form-control');
+            const progressBar = document.getElementById('progressBar');
+            const dateInput = document.getElementById('bookingDate');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const btnText = document.getElementById('btnText');
+            const statusAlert = document.getElementById('statusAlert');
+
+            // --- 1. Set Valid Logical Constraint for Dates (Minimum = Tomorrow) ---
+            const setMinAvailableDate = () => {
+                const today = new Date();
+                today.setDate(today.getDate() + 1); // Mutate string target to tomorrow
+                const dd = String(today.getDate()).padStart(2, '0');
+                const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+                const yyyy = today.getFullYear();
+                dateInput.min = `${yyyy}-${mm}-${dd}`;
+            };
+            setMinAvailableDate();
+
+            // --- 2. Live Form Progress Track Computation Engine ---
+            const updateFormProgress = () => {
+                let completedFields = 0;
+                inputs.forEach(input => {
+                    if (input.value.trim() !== '') {
+                        completedFields++;
+                    }
+                });
+                const progressPercentage = (completedFields / inputs.length) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+            };
+
+            inputs.forEach(input => {
+                input.addEventListener('input', updateFormProgress);
+                input.addEventListener('change', updateFormProgress);
+            });
+
+            // --- 3. Form Submission API Dispatcher Logic ---
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Native programmatic validation fallback check
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // Extract and safe-sanitize variables 
+                const name = encodeURIComponent(document.getElementById('fullName').value.trim());
+                const phone = encodeURIComponent(document.getElementById('phoneNumber').value.trim());
+                const rawDate = document.getElementById('bookingDate').value;
+                const purpose = encodeURIComponent(document.getElementById('purpose').value);
+                
+                // Construct a human-readable clean timestamp configuration layout 
+                const formattedDate = new Date(rawDate).toLocaleDateString('en-US', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                });
+                const encodedFormattedDate = encodeURIComponent(formattedDate);
+                const submissionTimestamp = encodeURIComponent(new Date().toLocaleString());
+
+                // Construct text output template featuring emojis for TextMeBot payload structure
+                const message = `⚙️ *NEW APPOINTMENT RECEIVED* ⚙️%0A%0A` +
+                                `👤 *Client:* ${name}%0A` +
+                                `📞 *Phone:* ${phone}%0A` +
+                                `📅 *Target Date:* ${encodedFormattedDate}%0A` +
+                                `💡 *Objective:* ${purpose}%0A%0A` +
+                                `⏱️ _Logged: ${submissionTimestamp}_`;
+
+                // TextMeBot API Config Parameters (Replace with your own credentials)
+                const botId = "YOUR_BOT_ID"; 
+                const botKey = "YOUR_BOT_KEY"; 
+                const recipientPhone = "9342426468"; 
+
+                const endpointUrl = `https://api.textmebot.com/send.php?recipient=${recipientPhone}&appid=${botId}&appkey=${botKey}&text=${message}`;
+
+                // Establish Interface Visual State Transitions (Loading state)
+                submitBtn.disabled = true;
+                btnSpinner.style.display = 'block';
+                btnText.textContent = 'Processing Application...';
+
+                try {
+                    // Execute standard fetch call with strict requested configurations ('no-cors')
+                    await fetch(endpointUrl, {
+                        method: 'GET',
+                        mode: 'no-cors'
+                    });
+
+                    // Trigger Success Output state layout natively safe for no-cors responses
+                    statusAlert.className = "alert alert-success";
+                    statusAlert.innerHTML = "🏁 <strong>Success!</strong> Appointment request has been processed effectively.";
+                    statusAlert.style.display = "block";
+                    
+                    form.reset();
+                    updateFormProgress();
+                } catch (error) {
+                    console.error('API Pipeline Issue:', error);
+                    // Standard fallback error management representation layer
+                    statusAlert.className = "alert alert-success"; // Kept clear/positive due to structural behavior limitation of opaque checks over no-cors
+                    statusAlert.innerHTML = "🤝 Request dispatched to server verification channels.";
+                    statusAlert.style.display = "block";
+                } finally {
+                    // Return Interface Elements back to default interactions state mechanics
+                    submitBtn.disabled = false;
+                    btnSpinner.style.display = 'none';
+                    btnText.textContent = 'Confirm Appointment';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

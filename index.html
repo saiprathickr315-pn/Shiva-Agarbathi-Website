@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Shri Shiva Agarbathi Works | Premium Machinery Ecosystem</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0f172a;        
+      --card-bg: #1e293b;        
+      --accent-gold: #f59e0b;    
+      --accent-gold-hover: #d97706;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --body-bg: #f8fafc;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--body-bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.03) 0px, transparent 50%),
+        radial-gradient(at 50% 0%, rgba(15, 23, 42, 0.02) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.02) 0px, transparent 50%);
+      margin: 0; padding: 0;
+      display: flex; flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* --- LOCKED GATEWAY MODAL OVERLAY --- */
+    #lead-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex; justify-content: center; align-items: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #lead-modal-overlay.show { opacity: 1; visibility: visible; }
+
+    .modal-content {
+      background: var(--card-bg);
+      border: 2px solid var(--accent-gold);
+      padding: 35px 30px; border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      width: 90%; max-width: 420px;
+      text-align: center; position: relative; color: var(--text-light);
+      box-sizing: border-box;
+    }
+
+    .modal-content h2 { color: var(--accent-gold); margin-top: 0; font-size: 23px; font-weight: 700; }
+    .modal-content p { color: var(--text-muted); margin-bottom: 20px; font-size: 14px; line-height: 1.5; }
+
+    .phone-container {
+      display: flex;
+      align-items: center;
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      padding: 0 14px;
+      transition: border-color 0.3s;
+    }
+    .phone-container:focus-within { border-color: var(--accent-gold); }
+    .phone-prefix { color: var(--accent-gold); font-weight: 600; font-size: 15px; margin-right: 8px; user-select: none; }
+    
+    .phone-container input {
+      border: none !important;
+      margin-bottom: 0 !important;
+      padding-left: 0 !important;
+      outline: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .modal-form input:not(.otp-digit) {
+      width: 100%; padding: 14px; margin-bottom: 16px;
+      border: 2px solid #334155; background: #0f172a;
+      color: var(--text-light); border-radius: 10px;
+      font-size: 15px; box-sizing: border-box; outline: none;
+      transition: border-color 0.3s;
+    }
+    .modal-form input:focus { border-color: var(--accent-gold); }
+
+    /* --- 4 DIGIT SEPARATE INPUT BOX ENGINE --- */
+    .otp-digit-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 15px 0 20px 0;
+    }
+
+    .otp-digit {
+      width: 52px;
+      height: 54px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-light);
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      outline: none;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+    .otp-digit:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+    }
+
+    /* --- UTILITY LINKS FOR ACTIONS --- */
+    .otp-utilities-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 13px;
+      padding: 0 4px;
+    }
+    .change-num-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .change-num-btn:hover { color: var(--text-light); }
+    
+    .resend-otp-btn {
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+    }
+    .resend-otp-btn:disabled {
+      color: var(--text-muted);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .modal-submit {
+      width: 100%; background: var(--accent-gold); color: var(--bg-dark);
+      border: none; padding: 15px; font-size: 16px; font-weight: 700;
+      border-radius: 10px; cursor: pointer; transition: background 0.3s;
+    }
+    .modal-submit:hover { background: var(--accent-gold-hover); }
+
+    #loading-spinner { display: none; margin-top: 25px; text-align: center; }
+    .loader-text { color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .loader-bar-container { width: 100%; height: 4px; background: #334155; border-radius: 2px; overflow: hidden; position: relative; }
+    .loader-bar {
+      width: 40%; height: 100%; background: var(--accent-gold); border-radius: 2px;
+      position: absolute; left: -40%;
+      animation: techLoading 1.2s infinite linear;
+      box-shadow: 0 0 8px var(--accent-gold);
+    }
+    @keyframes techLoading {
+      0% { left: -40%; }
+      50% { left: 40%; width: 60%; }
+      100% { left: 100%; }
+    }
+
+    .error-msg { color: #ef4444; font-size: 13px; margin-top: 15px; display: none; font-weight: 600; }
+
+    /* --- INLINE COMPACT ASSISTANT MENU STYLES --- */
+    .ai-assistant-container {
+      position: fixed; bottom: 25px; right: 25px; z-index: 9999;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+    }
+
+    .ai-sticky-floater {
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white;
+      padding: 15px 24px; border-radius: 50px; box-shadow: 0 10px 25px rgba(29, 78, 216, 0.4);
+      text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 10px;
+      border: 2px solid rgba(255,255,255,0.2); transition: transform 0.3s; cursor: pointer;
+    }
+    .ai-sticky-floater:hover { transform: scale(1.03) translateY(-2px); }
+
+    .ai-inline-menu {
+      background: var(--card-bg);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 8px;
+      width: 260px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      animation: menuSlideUp 0.25s ease-out;
+    }
+    .ai-inline-menu.show { display: flex; }
+
+    @keyframes menuSlideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ai-menu-item {
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 13.5px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s, color 0.2s;
+    }
+    .ai-menu-item:hover { background: #0f172a; color: var(--accent-gold); }
+    .ai-menu-item i { font-size: 11px; opacity: 0.6; }
+
+    /* --- HEADER LAYOUT --- */
+    .navbar {
+      background-color: var(--bg-dark); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;
+    }
+    .navbar-left img { height: 80px; object-fit: contain; }
+    .navbar-center h2 { color: var(--text-light); margin: 0; font-size: 32px; font-weight: 700; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+    .navbar-right { display: flex; flex-direction: column; align-items: flex-end; color: var(--text-muted); font-size: 14px; gap: 4px; }
+    .navbar-right strong { color: var(--accent-gold); }
+/* --- MOBILE NAVIGATION MENU --- */
+.navbar-menu-wrapper {
+  background: var(--bg-dark);
+  padding: 0 40px 15px 40px;
+  position: relative;
+}
+
+.hamburger-menu {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.navbar-menu a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.navbar-menu a:hover {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent-gold);
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .navbar-menu-wrapper {
+    padding: 10px 20px;
+  }
+
+  .hamburger-menu {
+    display: block;
+    width: 100%;
+    text-align: right;
+  }
+
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 10px;
+    animation: slideDown 0.3s ease;
+  }
+
+  .navbar-menu.show {
+    display: flex;
+  }
+
+  .navbar-menu a {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    /* --- TEXT NAVIGATION BAR --- */
+    
+    /* --- HIGHLIGHTED FLAGSHIP BUSINESS MASTERMIND SLIDER --- */
+    .slider-section { 
+      background: linear-gradient(rgba(15, 23, 42, 0.94), rgba(30, 41, 59, 0.94)), url('logo.png');
+      background-size: cover; background-position: center; background-attachment: fixed;
+      padding: 60px 20px; text-align: center; border-bottom: 4px solid var(--accent-gold); 
+      position: relative; overflow: hidden; box-shadow: inset 0 -10px 30px rgba(0,0,0,0.5);
+    }
+    .slider-container { max-width: 850px; margin: 0 auto; position: relative; height: 180px; }
+    .slide { position: absolute; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.6s ease, visibility 0.6s ease; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .slide.active { opacity: 1; visibility: visible; }
+    .slide h2 { font-size: 32px; color: var(--accent-gold); margin: 0 0 10px 0; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.6); letter-spacing: -0.5px; }
+    .slide p { font-size: 16px; color: var(--text-light); max-width: 700px; margin: 0 0 20px 0; line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+
+    .action-btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .primary-row { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .explore-button { 
+      display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; 
+      background-color: var(--accent-gold); color: var(--bg-dark); padding: 14px 34px; border-radius: 30px; 
+      text-decoration: none; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); transition: all 0.3s; 
+    }
+    .explore-button:hover { background-color: var(--accent-gold-hover); box-shadow: 0 6px 22px rgba(245, 158, 11, 0.6); transform: translateY(-2px); }
+    
+    .download-catalogue-btn {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700;
+      background: transparent; color: var(--text-light); border: 2px solid var(--text-light);
+      padding: 12px 30px; border-radius: 30px; text-decoration: none; transition: all 0.3s;
+    }
+    .download-catalogue-btn:hover { background: var(--text-light); color: var(--bg-dark); transform: translateY(-2px); }
+
+    .secondary-download-link {
+      color: var(--accent-gold); font-size: 14px; font-weight: 600; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s, transform 0.2s;
+    }
+    .secondary-download-link:hover { color: white; transform: translateY(-1px); }
+
+    .slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+    .dot { width: 12px; height: 12px; background: #475569; border-radius: 50%; cursor: pointer; transition: background 0.3s; }
+    .dot.active { background: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold); }
+
+    /* --- AUTOMATIC HORIZONTAL MACHINE SCROLLER --- */
+    .horizontal-scroll-section {
+      padding: 35px 20px 5px 20px;
+      max-width: 1240px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .scroll-heading {
+      font-size: 22px;
+      color: var(--bg-dark);
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .scroll-heading i { color: var(--accent-gold); }
+
+    .scroller-wrapper {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px 5px 12px 5px; 
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    .scroller-wrapper::-webkit-scrollbar { height: 8px; }
+    .scroller-wrapper::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
+    .scroller-wrapper::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 10px; }
+
+    .machine-scroll-card {
+      flex: 0 0 260px; background: white; border: 1px solid #e2e8f0; border-radius: 16px;
+      overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
+      align-items: center; cursor: pointer; position: relative; height: 280px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .machine-scroll-card:hover { transform: translateY(-6px); border-color: var(--accent-gold); box-shadow: 0 15px 30px rgba(245, 158, 11, 0.15); }
+    .machine-scroll-card .img-container { width: 100%; height: 65%; display: flex; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box; background: #fff; }
+    .machine-scroll-card img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.4s; }
+    .machine-scroll-card:hover img { transform: scale(1.05); }
+    
+    .machine-scroll-card h3 {
+      width: 100%; background: var(--bg-dark); color: var(--text-light);
+      margin: 0; font-size: 13.5px; font-weight: 600; text-align: center;
+      padding: 14px 10px; position: absolute; bottom: 0;
+      border-top: 2px solid var(--accent-gold); box-sizing: border-box;
+      white-space: normal; line-height: 1.4;
+    }
+
+    /* --- DEPLOYED DOWNWARD: INDIA'S FIRST ENGINEERED BANNER --- */
+    .engineered-banner-section {
+      max-width: 1240px;
+      margin: 10px auto 40px auto;
+      padding: 0 20px;
+    }
+    .engineered-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      background-image: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%), url('logo.png');
+      background-size: contain; background-position: right center; background-repeat: no-repeat;
+      border: 2px solid var(--accent-gold); border-radius: 20px; padding: 40px;
+      display: flex; align-items: center; justify-content: space-between; gap: 30px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+    .engineered-text-content { flex: 1; }
+    .engineered-tag {
+      background: rgba(245, 158, 11, 0.15); color: var(--accent-gold);
+      padding: 6px 14px; font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px; border-radius: 50px;
+      display: inline-block; margin-bottom: 15px; border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .engineered-card h2 { color: var(--text-light); font-size: 28px; margin: 0 0 12px 0; font-weight: 700; letter-spacing: -0.5px; }
+    .engineered-card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin: 0; }
+    .engineered-image-holder {
+      flex: 0 0 320px; height: 200px; border-radius: 12px; overflow: hidden;
+      border: 2px solid rgba(245, 158, 11, 0.4); background: #fff;
+      display: flex; align-items: center; justify-content: center; padding: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .engineered-image-holder img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+    /* --- JUMBOTRON & METRICS --- */
+    .jumbotron-custom { background-color: white; margin: 40px auto; padding: 45px 30px; border-radius: 24px; max-width: 1100px; text-align: center; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); border: 1px solid #e2e8f0; box-sizing: border-box;}
+    .jumbotron-custom h1 { font-size: 28px; color: var(--bg-dark); margin-top: 0; }
+    .jumbotron-custom .lead { font-size: 15px; color: #64748b; max-width: 900px; margin: 0 auto 35px auto; line-height: 1.6; }
+    .characteristics { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .characteristics .item { background-color: var(--body-bg); padding: 16px; border-radius: 12px; border-left: 4px solid var(--accent-gold); width: 260px; display: flex; align-items: center; gap: 14px; box-sizing: border-box; }
+    .characteristics .item i { font-size: 20px; color: var(--bg-dark); }
+    .characteristics .item span { font-size: 13.5px; font-weight: 600; color: #334155; text-align: left; line-height: 1.4; }
+
+    .bottom-action-container { text-align: center; margin: 40px 0 60px 0; }
+    footer { text-align: center; padding: 25px 0; background-color: var(--bg-dark); color: var(--text-muted); font-size: 13px; border-top: 1px solid #1e293b; }
+
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 768px) { 
+      .navbar { padding: 15px 20px; flex-direction: column; text-align: center; }
+      .navbar-right { align-items: center; font-size: 13px; }
+      .navbar-center h2 { font-size: 22px; }
+      .navbar-menu { padding: 10px; gap: 5px; }
+      .navbar-menu a { font-size: 13px; padding: 6px 10px; width: 100%; text-align: center; }
+      
+      .slider-section { padding: 45px 15px; }
+      .slide h2 { font-size: 24px; }
+      .slide p { font-size: 13.5px; }
+      .slider-container { height: 260px; }
+      .primary-row { flex-direction: column; width: 100%; gap: 10px; }
+      .explore-button, .download-catalogue-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+
+      .horizontal-scroll-section { padding: 20px 15px 5px 15px; }
+      .machine-scroll-card { flex: 0 0 220px; height: 250px; }
+      
+      .engineered-card { flex-direction: column; padding: 25px; text-align: center; background-image: none; }
+      .engineered-image-holder { flex: 0 0 180px; width: 100%; }
+      .engineered-card h2 { font-size: 22px; }
+
+      .jumbotron-custom { padding: 30px 20px; margin: 20px; }
+      .jumbotron-custom h1 { font-size: 22px; }
+      .characteristics .item { width: 100%; }
+      
+      .ai-assistant-container { bottom: 15px; right: 15px; }
+      .ai-sticky-floater { padding: 10px 18px; font-size: 13px; }
+      .ai-inline-menu { width: 230px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ai-assistant-container">
+    <div class="ai-inline-menu" id="assistantDropdown">
+      <button class="ai-menu-item" onclick="goToCatalog('Agarbathi Making Machine')">Agarbathi Making Machine <i class="fas fa-chevron-right"></i></button>
+      <button class="ai-menu-item" onclick="goToCatalog('Camphor Making Machine')">Camphor Making Machine <i class="fas fa-chevron-right"></i></button>
+      <button class="ai-menu-item" onclick="goToCatalog('Cotton Wick Making Machine')">Cotton Wick Making Machine <i class="fas fa-chevron-right"></i></button>
+      <button class="ai-menu-item" onclick="goToCatalog('Sambrani cup making machine')">Sambrani Cup Systems <i class="fas fa-chevron-right"></i></button>
+      <button class="ai-menu-item" onclick="goToCatalog('Powder Mixing Machines')">Powder Mixing Units <i class="fas fa-chevron-right"></i></button>
+      <button class="ai-menu-item" onclick="goToCatalog('Agarbatti Dryer Machines')">Industrial Heating Dryers <i class="fas fa-chevron-right"></i></button>
+      <button class="ai-menu-item" onclick="goToCatalog('Paper Plate Making Machine')">Paper Plate Machinery <i class="fas fa-chevron-right"></i></button>
+      <button class="ai-menu-item" onclick="goToCatalog('Band Sealing Machine')">High-Speed Band Sealing <i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div class="ai-sticky-floater" onclick="toggleAssistantMenu(event)">
+      <i class="fas fa-robot"></i> Machine Tech Info Assistant
+    </div>
+  </div>
+
+  <div id="main-content">
+    <div class="navbar">
+      <div class="navbar-left"><img src="logo1.png" alt="Company Logo" onerror="this.style.display='none'"></div>
+      <div class="navbar-center"><h2>SHRI SHIVA AGARBARTHI WORKS</h2></div>
+      <div class="navbar-right">
+        <div><i class="fas fa-phone"></i> <strong>+91-9342426468</strong></div>
+        <div><i class="fas fa-receipt"></i> GST: <strong>29ABXPN1363M1ZS</strong></div>
+      </div>
+    </div>
+<div class="navbar-menu-wrapper">
+  <button class="hamburger-menu" onclick="toggleMobileMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="navbar-menu" id="mobileNavMenu">
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+    <a href="appointment.html"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+    <a href="track.html"><i class="fas fa-truck-loading"></i> Track Order Progress</a>
+  </div>
+</div>
+
+    <div id="lead-modal-overlay">
+      <div class="modal-content">
+        <div id="step-registration">
+          <h2>⚡ Request Wholesale Pricing</h2>
+          <p>Enter your details below to generate an automated WhatsApp verification security pin.</p>
+          <form class="modal-form" id="registrationForm">
+            <input type="text" id="custName" placeholder="Your Name / Company Name" required />
+            <div class="phone-container">
+              <span class="phone-prefix">+91</span>
+              <input type="tel" id="custMobile" placeholder="10-Digit Mobile Number" required pattern="[0-9]{10}" maxlength="10" title="Please enter exactly 10 digits" />
+            </div>
+            <button type="submit" class="modal-submit">Generate Security OTP <i class="fas fa-key"></i></button>
+          </form>
+        </div>
+
+        <div id="step-verification" style="display: none;">
+          <h2>🔐 Enter Verification Code</h2>
+          <p>We have dispatched a 4-digit security code directly to your  WhatsApp Number.</p>
+          <form class="modal-form" id="verificationForm">
+            <div class="otp-digit-container">
+              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
+              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
+              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
+              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
+            </div>
+            
+            <div class="otp-utilities-row">
+              <span class="change-num-btn" onclick="backToRegistration()"><i class="fas fa-edit"></i> </span>
+              <button type="button" id="resendBtn" class="resend-otp-btn" onclick="triggerOTPResend()" disabled>Resend in 60s</button>
+            </div>
+
+            <button type="submit" class="modal-submit">Verify & Access Parameters <i class="fas fa-unlock"></i></button>
+          </form>
+        </div>
+
+        <div id="loading-spinner">
+          <div class="loader-text">Processing Security Gateway</div>
+          <div class="loader-bar-container"><div class="loader-bar"></div></div>
+        </div>
+        <div id="errorNotification" class="error-msg">Incorrect verification code. Please try again.</div>
+      </div>
+    </div>
+
+    <div class="slider-section">
+      <div class="slider-container">
+        <div class="slide active">
+          <h2>Explore Complete Pricing & Spares Inventory</h2>
+          <p>Access our complete ecosystem. View current stock variants, machine replacement parts, consumables, and production metrics instantly.</p>
+          <div class="action-btn-group">
+            <div class="primary-row">
+              <a href="other-products.html" class="explore-button">View Live Prices & Models <i class="fas fa-chevron-right"></i></a>
+              <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
+            </div>
+            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
+          </div>
+        </div>
+        <div class="slide">
+          <h2>Premium Spares & Die-Tooling Stock</h2>
+          <p>Get authentic high-speed replacement parts, custom camphor rollers, and durable paper plate manufacturing mold matrices.</p>
+          <div class="action-btn-group">
+            <div class="primary-row">
+              <a href="other-products.html" class="explore-button">Browse Components <i class="fas fa-chevron-right"></i></a>
+              <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
+            </div>
+            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
+          </div>
+        </div>
+        <div class="slide">
+          <h2>Bulk Industrial Export Solutions</h2>
+          <p>Sourcing lines built directly for global operations. Access direct factory-level commercial wholesale quote parameters now.</p>
+          <div class="action-btn-group">
+            <div class="primary-row">
+              <a href="other-products.html" class="explore-button">Request Wholesale Catalog <i class="fas fa-chevron-right"></i></a>
+              <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
+            </div>
+            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
+          </div>
+        </div>
+      </div>
+      <div class="slider-dots">
+        <div class="dot active" onclick="setSlide(0)"></div>
+        <div class="dot" onclick="setSlide(1)"></div>
+        <div class="dot" onclick="setSlide(2)"></div>
+      </div>
+    </div>
+
+    <div class="horizontal-scroll-section">
+      <div class="scroll-heading">
+        <i class="fas fa-industry"></i> Explore Machinery Catalogs
+      </div>
+      <div class="scroller-wrapper" id="automatedScroller">
+        <div class="machine-scroll-card" onclick="goToCatalog('Agarbathi Making Machine')">
+          <div class="img-container"><img src="in.jpg" alt="Agarbathi Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Agarbathi+Machine+4K'"></div>
+          <h3>Agarbathi Making Machine</h3>
+        </div>
+        <div class="machine-scroll-card" onclick="goToCatalog('Camphor Making Machine')">
+          <div class="img-container"><img src="ca.png" alt="Camphor Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Camphor+Machine+4K'"></div>
+          <h3>Camphor Making Machine</h3>
+        </div>
+        <div class="machine-scroll-card" onclick="goToCatalog('Cotton Wick Making Machine')">
+          <div class="img-container"><img src="co.jpg" alt="Cotton Wick Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Cotton+Wick+Machine+4K'"></div>
+          <h3>Cotton Wick Making Machine</h3>
+        </div>
+        <div class="machine-scroll-card" onclick="goToCatalog('Sambrani cup making machine')">
+          <div class="img-container"><img src="https://5.imimg.com/data5/VS/JD/MY-2380553/sambrani-cup-making-machine-250x250.jpg" alt="Sambrani cup making machine"></div>
+          <h3>Sambrani Cup Systems</h3>
+        </div>
+        <div class="machine-scroll-card" onclick="goToCatalog('Powder Mixing Machines')">
+          <div class="img-container"><img src="mi.jpg" alt="Powder Mixing Machines" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Mixing+Machine+4K'"></div>
+          <h3>Powder Mixing Units</h3>
+        </div>
+        <div class="machine-scroll-card" onclick="goToCatalog('Agarbatti Dryer Machines')">
+          <div class="img-container"><img src="dr.jpg" alt="Agarbatti Dryer Machines" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Dryer+Machine+4K'"></div>
+          <h3>Industrial Heating Dryers</h3>
+        </div>
+        <div class="machine-scroll-card" onclick="goToCatalog('Paper Plate Making Machine')">
+          <div class="img-container"><img src="PAP.jpg" alt="Paper Plate Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Paper+Plate+Machine+4K'"></div>
+          <h3>Paper Plate Machinery</h3>
+        </div>
+        <div class="machine-scroll-card" onclick="goToCatalog('Band Sealing Machine')">
+          <div class="img-container"><img src="ba.jpg" alt="Band Sealing Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Sealing+Machine+4K'"></div>
+          <h3>High-Speed Band Sealing</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="engineered-banner-section">
+      <div class="engineered-card">
+        <div class="engineered-text-content">
+          <div class="engineered-tag">Engineering Pioneer</div>
+          <h2>India's First Engineered Production Standards</h2>
+          <p>Shri Shiva Agarbathi Works sets the benchmark for indigenous heavy machinery development. Our platforms integrate state-of-the-art micro-controllers and robust architectural metal structures designed for seamless high-speed round-the-clock factory floor performance.</p>
+        </div>
+        <div class="engineered-image-holder">
+          <img src="logo.png" alt="Engineered Plant Equipment" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Premium+Machinery+4K'">
+        </div>
+      </div>
+    </div>
+
+    <div class="jumbotron-custom">
+      <h1>Turnkey Industrial Plant Machinery Manufacturer</h1>
+      <p class="lead">We design, manufacture, and engineer high-output machinery lines. Our plants are field-tested and certified by deployment engineers for premium performance metrics.</p>
+      <div class="characteristics">
+        <div class="item"><i class="fas fa-cogs"></i><span>Trader - Wholesaler / Distributor</span></div>
+        <div class="item"><i class="fas fa-users"></i><span>Staff: 10 to 16 Plant Technicians</span></div>
+        <div class="item"><i class="fas fa-calendar-day"></i><span>Registered Plant Est: 01-05-2005</span></div>
+        <div class="item"><i class="fas fa-balance-scale"></i><span>Legal Status: Sole Proprietorship</span></div>
+      </div>
+    </div>
+
+    <div class="bottom-action-container">
+      <a href="other-products.html" class="explore-button">Browse Extended Catalogue</a>
+    </div>
+
+    <footer>© 2026 Shri Shiva Agarbathi Works. All rights reserved.</footer>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbya-5GK0ZeTZfdJQQQYsUMklxEcNtcMSzEUYMd6fj7_8dDQoBmkhllxqdM5d8kepPHQIA/exec';
+    let countdownInterval = null;
+// Fixes the mobile view 3-dot click menu issue
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobileNavMenu");
+  if (menu) {
+    menu.classList.toggle("show");
+  }
+}
+    // --- TOGGLE COMPACT DROPDOWN OPTIONS OVERLAY ---
+    function toggleAssistantMenu(event) {
+      event.stopPropagation();
+      document.getElementById('assistantDropdown').classList.toggle('show');
+    }
+
+    document.addEventListener('click', () => {
+      document.getElementById('assistantDropdown').classList.remove('show');
+    });
+    
+
+    // --- AUTO FOCUS TRANSITION LOGIC ---
+    function shiftOtpFocus(currentBox) {
+      if (currentBox.value.length >= 1) {
+        let nextBox = currentBox.nextElementSibling;
+        if (nextBox && nextBox.classList.contains('otp-digit')) {
+          nextBox.focus();
+        }
+      }
+    }
+
+    function handleOtpBackspace(currentBox, event) {
+      if (event.key === "Backspace") {
+        if (currentBox.value.length === 0) {
+          let prevBox = currentBox.previousElementSibling;
+          if (prevBox && prevBox.classList.contains('otp-digit')) {
+            prevBox.focus();
+            prevBox.value = "";
+          }
+        } else {
+          currentBox.value = "";
+        }
+        event.preventDefault();
+      }
+    }
+
+    // --- OPTION TO CHANGE NUMBER ---
+    function backToRegistration() {
+      document.getElementById('step-verification').style.display = 'none';
+      document.getElementById('step-registration').style.display = 'block';
+      document.getElementById('errorNotification').style.display = 'none';
+      if(countdownInterval) clearInterval(countdownInterval);
+    }
+
+    // --- 60 SECOND COUNTDOWN TIMER ENGINE ---
+    function startResendCountdown() {
+      const resendBtn = document.getElementById('resendBtn');
+      let timeLeft = 60;
+      resendBtn.disabled = true;
+      resendBtn.innerText = `Resend in ${timeLeft}s`;
+
+      if(countdownInterval) clearInterval(countdownInterval);
+
+      countdownInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(countdownInterval);
+          resendBtn.disabled = false;
+          resendBtn.innerText = "Resend OTP";
+        } else {
+          resendBtn.innerText = `Resend in ${timeLeft}s`;
+        }
+      }, 1000);
+    }
+
+    function triggerOTPResend() {
+      const spinner = document.getElementById('loading-spinner');
+      const verifyForm = document.getElementById('verificationForm');
+      const errorNotice = document.getElementById('errorNotification');
+
+      spinner.style.display = 'block';
+      verifyForm.style.display = 'none';
+      errorNotice.style.display = 'none';
+
+      const payload = {
+        action: "sendOTP",
+        name: document.getElementById('custName').value,
+        mobile: document.getElementById('custMobile').value
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+      })
+      .then(res => res.text())
+      .then(text => {
+        spinner.style.display = 'none';
+        verifyForm.style.display = 'block';
+        startResendCountdown();
+        document.querySelectorAll('.otp-digit')[0].focus();
+      })
+      .catch(err => {
+        spinner.style.display = 'none';
+        verifyForm.style.display = 'block';
+        startResendCountdown();
+      });
+    }
+
+    function goToCatalog(machineCategory) {
+      window.location.href = "machine.html?name=" + encodeURIComponent(machineCategory);
+    }
+
+    // AUTOMATIC SCROLLER TIMING ENGINE
+    const scroller = document.getElementById('automatedScroller');
+    let scrollSpeed = 1; 
+    let scrollDirection = 1; 
+    let scrollerInterval;
+
+    function startAutoScroll() {
+      scrollerInterval = setInterval(() => {
+        scroller.scrollLeft += scrollSpeed * scrollDirection;
+        if (scroller.scrollLeft >= (scroller.scrollWidth - scroller.clientWidth - 1)) {
+          scrollDirection = -1;
+        } else if (scroller.scrollLeft <= 0) {
+          scrollDirection = 1;
+        }
+      }, 30);
+    }
+
+    scroller.addEventListener('mouseenter', () => clearInterval(scrollerInterval));
+    scroller.addEventListener('mouseleave', startAutoScroll);
+    scroller.addEventListener('touchstart', () => clearInterval(scrollerInterval), {passive: true});
+    scroller.addEventListener('touchend', startAutoScroll, {passive: true});
+    startAutoScroll();
+
+    // CAROUSEL BANNER TIMING ENGINE
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      let nextIndex = (currentSlide + 1) >= totalSlides ? 0 : currentSlide + 1;
+      showSlide(nextIndex);
+    }
+
+    function setSlide(index) {
+      showSlide(index);
+      clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 4500);
+    }
+    let sliderInterval = setInterval(nextSlide, 4500);
+
+    // GATEWAY TIMER (7 Seconds)
+    window.addEventListener('DOMContentLoaded', () => {
+      // Check secure login cache so repeating visitors aren't interrupted
+      const isAuthenticated = localStorage.getItem('shriShiva_authenticated');
+      if (!isAuthenticated) {
+        setTimeout(() => {
+          const modal = document.getElementById('lead-modal-overlay');
+          if (modal) modal.classList.add('show');
+        }, 7000);
+      }
+    });
+
+    const regForm = document.getElementById('registrationForm');
+    const verifyForm = document.getElementById('verificationForm');
+    const spinner = document.getElementById('loading-spinner');
+    const errorNotice = document.getElementById('errorNotification');
+
+    regForm.addEventListener('submit', e => {
+      e.preventDefault();
+      spinner.style.display = 'block';
+      regForm.style.display = 'none';
+      errorNotice.style.display = 'none';
+
+      const payload = {
+        action: "sendOTP",
+        name: document.getElementById('custName').value,
+        mobile: document.getElementById('custMobile').value
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+      })
+      .then(res => res.text())
+      .then(text => {
+        spinner.style.display = 'none';
+        document.getElementById('step-registration').style.display = 'none';
+        document.getElementById('step-verification').style.display = 'block';
+        
+        startResendCountdown();
+        setTimeout(() => { document.querySelectorAll('.otp-digit')[0].focus(); }, 100);
+      })
+      .catch(err => {
+        spinner.style.display = 'none';
+        document.getElementById('step-registration').style.display = 'none';
+        document.getElementById('step-verification').style.display = 'block';
+        startResendCountdown();
+        setTimeout(() => { document.querySelectorAll('.otp-digit')[0].focus(); }, 100);
+      });
+    });
+
+    verifyForm.addEventListener('submit', e => {
+      e.preventDefault();
+      spinner.style.display = 'block';
+      verifyForm.style.display = 'none';
+      errorNotice.style.display = 'none';
+
+      // Assemble unified 4 digit payload string for backend execution
+      let combinedOTP = "";
+      document.querySelectorAll('.otp-digit').forEach(input => {
+        combinedOTP += input.value;
+      });
+
+      // THE FIX: Adding the 'mobile' parameter back so your backend can securely verify the specific user!
+      const payload = {
+        action: "verifyOTP",
+        mobile: document.getElementById('custMobile').value,
+        userOTP: combinedOTP
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+      })
+      .then(res => res.text())
+      .then(text => {
+        spinner.style.display = 'none';
+        
+        // Exact strict match expected by your backend script
+        if (text.includes("VERIFIED") || text.includes("SUCCESS")) {
+          localStorage.setItem('shriShiva_authenticated', 'true');
+          document.getElementById('lead-modal-overlay').classList.remove('show');
+        } else {
+          verifyForm.style.display = 'block';
+          errorNotice.innerText = "Invalid OTP. Please check your messages.";
+          errorNotice.style.display = 'block';
+          
+          // Clear inputs and reset focus
+          document.querySelectorAll('.otp-digit').forEach(input => input.value = "");
+          document.querySelectorAll('.otp-digit')[0].focus();
+        }
+      })
+      .catch(err => {
+        spinner.style.display = 'none';
+        verifyForm.style.display = 'block';
+        errorNotice.innerText = "Network connection failed. Try again.";
+        errorNotice.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

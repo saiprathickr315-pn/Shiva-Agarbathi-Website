@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Manual Scrubber Packing Machine | Shri Shiva Agarbathi Works</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-dark: #0f172a;        
+      --card-bg: #1e293b;        
+      --accent-gold: #f59e0b;    
+      --accent-gold-hover: #d97706;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --body-bg: #f8fafc;
+      --primary-color: #0f172a;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--body-bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.01) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.02) 0px, transparent 50%);
+      margin: 0; padding: 0;
+      color: var(--primary-color);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- PREMIUM NAVIGATION HEADER --- */
+    .navbar {
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 20px 40px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .navbar-brand h1 {
+      color: #ffffff; margin: 0; font-size: 22px; font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .navbar-brand h1 i { color: var(--accent-gold); font-size: 20px; }
+
+    .back-btn {
+      color: var(--text-light); text-decoration: none; font-size: 14px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover { background: var(--accent-gold); color: var(--bg-dark); border-color: var(--accent-gold); transform: translateX(-3px); }
+
+    /* --- PAGE STRUCTURE --- */
+    .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
+    .heading { font-size: 32px; font-weight: 700; margin-bottom: 30px; letter-spacing: -0.5px; }
+
+    /* --- PRODUCT VIEW --- */
+    .product-section { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+    .product-media-block { flex: 1 1 42%; min-width: 320px; }
+
+    .main-image-viewport {
+      width: 100%; border-radius: 20px; overflow: hidden; background: white;
+      border: 1px solid rgba(15, 23, 42, 0.06); padding: 20px; margin-bottom: 20px;
+      box-sizing: border-box; display: flex; align-items: center; justify-content: center;
+    }
+    .main-image-viewport img { width: 100%; max-height: 380px; object-fit: contain; border-radius: 12px; cursor: pointer; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gallery-thumb-card {
+      background: white; border: 1px solid rgba(15, 23, 42, 0.06); border-radius: 14px;
+      padding: 8px; cursor: pointer; transition: 0.3s;
+    }
+    .gallery-thumb-card:hover { border-color: var(--accent-gold); }
+    .gallery-thumb-card img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; }
+
+    /* --- LIVE PRICING COMPONENT --- */
+    .live-pricing-dock {
+      background: var(--bg-dark); color: white; border-radius: 16px; padding: 16px 24px; margin-top: 15px;
+      display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .live-pricing-dock .price-lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 2px; }
+    .live-pricing-dock .price-value { font-size: 22px; font-weight: 700; color: var(--accent-gold); }
+
+    /* --- E-COMMERCE ACTION HUBS --- */
+    .ecommerce-action-hub { display: flex; gap: 15px; margin-top: 25px; }
+    .btn-buy-now, .btn-add-cart {
+      flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px;
+      font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 12px;
+      transition: all 0.3s ease; text-transform: uppercase; cursor: pointer; border: none; letter-spacing: 0.5px;
+    }
+    .btn-buy-now { background: var(--bg-dark); color: var(--accent-gold); border: 1px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12); }
+    .btn-buy-now:hover:not(:disabled) { background: var(--accent-gold); color: var(--bg-dark); transform: translateY(-2px); }
+    .btn-add-cart { background: #ffffff; color: var(--bg-dark); border: 2px solid var(--bg-dark); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+    .btn-add-cart:hover:not(:disabled) { background: var(--bg-dark); color: #ffffff; transform: translateY(-2px); }
+
+    /* Programmatic Locking Safety Styles */
+    .btn-buy-now:disabled, .btn-add-cart:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+      border-color: #cbd5e1 !important;
+      background: #e2e8f0 !important;
+      color: #94a3b8 !important;
+    }
+
+    /* --- INFO SECTION --- */
+    .product-details { flex: 1 1 50%; min-width: 320px; }
+    .overview-card { background: white; border-radius: 20px; padding: 30px; border: 1px solid rgba(15, 23, 42, 0.04); margin-bottom: 25px; }
+    .overview-card h3 { margin-top: 0; font-size: 20px; font-weight: 700; color: var(--bg-dark); border-left: 4px solid var(--accent-gold); padding-left: 12px; margin-bottom: 15px; }
+    .overview-card p { font-size: 14px; color: #475569; line-height: 1.6; }
+    
+    .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px; }
+    .spec-item { font-size: 13px; padding: 10px 14px; background: #f8fafc; border-radius: 8px; border-left: 2px solid var(--accent-gold); color: #334155; line-height: 1.5; }
+    .spec-item strong { color: var(--bg-dark); }
+
+    /* --- LIGHTBOX & TERMS --- */
+    .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; height: 100%; width: 100%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); justify-content: center; align-items: center; }
+    .lightbox img { max-width: 85%; max-height: 80vh; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .close-trigger { position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; cursor: pointer; }
+    .close-trigger:hover { color: var(--accent-gold); }
+    
+    .legal-terms-box { background: rgba(15, 23, 42, 0.02); border: 1px solid rgba(15, 23, 42, 0.06); border-radius: 20px; padding: 30px; margin-top: 30px; }
+    .legal-terms-box h4 { margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: var(--bg-dark); display: flex; align-items: center; gap: 8px; }
+    .legal-terms-box h4 i { color: #ef4444; }
+
+    /* --- RESPONSIVE CONFIGURATIONS --- */
+    @media screen and (max-width: 768px) {
+      .navbar { padding: 16px 20px; } .navbar-brand h1 { font-size: 17px; } .back-btn { padding: 8px 14px; font-size: 12px; }
+      .container { padding: 25px 15px; } .heading { font-size: 24px; margin-bottom: 20px; }
+      .product-section { flex-direction: column; gap: 25px; } .product-media-block, .product-details { flex: 1 1 100%; width: 100%; }
+      .main-image-viewport { padding: 10px; margin-bottom: 15px; } .main-image-viewport img { max-height: 280px; }
+      .spec-grid { grid-template-columns: 1fr; gap: 10px; } .overview-card, .legal-terms-box { padding: 20px; }
+      .ecommerce-action-hub { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-brand"><h1><i class="fas fa-industry"></i> Shri Shiva Works</h1></div>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Products</a>
+  </div>
+
+  <div class="container">
+    <h2 class="heading">Manual Scrubber Packing Machine</h2>
+
+    <div class="product-section">
+      <div class="product-media-block">
+        <div class="main-image-viewport" onclick="openLightbox(document.getElementById('main-product-image').src)">
+          <img src="https://5.imimg.com/data5/ANDROID/Default/2025/3/495250725/RL/ZP/DL/2380553/product-jpeg-500x500.jpg" id="main-product-image" alt="Scrubber Machine">
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2022/2/KT/VW/YJ/2380553/manual-scrubber-packing-machine-500x500.jpg" alt="View 1">
+          </div>
+          <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2022/2/BI/IC/IA/2380553/manual-scrubber-packing-machine-500x500.jpg" alt="View 2">
+          </div>
+        </div>
+      </div>
+
+      <div class="product-details">
+        <div class="overview-card">
+          <h3>Product Overview</h3>
+          <p>A professional semi-automatic solution for efficient scrubber packaging, featuring precision digital heating and integrated auto-cut safety mechanisms.</p>
+          
+          <div class="live-pricing-dock">
+            <div>
+              <div class="price-lbl">Real-time Machine Price</div>
+              <div class="price-value" id="price-target-element">Loading...</div>
+            </div>
+            <i class="fas fa-tag" style="color: var(--accent-gold); font-size: 24px;"></i>
+          </div>
+
+          <div class="ecommerce-action-hub">
+            <button class="btn-buy-now" id="buy-now-btn" onclick="sendToCartPipeline()" disabled>
+              <i class="fas fa-bolt"></i> Loading Price...
+            </button>
+            <button class="btn-add-cart" id="add-cart-btn" onclick="sendToCartPipeline()" disabled>
+              <i class="fas fa-shopping-cart"></i> Loading Price...
+            </button>
+          </div>
+        </div>
+
+        <div class="overview-card">
+          <h3>Technical Specifications</h3>
+          <div class="spec-grid">
+            <div class="spec-item"><strong>Production:</strong> 350 pieces/hour</div>
+            <div class="spec-item"><strong>Bed Size:</strong> 16 x 24 Inch</div>
+            <div class="spec-item"><strong>Power:</strong> Single/Three Phase, 230V</div>
+            <div class="spec-item"><strong>Alerts:</strong> Auto-Voice/Beep Sealing</div>
+            <div class="spec-item"><strong>Contact Support:</strong> 9342426468</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legal-terms-box">
+      <h4><i class="fas fa-balance-scale"></i> Commercial Terms &amp; Conditions</h4>
+      <ul style="font-size: 13px; color: #475569; line-height: 1.8; margin: 0; padding-left: 20px;">
+        <li>18% GST applicable on all industrial machinery.</li>
+        <li>Transportation and installation charges are extra.</li>
+        <li>Delivery Window: 15–30 working days post-advance.</li>
+        <li>Payment: 75% Advance, balance due prior to dispatch.</li>
+        <li>Subject to Bangalore City Jurisdiction.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="lightbox" id="modal-viewport">
+    <span class="close-trigger" onclick="closeLightbox()">&times;</span>
+    <img id="modal-image-source" src="" alt="Expanded View">
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      document.getElementById('modal-image-source').src = src;
+      document.getElementById('modal-viewport').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('modal-viewport').style.display = 'none';
+    }
+    
+    function sendToCartPipeline() {
+      const productName = "Manual Scrubber Packing Machine";
+      const priceText = document.getElementById("price-target-element").innerText;
+      const productImage = document.getElementById("main-product-image").src;
+      window.location.href = `cart.html?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(priceText)}&image=${encodeURIComponent(productImage)}`;
+    }
+
+    // UNLOCK PIPELINE INTERACTION POST RESOLUTION
+    function enablePurchaseWorkflow() {
+      const buyBtn = document.getElementById("buy-now-btn");
+      const cartBtn = document.getElementById("add-cart-btn");
+      
+      if (buyBtn && cartBtn) {
+        buyBtn.disabled = false;
+        buyBtn.innerHTML = `<i class="fas fa-bolt"></i> Order Now`;
+        
+        cartBtn.disabled = false;
+        cartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Add to Cart`;
+      }
+    }
+
+    // SHEETS API INTEGRATION ENGINE
+    fetch("https://script.google.com/macros/s/AKfycbya-5GK0ZeTZfdJQQQYsUMklxEcNtcMSzEUYMd6fj7_8dDQoBmkhllxqdM5d8kepPHQIA/exec")
+    .then(response => response.json())
+    .then(data => {
+      if(data.result === "success") {
+        let sheetPrices = data.data;
+        let priceTag = document.getElementById("price-target-element");
+
+        // SCRUBBER PACKING SPECIFIC LOOKUP STRINGS
+        const matchingKeys = [
+          "Manual Scrubber Packing Machine",
+          "Scrubber Packing Machine",
+          "Manual Scrubber Machine",
+          "Scrubber Packing"
+        ];
+
+        let pickedPrice = null;
+        for(let key of matchingKeys) {
+          if(sheetPrices[key] !== undefined && sheetPrices[key] !== null && sheetPrices[key] !== "") {
+            pickedPrice = sheetPrices[key];
+            break;
+          }
+        }
+
+        if(pickedPrice !== null) {
+          priceTag.innerText = isNaN(pickedPrice) ? pickedPrice : "₹ " + Number(pickedPrice).toLocaleString('en-IN');
+        } else {
+          priceTag.innerText = "Quote on Call";
+        }
+      }
+      enablePurchaseWorkflow();
+    })
+    .catch(err => {
+      console.error("Pricing API Timeout: ", err);
+      document.getElementById("price-target-element").innerText = "Quote on Call";
+      enablePurchaseWorkflow();
+    });
+  </script>
+</body>
+</html>

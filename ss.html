@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Grid</title>
+  <style>
+    /* ---------- PC VIEW (default) remains unchanged ---------- */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 items per row for desktop */
+      gap: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 300px; /* Fixed height for desktop */
+      border: 3px solid #212121;
+      cursor: pointer;
+      transition: transform 0.2s;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .grid-item img {
+      width: 80%;
+      height: auto;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .grid-item h3 {
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      font-size: 16px;
+      text-align: center;
+      padding: 8px;
+      width: 100%;
+    }
+
+    /* ---------- MOBILE VIEW FIXES ONLY ---------- */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row in mobile view */
+        gap: 12px;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+
+      .grid-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto; /* Adjust height for mobile */
+        border: 3px solid #212121;
+        cursor: pointer;
+        transition: transform 0.2s;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .grid-item img {
+        width: 80%;
+        height: auto;
+        object-fit: contain;
+        padding: 10px;
+      }
+
+      .grid-item h3 {
+        margin-top: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-size: 16px;
+        text-align: center;
+        padding: 8px;
+        width: 100%;
+      }
+
+      /* Adjust logo display only for mobile */
+      .logo-before-machine {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .logo-before-machine img {
+        max-width: 80%;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Grid Layout -->
+  <div class="container">
+    <!-- Logo before the first machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Agarbathi Making Machine')">
+      <img src="in.jpg" alt="Agarbathi Making Machine">
+      <h3>Agarbathi Making Machine</h3>
+    </div>
+    
+    <!-- Logo before the second machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Camphor Making Machine')">
+      <img src="ca.png" alt="Camphor Making Machine">
+      <h3>Camphor Making Machine</h3>
+    </div>
+    
+    <!-- Logo before the third machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Cotton Wick Making Machine')">
+      <img src="co.jpg" alt="Cotton Wick Making Machine">
+      <h3>Cotton Wick Making Machine</h3>
+    </div>
+    
+    <!-- Logo before the fourth machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Sambrani cup making machine')">
+      <img src="https://5.imimg.com/data5/VS/JD/MY-2380553/sambrani-cup-making-machine-250x250.jpg" alt="Sambrani cup making machine">
+      <h3>Sambrani Cup Making Machine</h3>
+    </div>
+    
+    <!-- Logo before the fifth machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Powder Mixing Machines')">
+      <img src="mi.jpg" alt="Powder Mixing Machines">
+      <h3>Powder Mixing Machines</h3>
+    </div>
+    
+    <!-- Logo before the sixth machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Agarbatti Dryer Machines')">
+      <img src="dr.jpg" alt="Agarbatti Dryer Machines">
+      <h3>Agarbatti Dryer Machines</h3>
+    </div>
+    
+    <!-- Logo before the seventh machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Paper Plate Making Machine')">
+      <img src="PAP.jpg" alt="Paper Plate Making Machine">
+      <h3>Paper Plate Making Machine</h3>
+    </div>
+    
+    <!-- Logo before the eighth machine (for mobile view only) -->
+    <div class="logo-before-machine">
+      <img src="logo.png" alt="Logo">
+    </div>
+    
+    <div class="grid-item" onclick="goToMachine('Band Sealing Machine')">
+      <img src="ba.jpg" alt="Band Sealing Machine">
+      <h3>Band Sealing Machine</h3>
+    </div>
+  </div>
+
+  <script>
+    function goToMachine(machineName) {
+      // Replace with your actual redirection or action
+      alert("Redirecting to " + machineName);
+    }
+  </script>
+</body>
+</html>

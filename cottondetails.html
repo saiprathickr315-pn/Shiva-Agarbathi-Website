@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cotton Raw Meterial </title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: rgba(184, 91, 91, 0.95);
+      padding: 10px 25px;
+      color: white;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .heading {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      text-align: center;
+    }
+
+    .product-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .product-image {
+      flex: 1 1 40%;
+      min-width: 300px;
+    }
+
+    .product-image img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #444;
+    }
+
+    .product-details {
+      flex: 1 1 55%;
+      min-width: 300px;
+    }
+
+    .product-details h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    .product-details p, .product-details li {
+      font-size: 1em;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .product-details ul {
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .product-section {
+        flex-direction: column;
+      }
+      
+      .video-container {
+        order: 3;
+        margin-top: 20px;
+      }
+      
+      .enquire-now {
+        order: 2;
+      }
+    }
+
+    /* Gallery Styles - Two images per row */
+    .gallery-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .thumb {
+      text-align: center;
+      width: 45%; /* Two images per row */
+    }
+
+    .thumb img {
+      width: 95%;
+      height: 200px; /* Fixed height to keep images uniform */
+      object-fit: cover; /* Maintains aspect ratio */
+      border-radius: 5px;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      transition: transform 0.2s ease;
+    }
+
+    .thumb img:hover {
+      transform: scale(1.02);
+    }
+
+    .thumb p {
+      font-size: 0.9em;
+      color: #333;
+      margin-top: 10px; /* Add space between image and description */
+      text-align: center;
+    }
+
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 10px;
+      border: 4px solid #fff;
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lightbox .close:hover {
+      color: #f00;
+    }
+
+    .video-container {
+      text-align: center; /* Centers the content */
+      margin-bottom: 30px; /* Adds space below the video container */
+    }
+
+    .video-row {
+      display: flex; /* Enables flexbox */
+      justify-content: center; /* Centers the videos horizontally */
+      gap: 20px; /* Adds space between the videos */
+    }
+
+    .video-row iframe {
+      width: 520px; /* Keeps the width fixed at 520px */
+      height: 300px; /* Keeps the height fixed */
+    }
+
+    .enquire-now {
+      display: inline-block;
+      background-color: #ff6f61;
+      color: white;
+      padding: 15px 40px;
+      border-radius: 5px;
+      font-size: 1.2em;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .enquire-now:hover {
+      background-color: #ff5c50;
+      box-shadow: 0 0 15px rgba(255, 105, 0, 0.7);
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 5px #ff6f61, 0 0 10px #ff6f61, 0 0 15px #ff6f61;
+      }
+      100% {
+        box-shadow: 0 0 20px #ff6f61, 0 0 30px #ff6f61, 0 0 40px #ff6f61;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>Shri Shiva Agarbathi Works</h1>
+  </div>
+
+  <div class="container">
+    <h2 class="heading">Dhoopbatti Making Machine</h2>
+
+    <div class="product-section">
+      <div class="product-image">
+        <img src="https://m.media-amazon.com/images/I/31IE7M2g+wS._AC_UF894,1000_QL80_.jpg" alt="Bullet Dhoop Making Machine">
+
+        <!-- Gallery with Two Images in a Row -->
+        <div class="gallery-images">
+          <div class="thumb">
+            <img src="SS2.jpg" alt="Side View" onclick="openLightbox(this.src)">
+            <p>Dhop Machine With Conveyor</p>
+          </div>
+          <div class="thumb">
+            <img src="https://5.imimg.com/data5/UP/UJ/MY-10183492/dhoop-stick-making-machine-in-bhavnagar-500x500.jpg" alt="Front View" onclick="openLightbox(this.src)">
+            <p>Dhop Stick Without Conveyor</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-details">
+        <h3>Product Overview:</h3>
+        <p><strong>Prominent & Leading Manufacturer from Bengaluru</strong>, we offer high-quality Dhoopbatti making machines designed for precision, durability, and high-speed operation.</p>
+
+        <ul>
+          <li><strong>Price:</strong>  Price on Request </li>
+          <li><strong>Production Capacity:</strong> 10–15 kg/hr</li>
+          <li><strong>Machine Speed:</strong> 150–200 strokes/min</li>
+          <li><strong>Material:</strong> Mild Steel</li>
+          <li><strong>Automation Grade:</strong> Semi Automatic</li>
+          <li><strong>Power Required:</strong> 4 HP</li>
+        </ul>
+
+        <br>
+        <p><strong>Machine Specifications:</strong></p>
+        <ul>
+          <li>Dhoop Size: 6mm to 12mm</li>
+          <li>Dhoop Length: 75mm (Depends on Stick Size)</li>
+          <li>Motor Power: 1 HP or 1.5 HP (Single Phase)</li>
+          <li>Warranty: 6 months for motor and gearbox, excluding electronic components</li>
+          <li>Power Supply: Single Phase</li>
+          <li>Production Capacity: 10-15 kg/hr (Depends on Raw Material)</li>
+        </ul>
+
+        <br>
+        <p><strong>Contact for More Information:</strong></p>
+        <ul>
+          <li>Phone: 9342426468</li>
+        </ul>
+
+        <a href="https://www.indiamart.com/srishivaagarbathiworks/enquiry.html" class="enquire-now">Enquire Now</a>
+
+        <br><br>
+
+        <a href="https://www.indiamart.com/proddetail/dhoop-stick-making-machine-2855715269230.html" class="enquire-now">Download Brochure</a>
+      </div>
+    </div>
+
+    <!-- Terms & Conditions below Additional Information -->
+    <div class="terms">
+      <strong>Terms & Conditions:</strong>
+      <ul>
+        <li>GST 18% ON MACHINERIES</li>
+        <li>Transportation Charge Extra as Applicable.</li>
+        <li>Delivery Period: 15 TO 30 Working Days from Date of Advance</li>
+        <li>Payment: 75% Advance Balance Before Delivery</li>
+        <li>Quotation Validity: 10 Days from the Date of Quotation</li>
+        <li>Machine installation charges are extra.</li>
+        <li>Additional site visit for the above quote will be charged extra as applicable.</li>
+        <li>Above rates can be changed according to size and specification.</li>
+        <li>Goods once dispatched can’t be exchanged or replaced.</li>
+        <li>Above rates are only for the mentioned equipments and Installation charges will be extra as applicable.</li>
+        <li>100% billing will be done against proper GST NO or PAN NO of the client.</li>
+        <li>Subject to Bangalore City Jurisdiction.</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="video-section">
+    <h2>Watch the Sambrani Cup Making Machine in Action</h2>
+    <video width="800" height="450" controls>
+      <source src="dhoop12.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Expanded Image">
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
