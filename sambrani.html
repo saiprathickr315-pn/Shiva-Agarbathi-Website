@@ -30,75 +30,71 @@
     }
 
     /* --- PREMIUM NAVIGATION HEADER --- */
-   .navbar {
-  background: rgba(15, 23, 42, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 20px 40px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; /* Keeps elements perfectly pushed to the extreme ends */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-  position: sticky; 
-  top: 0; 
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
+    .navbar {
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 20px 40px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+      position: sticky; 
+      top: 0; 
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
 
-/* --- POSITION CONTROLS --- */
+    .back-btn {
+      order: 1; 
+      color: var(--text-light); 
+      text-decoration: none; 
+      font-size: 14px; 
+      font-weight: 600;
+      display: inline-flex; 
+      align-items: center; 
+      gap: 8px; 
+      padding: 10px 20px; 
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05); 
+      border: 1px solid rgba(255, 255, 255, 0.1); 
+      transition: all 0.3s ease;
+    }
 
-/* Forces the Back Button to the EXTREME LEFT */
-.back-btn {
-  order: 1; 
-  color: var(--text-light); 
-  text-decoration: none; 
-  font-size: 14px; 
-  font-weight: 600;
-  display: inline-flex; 
-  align-items: center; 
-  gap: 8px; 
-  padding: 10px 20px; 
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.05); 
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  transition: all 0.3s ease;
-}
+    .navbar-brand {
+      order: 2; 
+    }
 
-/* Forces the Logo and SSAW Name to the EXTREME RIGHT */
-.navbar-brand {
-  order: 2; 
-}
+    .navbar-brand h1 {
+      color: #ffffff; 
+      margin: 0; 
+      font-size: 22px; 
+      font-weight: 700; 
+      letter-spacing: 0.5px; 
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent;
+      display: flex; 
+      align-items: center; 
+      gap: 10px;
+    }
 
-/* ------------------------- */
+    .navbar-brand h1 i { 
+      color: var(--accent-gold); 
+      font-size: 20px; 
+    }
 
-.navbar-brand h1 {
-  color: #ffffff; 
-  margin: 0; 
-  font-size: 22px; 
-  font-weight: 700; 
-  letter-spacing: 0.5px; 
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent;
-  display: flex; 
-  align-items: center; 
-  gap: 10px;
-}
+    .back-btn:hover { 
+      background: var(--accent-gold); 
+      color: var(--bg-dark); 
+      border-color: var(--accent-gold); 
+      transform: translateX(-3px); 
+    }
 
-.navbar-brand h1 i { 
-  color: var(--accent-gold); 
-  font-size: 20px; 
-}
-
-.back-btn:hover { 
-  background: var(--accent-gold); 
-  color: var(--bg-dark); 
-  border-color: var(--accent-gold); 
-  transform: translateX(-3px); 
-}
     /* --- PAGE STRUCTURE --- */
     .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
-    .heading { font-size: 32px; font-weight: 700; margin-bottom: 30px; color: var(--primary-color); letter-spacing: -0.5px; }
+    .heading { font-size: 32px; font-weight: 700; margin-bottom: 5px; color: var(--primary-color); letter-spacing: -0.5px; }
+    .subheading-model { font-size: 16px; font-weight: 600; color: var(--accent-gold-hover); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; display: none; }
 
     /* --- PRODUCT VIEW GRID --- */
     .product-section { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
@@ -125,11 +121,25 @@
 
     /* --- DETAILS SIDEBAR --- */
     .product-details { flex: 1 1 50%; min-width: 320px; }
-    .overview-card { background: white; border-radius: 20px; padding: 30px; border: 1px solid rgba(15, 23, 42, 0.04); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02); margin-bottom: 25px; }
+    .overview-card { background: white; border-radius: 20px; padding: 30px; border: 1px solid rgba(15, 23, 42, 0.04); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02); margin-bottom: 25px; scroll-margin-top: 100px; }
     .overview-card h3 { margin-top: 0; font-size: 20px; font-weight: 700; color: var(--bg-dark); border-left: 4px solid var(--accent-gold); padding-left: 12px; margin-bottom: 15px; }
     .overview-card p { font-size: 14px; color: #475569; line-height: 1.6; }
 
-    /* --- SPECIFICATION GRIDS --- */
+    /* --- AMAZON-STYLE VARIANT SELECTOR --- */
+    .variant-selector-wrapper { margin-top: 20px; margin-bottom: 10px; }
+    .variant-lbl { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--bg-dark); margin-bottom: 8px; display: flex; gap: 5px; align-items: center; }
+    .variant-lbl span { color: #64748b; font-weight: 500; font-size: 12px; }
+    .variant-pill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .variant-pill {
+      background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 10px; padding: 12px;
+      text-align: left; cursor: pointer; transition: all 0.2s ease; position: relative;
+    }
+    .variant-pill:hover:not(.active) { border-color: #cbd5e1; background: #f1f5f9; }
+    .variant-pill.active { border-color: var(--accent-gold); background: #fffbeb; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08); }
+    .variant-pill .v-title { font-size: 12px; font-weight: 600; color: var(--bg-dark); display: block; margin-bottom: 2px; }
+    .variant-pill .v-p-lbl { font-size: 13px; font-weight: 700; color: var(--accent-gold-hover); }
+
+    /* --- INFO CARDS --- */
     .spec-group-box { background: white; border-radius: 20px; padding: 30px; border: 1px solid rgba(15, 23, 42, 0.04); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02); margin-bottom: 25px; }
     .spec-group-box h4 { margin: 0 0 15px 0; font-size: 16px; font-weight: 700; color: var(--bg-dark); display: flex; align-items: center; gap: 8px; }
     .spec-group-box h4 i { color: var(--accent-gold); }
@@ -145,7 +155,7 @@
     .live-pricing-dock .price-lbl { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 2px; }
     .live-pricing-dock .price-value { font-size: 22px; font-weight: 700; color: var(--accent-gold); }
 
-    /* --- ACTION HUBS WITH PROGRAMMATIC LOCKS --- */
+    /* --- ACTIONS HUB WITH BLOCKING UI --- */
     .ecommerce-action-hub { display: flex; gap: 15px; margin-top: 25px; }
     .btn-buy-now {
       flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 25px;
@@ -165,18 +175,12 @@
     }
     .btn-add-cart:hover:not(:disabled) { transform: translateY(-2px); background: var(--bg-dark); color: #ffffff; }
 
-    /* Structural Safe-Lock Layout Overrides */
     .btn-buy-now:disabled, .btn-add-cart:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none !important;
-      box-shadow: none !important;
-      border-color: #cbd5e1 !important;
-      background: #e2e8f0 !important;
-      color: #94a3b8 !important;
+      opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important;
+      border-color: #cbd5e1 !important; background: #e2e8f0 !important; color: #94a3b8 !important;
     }
 
-    /* --- VIDEO HUB DISPLAY --- */
+    /* --- VIDEO SYSTEM DISPLAY --- */
     .video-console-unit { margin-top: 50px; text-align: center; }
     .video-console-unit h3 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 25px; color: var(--bg-dark); }
     .video-frame-box { max-width: 800px; margin: 0 auto; background: #000; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); border: 1px solid rgba(15, 23, 42, 0.05); }
@@ -194,10 +198,60 @@
     .lightbox .close-trigger { position: absolute; top: 20px; right: 30px; color: white; font-size: 35px; cursor: pointer; transition: color 0.2s; }
     .lightbox .close-trigger:hover { color: var(--accent-gold); }
 
-    /* --- RESPONSIVE CONFIGURATIONS --- */
+    /* ========================================================
+       PERSISTENT STICKY ACTION BAR SYSTEM
+       ======================================================== */
+    .sticky-mobile-action-bar {
+      display: none; /* STRICTLY HIDDEN ON PC / DESKTOP VIEW BY DEFAULT */
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 2px solid var(--accent-gold);
+      padding: 12px 16px;
+      z-index: 1500;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.3);
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .m-btn-scroll-variants {
+      width: 100%;
+      max-width: 500px;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, #d97706 100%);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .m-btn-scroll-variants:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
+    }
+
+    .m-btn-scroll-variants:active {
+      transform: scale(0.98);
+    }
+
+    /* --- RESPONSIVE MOBILE FIXES --- */
     @media screen and (max-width: 768px) {
       .navbar { padding: 16px 20px; } .navbar-brand h1 { font-size: 17px; } .back-btn { padding: 8px 14px; font-size: 12px; }
-      .container { padding: 25px 15px; } .heading { font-size: 24px; margin-bottom: 20px; }
+      .container { padding: 25px 15px 110px 15px; } /* Added layout bottom padding strictly on mobile to clear sticky bar */
+      .heading { font-size: 24px; margin-bottom: 20px; }
       .product-section { flex-direction: column; gap: 25px; } .product-media-block, .product-details { flex: 1 1 100%; width: 100%; }
       .main-image-viewport { padding: 10px; margin-bottom: 15px; } .main-image-viewport img { max-height: 280px; }
       .gallery-grid { grid-template-columns: 1fr; gap: 8px; } .gallery-thumb-card img { height: 140px; }
@@ -205,23 +259,26 @@
       .live-pricing-dock { flex-direction: column; text-align: center; gap: 10px; }
       .ecommerce-action-hub { flex-direction: column; gap: 10px; }
       .video-frame-box iframe { height: 240px; }
+      
+      .sticky-mobile-action-bar { display: flex; } /* ONLY ACTIVATED ON MOBILE / TABLET VIEWS */
     }
   </style>
 </head>
 <body>
 
- <div class="navbar">
-  <div class="navbar-brand">
-    <h1>
-      <img src="logo1.png" alt="SSAW Logo" style="height: 26px; width: auto; object-fit: contain;">
-      SSAW
-    </h1>
+  <div class="navbar">
+    <div class="navbar-brand">
+      <h1>
+        <img src="logo1.png" alt="SSAW Logo" style="height: 26px; width: auto; object-fit: contain;">
+        SSAW
+      </h1>
+    </div>
+    <a href="other-products.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Products</a>
   </div>
-  <a href="other-products.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Products</a>
-</div>
 
   <div class="container">
-    <h2 class="heading">Sambrani Cup Making Machine</h2>
+    <h2 class="heading" id="main-product-title">Sambrani Cup Making Machine</h2>
+    <div class="subheading-model" id="variant-subheading">Model: Selected variant</div>
 
     <div class="product-section">
       <div class="product-media-block">
@@ -250,13 +307,18 @@
       </div>
 
       <div class="product-details">
-        <div class="overview-card">
+        <div class="overview-card" id="pricing-selection-card">
           <h3>Product Overview</h3>
           <p>Engineered for versatility and industrial strength, our machinery options cater perfectly to varying operations. Highly adaptive systems support alternative raw blend bases effortlessly while maintaining uniform structure density.</p>
           
+          <div class="variant-selector-wrapper">
+            <div class="variant-lbl">Select Machine Option: <span id="active-variant-indicator">Loading Models...</span></div>
+            <div class="variant-pill-grid" id="variant-dynamic-container"></div>
+          </div>
+
           <div class="live-pricing-dock">
             <div>
-              <div class="price-lbl">Real-time Machine Price</div>
+              <div class="price-lbl" id="price-dock-label">Real-time Machine Price</div>
               <div class="price-value" id="price-target-element">Loading...</div>
             </div>
             <i class="fas fa-tag" style="color: var(--accent-gold); font-size: 24px;"></i>
@@ -309,12 +371,28 @@
     </div>
   </div>
 
+  <div class="sticky-mobile-action-bar" id="mobile-sticky-dock">
+    <button class="m-btn-scroll-variants" onclick="scrollToVariantsSection()">
+      <i class="fas fa-layer-group"></i> See Available Variants & Prices
+    </button>
+  </div>
+
   <div class="lightbox" id="modal-viewport">
     <span class="close-trigger" onclick="closeLightbox()">&times;</span>
     <img id="modal-image-source" src="" alt="Expanded View">
   </div>
 
   <script>
+    let activeSelectedProduct = "Sambrani Cup Making Machine";
+    let activeSelectedPriceText = "Quote on Call";
+
+    function scrollToVariantsSection() {
+      const targetElement = document.getElementById("pricing-selection-card");
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     function openLightbox(imgUrl) {
       document.getElementById('modal-image-source').src = imgUrl;
       document.getElementById('modal-viewport').style.display = 'flex';
@@ -325,15 +403,11 @@
     }
 
     function sendToCartPipeline() {
-      const productName = "Sambrani Cup Making Machine";
-      const priceText = document.getElementById("price-target-element").innerText;
       const productImage = document.getElementById("main-product-image").src;
-      
-      const cartUrl = `cart.html?name=${encodeURIComponent(productName)}&price=${encodeURIComponent(priceText)}&image=${encodeURIComponent(productImage)}`;
+      const cartUrl = `cart.html?name=${encodeURIComponent(activeSelectedProduct)}&price=${encodeURIComponent(activeSelectedPriceText)}&image=${encodeURIComponent(productImage)}`;
       window.location.href = cartUrl;
     }
 
-    // UNLOCK INTERACTIVE WORKFLOWS ONCE DATA RESOLVES
     function enablePurchaseWorkflow() {
       const buyBtn = document.getElementById("buy-now-btn");
       const cartBtn = document.getElementById("add-cart-btn");
@@ -347,42 +421,118 @@
       }
     }
 
-    // SHEETS API INTEGRATION ENGINE
+    // LIVE PRICE & VARIANT PARSER PIPELINE
     fetch("https://script.google.com/macros/s/AKfycbya-5GK0ZeTZfdJQQQYsUMklxEcNtcMSzEUYMd6fj7_8dDQoBmkhllxqdM5d8kepPHQIA/exec")
     .then(response => response.json())
     .then(data => {
       if(data.result === "success") {
         let sheetPrices = data.data;
-        let priceTag = document.getElementById("price-target-element");
-
-        // SHEET FIELD KEY LOOKUPS
+        
         const matchingKeys = [
           "Sambrani Cup Making Machine",
           "Sambrani Making Machine",
           "Sambrani Machine"
         ];
 
-        let pickedPrice = null;
+        let matchedDataBlock = null;
         for(let key of matchingKeys) {
-          if(sheetPrices[key] !== undefined && sheetPrices[key] !== null && sheetPrices[key] !== "") {
-            pickedPrice = sheetPrices[key];
+          if(sheetPrices[key] !== undefined) {
+            matchedDataBlock = sheetPrices[key];
             break;
           }
         }
 
-        if(pickedPrice !== null) {
-          priceTag.innerText = isNaN(pickedPrice) ? pickedPrice : "₹ " + Number(pickedPrice).toLocaleString('en-IN');
+        // If variant structure exists, handle it dynamically
+        if(matchedDataBlock && matchedDataBlock.variants && matchedDataBlock.variants.length > 0) {
+          renderAmazonStyleVariants(matchedDataBlock.variants);
         } else {
-          priceTag.innerText = "Quote on Call";
+          // Fallback single item value check
+          let singlePrice = matchedDataBlock ? (typeof matchedDataBlock === 'object' ? matchedDataBlock.price : matchedDataBlock) : null;
+          if(singlePrice) {
+            setupSingleValueView(singlePrice);
+          } else {
+            setupNoVariantView();
+          }
         }
+      } else {
+        fallbackPricingSetup();
       }
-      enablePurchaseWorkflow();
     })
     .catch(err => {
-      console.error("Pricing API Timeout: ", err);
-      document.getElementById("price-target-element").innerText = "Quote on Call";
-      enablePurchaseWorkflow();
+      console.error("Pricing sheet connection failed:", err);
+      fallbackPricingSetup();
     });
+
+    function renderAmazonStyleVariants(variants) {
+      const container = document.getElementById("variant-dynamic-container");
+      container.innerHTML = ""; 
+
+      variants.forEach((variant, index) => {
+        const pill = document.createElement("div");
+        pill.className = "variant-pill";
+        if(index === 0) pill.className += " active";
+
+        const formattedPrice = isNaN(variant.price) ? variant.price : "₹" + Number(variant.price).toLocaleString('en-IN');
+        
+        pill.innerHTML = `
+          <span class="v-title">${variant.name}</span>
+          <span class="v-p-lbl">${formattedPrice}</span>
+        `;
+
+        pill.onclick = function() {
+          document.querySelectorAll(".variant-pill").forEach(p => p.classList.remove("active"));
+          pill.classList.add("active");
+          updateSelectedVariantView(variant);
+        };
+
+        container.appendChild(pill);
+      });
+
+      updateSelectedVariantView(variants[0]);
+    }
+
+    function updateSelectedVariantView(variant) {
+      const priceTag = document.getElementById("price-target-element");
+      const indicator = document.getElementById("active-variant-indicator");
+      const subheading = document.getElementById("variant-subheading");
+      const labelDock = document.getElementById("price-dock-label");
+
+      const formattedPrice = isNaN(variant.price) ? variant.price : "₹ " + Number(variant.price).toLocaleString('en-IN');
+      
+      activeSelectedProduct = `Sambrani Cup Making Machine (${variant.name})`;
+      activeSelectedPriceText = formattedPrice;
+
+      priceTag.innerText = formattedPrice;
+      indicator.innerText = variant.name;
+      labelDock.innerText = `Real-time ${variant.name} Price`;
+      
+      subheading.innerText = `Model: ${variant.name}`;
+      subheading.style.display = "block";
+
+      enablePurchaseWorkflow();
+    }
+
+    function setupSingleValueView(priceValue) {
+      const formattedPrice = isNaN(priceValue) ? priceValue : "₹ " + Number(priceValue).toLocaleString('en-IN');
+      document.getElementById("active-variant-indicator").innerText = "Standard Line";
+      document.getElementById("price-target-element").innerText = formattedPrice;
+      activeSelectedPriceText = formattedPrice;
+      enablePurchaseWorkflow();
+    }
+
+    function setupNoVariantView() {
+      document.getElementById("active-variant-indicator").innerText = "Standard Setup";
+      document.getElementById("price-target-element").innerText = "Quote on Call";
+      activeSelectedPriceText = "Quote on Call";
+      enablePurchaseWorkflow();
+    }
+
+    function fallbackPricingSetup() {
+      document.getElementById("active-variant-indicator").innerText = "Standard Line";
+      document.getElementById("price-target-element").innerText = "Quote on Call";
+      activeSelectedPriceText = "Quote on Call";
+      enablePurchaseWorkflow();
+    }
   </script>
 </body>
 </html>
