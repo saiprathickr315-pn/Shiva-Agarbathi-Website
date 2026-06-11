@@ -785,20 +785,24 @@
       const date = dateInput.value;
       const timeSlot = document.getElementById('appointmentTime').value;
 
+      // 1. Validation
       if (!name) { alert('Please fill out your name.'); return; }
       if (!phone) { alert('Please enter your mobile number.'); return; }
       if (!date) { alert('Please pick a date.'); return; }
       if (!timeSlot) { alert('Please select a time slot.'); return; }
 
+      // 2. Phone Number Sanitization
       phone = phone.replace(/\D/g, ''); 
       if (phone.length === 10) {
         phone = '91' + phone;
-      } else if (phone.length > 10 && !phone.startsWith('91')) {
-        alert('Please enter a valid phone number with 91 extension.');
+      } else if (phone.length === 12 && phone.startsWith('91')) {
+        // Already correct
+      } else {
+        alert('Please enter a valid 10-digit mobile number.');
         return;
       }
 
-      // 1. TRIGGER RUNTIME LOADING INDICATOR
+      // 3. UI Feedback
       submitBtn.disabled = true;
       submitBtn.innerHTML = `<span class="spinner"></span> <span>Processing...</span>`;
 
@@ -807,26 +811,22 @@
           weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
       });
 
-      // 2. CONFIGURE RECIPIENTS & CREDENTIALS
+      // 4. Message Construction
       const apiKey = "U1wLZs9Z2hMk";
       const primaryRecipient = "919342426468"; 
-      const userRecipient = phone;           
-
-      // 3. BUILD UNIFIED MESSAGE TEXT
+      
       let textMessage = `Hi ${name}, your appointment is successfully booked!\n\n`;
       textMessage += `ID: #APT-${appointmentId}\n`;
-      textMessage += `Phone: +${phone}\n`;
       textMessage += `Date: ${formattedDate}\n`;
       textMessage += `Slot: ${timeSlot}\n\n`;
-      textMessage += `Please confirm the slot by calling. Thank you!`;
+      textMessage += `Please confirm availability. Thank you!`;
 
       const encodedText = encodeURIComponent(textMessage);
       
-      // 4. GENERATE DUAL TARGET API ENDPOINTS
+      // 5. API Execution for dual notification
       const endpointPrimary = `https://api.textmebot.com/send.php?phone=${primaryRecipient}&apikey=${apiKey}&text=${encodedText}`;
-      const endpointUser = `https://api.textmebot.com/send.php?phone=${userRecipient}&apikey=${apiKey}&text=${encodedText}`;
+      const endpointUser = `https://api.textmebot.com/send.php?phone=${phone}&apikey=${apiKey}&text=${encodedText}`;
 
-      // 5. ASYNCHRONOUS FIRE & FORGET SPEEDWAY (Runs both API hits at the exact same time)
       Promise.all([
         fetch(endpointPrimary, { mode: 'no-cors' }),
         fetch(endpointUser, { mode: 'no-cors' })
@@ -835,7 +835,7 @@
         processSuccessState(appointmentId); 
       })
       .catch((err) => {
-        console.log("Fallback routing applied:", err);
+        console.error("Fetch error:", err);
         processSuccessState(appointmentId);
       });
     }

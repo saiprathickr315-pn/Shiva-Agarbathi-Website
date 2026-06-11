@@ -6,421 +6,176 @@
 <title>Secure Checkout</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter, Arial, sans-serif;
-}
+*{ margin:0; padding:0; box-sizing:border-box; font-family:Inter, Arial, sans-serif; }
+body{ background:linear-gradient(135deg,#020617,#0f172a,#111827); color:white; min-height:100vh; padding:30px; }
+.container{ max-width:1200px; margin:auto; display:grid; grid-template-columns:1.3fr 0.9fr; gap:28px; }
+.card{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(18px); padding:30px; border-radius:24px; box-shadow:0 8px 30px rgba(0,0,0,0.35); }
+h1{ font-size:30px; margin-bottom:25px; }
+h2{ font-size:22px; margin-bottom:18px; }
+.section-title{ font-size:14px; text-transform:uppercase; letter-spacing:1px; color:#94a3b8; margin-bottom:15px; }
+input,select,textarea{ width:100%; padding:15px; border:none; border-radius:14px; background:#1e293b; color:white; margin-bottom:16px; font-size:15px; outline:none; }
+input:focus,select:focus,textarea:focus{ outline:2px solid #2563eb; }
+textarea{ min-height:90px; resize:none; }
+button{ width:100%; padding:16px; border:none; border-radius:16px; background:linear-gradient(135deg,#2563eb,#1d4ed8); color:white; font-size:16px; font-weight:600; cursor:pointer; transition:0.3s; }
+button:hover{ transform:translateY(-2px); }
+.summary-card{ position:sticky; top:20px; height:fit-content; }
+table{ width:100%; border-collapse:collapse; margin-top:15px; margin-bottom:20px; }
+th,td{ padding:14px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.08); }
+th{ color:#94a3b8; font-size:14px; }
+.total-box{ margin-top:20px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); }
+.total-row{ display:flex; justify-content:space-between; margin-bottom:12px; }
+.grand-total{ font-size:24px; font-weight:700; color:#4ade80; }
+@media(max-width:900px){ .container{ grid-template-columns:1fr; } }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-body{
-    background:linear-gradient(135deg,#020617,#0f172a,#111827);
-    color:white;
-    min-height:100vh;
-    padding:30px;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1.3fr 0.9fr;
-    gap:28px;
-}
-
-.card{
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(18px);
-    padding:30px;
-    border-radius:24px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.35);
-}
-
-h1{
-    font-size:30px;
-    margin-bottom:25px;
-}
-
-h2{
-    font-size:22px;
-    margin-bottom:18px;
-}
-
-.section-title{
-    font-size:14px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    color:#94a3b8;
-    margin-bottom:15px;
-}
-
-input,select,textarea{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:14px;
-    background:#1e293b;
-    color:white;
-    margin-bottom:16px;
-    font-size:15px;
-    outline:none;
-}
-
-input:focus,select:focus,textarea:focus{
-    outline:2px solid #2563eb;
-}
-
-textarea{
-    min-height:90px;
-    resize:none;
-}
-
-button{
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:16px;
-    background:linear-gradient(135deg,#2563eb,#1d4ed8);
-    color:white;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    transform:translateY(-2px);
-}
-
-.summary-card{
-    position:sticky;
-    top:20px;
-    height:fit-content;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
-    margin-bottom:20px;
-}
-
-th,td{
-    padding:14px;
-    text-align:left;
-    border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-th{
-    color:#94a3b8;
-    font-size:14px;
-}
-
-.total-box{
-    margin-top:20px;
-    padding-top:20px;
-    border-top:1px solid rgba(255,255,255,0.08);
-}
-
-.total-row{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:12px;
-}
-
-.grand-total{
-    font-size:24px;
-    font-weight:700;
-    color:#4ade80;
-}
-
-@media(max-width:900px){
-    .container{
-        grid-template-columns:1fr;
-    }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Premium Success Screen Overlay */
-.success-screen-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #020617, #0f172a, #111827);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.success-screen-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.success-inner-card {
-    max-width: 650px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 28px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-    transform: scale(0.9);
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.success-screen-overlay.active .success-inner-card {
-    transform: scale(1);
-}
-
-.success-checkmark-circle {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 25px auto;
-    border-radius: 50%;
-    background: #16a34a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 42px;
-    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5);
-    animation: successPulseGlow 2s infinite cubic-bezier(0.66, 0, 0, 1);
-}
-
-@keyframes successPulseGlow {
-    70% { box-shadow: 0 0 0 24px rgba(22, 163, 74, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
-}
+/* Success Overlay Styles */
+.success-screen-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #020617, #0f172a, #111827); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.success-screen-overlay.active { opacity: 1; pointer-events: auto; }
+.success-inner-card { max-width: 650px; width: 100%; background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 28px; padding: 40px; text-align: center; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); transform: scale(0.9); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.success-screen-overlay.active .success-inner-card { transform: scale(1); }
+.success-checkmark-circle { width: 90px; height: 90px; margin: 0 auto 25px auto; border-radius: 50%; background: #16a34a; display: flex; align-items: center; justify-content: center; font-size: 42px; animation: successPulseGlow 2s infinite cubic-bezier(0.66, 0, 0, 1); }
+@keyframes successPulseGlow { 70% { box-shadow: 0 0 0 24px rgba(22, 163, 74, 0); } 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); } }
 </style>
 </head>
 <body>
 
 <div class="container">
-
     <div class="card">
         <h1>Checkout</h1>
-
         <form id="checkoutForm">
             <div class="section-title">Customer Information</div>
-
             <input type="text" id="name" placeholder="Full Name" required>
             <input type="tel" id="phone" placeholder="Phone Number" required>
-
             <div class="section-title">Delivery Address</div>
-
             <textarea id="address1" placeholder="Address Line 1" required></textarea>
             <input type="text" id="address2" placeholder="Landmark / Address Line 2">
-
             <input type="text" id="pinCode" placeholder="PIN Code" required>
-
             <select id="state" required>
                 <option value="">Select State</option>
-                <option>Karnataka</option>
-                <option>Tamil Nadu</option>
-                <option>Kerala</option>
-                <option>Andhra Pradesh</option>
-                <option>Maharashtra</option>
-                <option>Telangana</option>
-                <option>Delhi</option>
-                <option>Gujarat</option>
+                <option>Karnataka</option><option>Tamil Nadu</option><option>Kerala</option><option>Andhra Pradesh</option>
+                <option>Maharashtra</option><option>Telangana</option><option>Delhi</option><option>Gujarat</option>
             </select>
-
             <button type="submit">Place Secure Order</button>
         </form>
     </div>
 
     <div class="card summary-card">
         <h2>Order Summary</h2>
-
         <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Product</th><th>Amount</th></tr></thead>
             <tbody id="productTable"></tbody>
         </table>
-
         <div class="total-box">
-            <div class="total-row">
-                <span>Total</span>
-                <span class="grand-total" id="totalAmount"></span>
-            </div>
+            <div class="total-row"><span>Total</span><span class="grand-total" id="totalAmount"></span></div>
         </div>
     </div>
-
 </div>
 
-<!-- Hidden Success Screen Overlay -->
 <div class="success-screen-overlay" id="successOverlay">
     <div class="success-inner-card">
         <div class="success-checkmark-circle">✓</div>
-        <h1 style="font-size:32px;margin-bottom:18px;">Order Placed Successfully</h1>
-        <p style="color:#cbd5e1;font-size:17px;line-height:1.7;margin-bottom:25px;">
-            Thank you for placing your order with us.<br>
-            Our team will contact you very soon.
-        </p>
-        <div style="background:rgba(255,255,255,0.05);padding:18px;border-radius:18px;margin-bottom:25px;">
-            <strong>Expected Response Time:</strong><br>Within 2 hours a representative may call you.
-        </div>
-        <p style="color:#94a3b8;">Redirecting to homepage in <span id="countdown" style="color:#60a5fa;font-weight:bold;">15</span> seconds...</p>
+        <h1>Order Placed Successfully</h1>
+        <p style="color:#cbd5e1;font-size:17px;margin:20px 0;">Thank you for your order. Our team will contact you soon.</p>
+        <p>Redirecting in <span id="countdown">10</span> seconds...</p>
     </div>
 </div>
 
 <script>
 const payload = JSON.parse(localStorage.getItem("checkout_payload")) || { items: [], totalPrice: 0, machines: "" };
-
 const table = document.getElementById("productTable");
 
 if(payload && payload.items){
-    payload.items.forEach(item=>{
-        table.innerHTML += `
-            <tr>
-                <td>${item.name} x ${item.quantity}</td>
-                <td>₹${(item.price * item.quantity).toLocaleString()}</td>
-            </tr>
-        `;
+    payload.items.forEach(item => {
+        table.innerHTML += `<tr><td>${item.name} x ${item.quantity}</td><td>₹${(item.price * item.quantity).toLocaleString()}</td></tr>`;
     });
 }
-
 document.getElementById("totalAmount").innerText = "₹" + (payload.totalPrice ? payload.totalPrice.toLocaleString() : 0);
 
-// Rich Synthetic Notification Audio & Engine
 function triggerPaymentFeedback() {
-    // 1. Mobile Device Vibration (Rhythmic Pulse Pattern)
-    if (navigator.vibrate) {
-        navigator.vibrate([150, 100, 300]); 
-    }
-
-    // 2. High-Fidelity Custom Chime Generator
     try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const audioCtx = new AudioContext();
-        
-        // Primary Layer: Crisp Electronic Sound
-        let osc1 = audioCtx.createOscillator();
-        let gain1 = audioCtx.createGain();
-        osc1.type = 'square'; // Delivers the rich punchiness needed for notification visibility
-        osc1.frequency.setValueAtTime(523.25, audioCtx.currentTime); // Chord foundation pitch (C5)
-        
-        // High gain for rich volume presence
-        gain1.gain.setValueAtTime(0.4, audioCtx.currentTime);
-        gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
-        
-        // Filter out harsh extreme harmonics to keep the ring premium
-        let filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(1500, audioCtx.currentTime);
-
-        osc1.connect(filter);
-        filter.connect(gain1);
-        gain1.connect(audioCtx.destination);
-        
-        osc1.start();
-        osc1.stop(audioCtx.currentTime + 0.4);
-        
-        // Secondary Layer: Clear up-ping melody tracking right after
-        setTimeout(() => {
-            let osc2 = audioCtx.createOscillator();
-            let gain2 = audioCtx.createGain();
-            osc2.type = 'sine'; // Pure smooth signal line
-            osc2.frequency.setValueAtTime(783.99, audioCtx.currentTime); // Rising note accent (G5)
-            
-            gain2.gain.setValueAtTime(0.5, audioCtx.currentTime);
-            gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-            
-            osc2.connect(gain2);
-            gain2.connect(audioCtx.destination);
-            
-            osc2.start();
-            osc2.stop(audioCtx.currentTime + 0.6);
-        }, 120);
-
-    } catch (e) {
-        console.warn("Audio Context production muted by browser context policy flags:", e);
-    }
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [523.25, 783.99].forEach((freq, i) => {
+            setTimeout(() => {
+                let osc = ctx.createOscillator();
+                let gain = ctx.createGain();
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.start(); osc.stop(ctx.currentTime + 0.5);
+            }, i * 150);
+        });
+    } catch (e) {}
 }
 
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
     e.preventDefault();
-
     const submitBtn = document.querySelector("button[type='submit']");
     submitBtn.disabled = true;
-    submitBtn.innerHTML = `
-        <span style="display:flex;align-items:center;justify-content:center;gap:10px;">
-            <span style="width:18px;height:18px;border:3px solid rgba(255,255,255,0.3);border-top:3px solid white;border-radius:50%;animation:spin 0.8s linear infinite;"></span>
-            Processing...
-        </span>
-    `;
+    submitBtn.innerText = "Processing...";
 
-    const priceValue = payload.totalPrice || 0;
-    const displayPrice = (priceValue > 0) ? "₹" + priceValue : "Price on Request";
+    // 1. Collect and Clean Data
+    const name = document.getElementById("name").value;
+    const phoneInput = document.getElementById("phone").value.replace(/\D/g, "");
+    const buyerPhone = (phoneInput.length === 10) ? "91" + phoneInput : phoneInput;
+    const machine = payload.machines || "Not Specified";
+    const price = document.getElementById("totalAmount").innerText;
+    const address = document.getElementById("address1").value;
+    const pin = document.getElementById("pinCode").value;
 
-    const requestData = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        address1: document.getElementById("address1").value,
-        address2: document.getElementById("address2").value,
-        pinCode: document.getElementById("pinCode").value,
-        state: document.getElementById("state").value,
-        machineName: payload.machines || "Not Specified",
-        machinePrice: displayPrice
-    };
+    // 2. Professional Message Formatting
+    const apiKey = "U1wLZs9Z2hMk";
+    const ownerPhone = "919342426468";
+    
+    const ownerMsg = encodeURIComponent(
+        `📦 *NEW ORDER RECEIVED*\n` +
+        `--------------------------\n` +
+        `👤 *Name:* ${name}\n` +
+        `📞 *Phone:* ${buyerPhone}\n` +
+        `🛠 *Machine:* ${machine}\n` +
+        `💰 *Total:* ${price}\n` +
+        `📍 *Address:* ${address}, ${pin}\n` +
+        `--------------------------\n` +
+        `*Status:* Pending Contact`
+    );
+    
+    const buyerMsg = encodeURIComponent(
+        `✅ *Order Confirmed!*\n\n` +
+        `Hi ${name}, thank you for choosing us! We have received your order for *${machine}*.\n\n` +
+        `Our team will verify your details and contact you within 2 hours.\n\n` +
+        `*Thank you!*`
+    );
 
+    // 3. Prepare FormData for Google Sheet
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", buyerPhone);
+    formData.append("address1", address);
+    formData.append("address2", document.getElementById("address2").value);
+    formData.append("pinCode", pin);
+    formData.append("state", document.getElementById("state").value);
+    formData.append("machineName", machine);
+    formData.append("machinePrice", price);
+
+    // 4. Send all requests simultaneously
     try {
-        await fetch(
-            "https://script.google.com/macros/s/AKfycbwudcmsJNxUL2oMn781FG8tee9rAAmMuQTmuH9ANmRhkmfE2stZrXv7TESLtARHNASd/exec",
-            {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify(requestData)
-            }
-        );
-    } catch(err) {
-        console.error("Form transmission handled safely over standard fallback routes.");
-    }
+        await Promise.all([
+            fetch("https://script.google.com/macros/s/AKfycbzVDEV4lvmLzBthfeYvd8ek4C0ynbKqZzfMATrLqMxHepgZ8l545ZxTGpSBCuI-_Yy0GA/exec", { method: "POST", mode: "no-cors", body: formData }),
+            fetch(`https://api.textmebot.com/send.php?recipient=${ownerPhone}&apikey=${apiKey}&text=${ownerMsg}`, { mode: 'no-cors' }),
+            fetch(`https://api.textmebot.com/send.php?recipient=${buyerPhone}&apikey=${apiKey}&text=${buyerMsg}`, { mode: 'no-cors' })
+        ]);
+    } catch(err) { console.error("Error sending data:", err); }
 
-    // Trigger full physical/audio notification events
+    // 5. Finalize UI
     triggerPaymentFeedback();
-
-    // Fire screen layout transition animation
-    const successOverlay = document.getElementById("successOverlay");
-    successOverlay.classList.add("active");
-
-    // Clean up loading indicators behind the overlay safely
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = "Place Secure Order";
-
+    document.getElementById("successOverlay").classList.add("active");
     localStorage.removeItem("checkout_payload");
 
     let seconds = 15;
     const timer = setInterval(() => {
-        seconds--;
+        if (--seconds <= 0) { clearInterval(timer); window.location.href = "index.html"; }
         document.getElementById("countdown").innerText = seconds;
-        if(seconds <= 0){
-            clearInterval(timer);
-            window.location.href = "index.html";
-        }
     }, 1000);
 });
 </script>
-
 </body>
 </html>
