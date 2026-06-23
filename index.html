@@ -449,6 +449,20 @@
     footer { text-align: center; padding: 25px 0; background-color: var(--bg-dark); color: var(--text-muted); font-size: 13px; border-top: 1px solid #1e293b; }
 
     /* --- RESPONSIVE ADJUSTMENTS --- */
+    .close-modal-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+.close-modal-btn:hover {
+  color: #f8fafc;
+}
     @media (max-width: 768px) { 
       .navbar { padding: 15px 20px; flex-direction: column; text-align: center; }
       .navbar-right { align-items: center; font-size: 13px; }
@@ -519,48 +533,7 @@
   </div>
 </div>
 
-    <div id="lead-modal-overlay">
-      <div class="modal-content">
-        <div id="step-registration">
-          <h2>⚡ Request Wholesale Pricing</h2>
-          <p>Enter your details below to generate an automated WhatsApp verification security pin.</p>
-          <form class="modal-form" id="registrationForm">
-            <input type="text" id="custName" placeholder="Your Name / Company Name" required />
-            <div class="phone-container">
-              <span class="phone-prefix">+91</span>
-              <input type="tel" id="custMobile" placeholder="10-Digit Mobile Number" required pattern="[0-9]{10}" maxlength="10" title="Please enter exactly 10 digits" />
-            </div>
-            <button type="submit" class="modal-submit">Generate Security OTP <i class="fas fa-key"></i></button>
-          </form>
-        </div>
-
-        <div id="step-verification" style="display: none;">
-          <h2>🔐 Enter Verification Code</h2>
-          <p>We have dispatched a 4-digit security code directly to your  WhatsApp Number.</p>
-          <form class="modal-form" id="verificationForm">
-            <div class="otp-digit-container">
-              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-              <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]{1}" required oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-            </div>
-            
-            <div class="otp-utilities-row">
-              <span class="change-num-btn" onclick="backToRegistration()"><i class="fas fa-edit"></i> </span>
-              <button type="button" id="resendBtn" class="resend-otp-btn" onclick="triggerOTPResend()" disabled>Resend in 60s</button>
-            </div>
-
-            <button type="submit" class="modal-submit">Verify & Access Parameters <i class="fas fa-unlock"></i></button>
-          </form>
-        </div>
-
-        <div id="loading-spinner">
-          <div class="loader-text">Processing Security Gateway</div>
-          <div class="loader-bar-container"><div class="loader-bar"></div></div>
-        </div>
-        <div id="errorNotification" class="error-msg">Incorrect verification code. Please try again.</div>
-      </div>
-    </div>
+ 
 
     <div class="slider-section">
       <div class="slider-container">
@@ -685,6 +658,9 @@ function toggleMobileMenu() {
   if (menu) {
     menu.classList.toggle("show");
   }
+}
+function closeModal() {
+  document.getElementById('lead-modal-overlay').classList.remove('show');
 }
     // --- TOGGLE COMPACT DROPDOWN OPTIONS OVERLAY ---
     function toggleAssistantMenu(event) {

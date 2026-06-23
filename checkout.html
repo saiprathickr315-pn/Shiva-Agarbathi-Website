@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Secure Checkout</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 *{ margin:0; padding:0; box-sizing:border-box; font-family:Inter, Arial, sans-serif; }
@@ -28,7 +29,6 @@ th{ color:#94a3b8; font-size:14px; }
 @media(max-width:900px){ .container{ grid-template-columns:1fr; } }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* Success Overlay Styles */
 .success-screen-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #020617, #0f172a, #111827); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .success-screen-overlay.active { opacity: 1; pointer-events: auto; }
 .success-inner-card { max-width: 650px; width: 100%; background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 28px; padding: 40px; text-align: center; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); transform: scale(0.9); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
@@ -76,7 +76,7 @@ th{ color:#94a3b8; font-size:14px; }
         <div class="success-checkmark-circle">✓</div>
         <h1>Order Placed Successfully</h1>
         <p style="color:#cbd5e1;font-size:17px;margin:20px 0;">Thank you for your order. Our team will contact you soon.</p>
-        <p>Redirecting in <span id="countdown">10</span> seconds...</p>
+        <p>Redirecting in <span id="countdown">15</span> seconds...</p>
     </div>
 </div>
 
@@ -107,13 +107,67 @@ function triggerPaymentFeedback() {
     } catch (e) {}
 }
 
+// PDF Generation Logic
+async function generateAndDownloadPDF(name, phone, address, machineString) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const date = new Date().toLocaleDateString();
+
+    // 1. Header
+    doc.setFontSize(22);
+    doc.text("QUOTATION", 195, 20, { align: "right" });
+    doc.setFontSize(14);
+    doc.text("Shri Shiva Agarbathi Works", 20, 20);
+    doc.setFontSize(10);
+    doc.text("Customer Support: +91-9342426468", 20, 26);
+    
+    // 2. Metadata Box
+    doc.setDrawColor(0);
+    doc.rect(140, 30, 60, 15);
+    doc.setFontSize(9);
+    doc.text("DATE", 145, 35);
+    doc.text(date, 145, 42);
+
+    // 3. Customer Info
+    doc.setFontSize(10);
+    doc.text("CUSTOMER INFO", 20, 65);
+    doc.line(20, 67, 100, 67);
+    doc.text(`Name: ${name}`, 20, 75);
+    doc.text(`Phone: ${phone}`, 20, 80);
+    doc.text(`Address: ${address}`, 20, 85);
+
+    // 4. Clean Table Header (No Amount)
+    doc.setFillColor(200, 200, 200);
+    doc.rect(20, 100, 180, 10, 'F');
+    doc.text("DESCRIPTION", 25, 107);
+    doc.text("QTY", 160, 107);
+
+    // 5. Split Machines and List them
+    const machines = machineString.split(',').map(m => m.trim());
+    let yPos = 120;
+    
+    machines.forEach((m) => {
+        doc.text(m, 25, yPos);
+        doc.text("1", 162, yPos);
+        yPos += 10;
+    });
+
+    // 6. Footer Disclaimer (Updated Text)
+    doc.setFontSize(8);
+    doc.setTextColor(50);
+    doc.text("NOTE: This is a computer-generated quotation for reference purposes.", 20, 260);
+    doc.text("Please keep this document handy as it is the base for further process when our", 20, 265);
+    doc.text("customer care representative calls you for verification.", 20, 270);
+    
+    doc.save(`Quotation_${name.replace(/\s+/g, '_')}.pdf`);
+}
+
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
     e.preventDefault();
     const submitBtn = document.querySelector("button[type='submit']");
     submitBtn.disabled = true;
     submitBtn.innerText = "Processing...";
 
-    // 1. Collect and Clean Data
     const name = document.getElementById("name").value;
     const phoneInput = document.getElementById("phone").value.replace(/\D/g, "");
     const buyerPhone = (phoneInput.length === 10) ? "91" + phoneInput : phoneInput;
@@ -122,30 +176,12 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
     const address = document.getElementById("address1").value;
     const pin = document.getElementById("pinCode").value;
 
-    // 2. Professional Message Formatting
     const apiKey = "U1wLZs9Z2hMk";
     const ownerPhone = "919342426468";
     
-    const ownerMsg = encodeURIComponent(
-        `📦 *NEW ORDER RECEIVED*\n` +
-        `--------------------------\n` +
-        `👤 *Name:* ${name}\n` +
-        `📞 *Phone:* ${buyerPhone}\n` +
-        `🛠 *Machine:* ${machine}\n` +
-        `💰 *Total:* ${price}\n` +
-        `📍 *Address:* ${address}, ${pin}\n` +
-        `--------------------------\n` +
-        `*Status:* Pending Contact`
-    );
-    
-    const buyerMsg = encodeURIComponent(
-        `✅ *Order Confirmed!*\n\n` +
-        `Hi ${name}, thank you for choosing us! We have received your order for *${machine}*.\n\n` +
-        `Our team will verify your details and contact you within 2 hours.\n\n` +
-        `*Thank you!*`
-    );
+    const ownerMsg = encodeURIComponent(`📦 *NEW ORDER RECEIVED*\nName: ${name}\nPhone: ${buyerPhone}\nMachine: ${machine}\nTotal: ${price}\nAddress: ${address}, ${pin}`);
+    const buyerMsg = encodeURIComponent(`✅ *Order Confirmed!*\nHi ${name}, thank you for choosing us! We have received your order for *${machine}*. Our team will contact you within 2 hours.`);
 
-    // 3. Prepare FormData for Google Sheet
     const formData = new FormData();
     formData.append("name", name);
     formData.append("phone", buyerPhone);
@@ -156,16 +192,18 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
     formData.append("machineName", machine);
     formData.append("machinePrice", price);
 
-    // 4. Send all requests simultaneously
     try {
         await Promise.all([
             fetch("https://script.google.com/macros/s/AKfycbzVDEV4lvmLzBthfeYvd8ek4C0ynbKqZzfMATrLqMxHepgZ8l545ZxTGpSBCuI-_Yy0GA/exec", { method: "POST", mode: "no-cors", body: formData }),
             fetch(`https://api.textmebot.com/send.php?recipient=${ownerPhone}&apikey=${apiKey}&text=${ownerMsg}`, { mode: 'no-cors' }),
             fetch(`https://api.textmebot.com/send.php?recipient=${buyerPhone}&apikey=${apiKey}&text=${buyerMsg}`, { mode: 'no-cors' })
         ]);
+        
+        // Trigger PDF download after success
+        await generateAndDownloadPDF(name, buyerPhone, address, machine, price);
+        
     } catch(err) { console.error("Error sending data:", err); }
 
-    // 5. Finalize UI
     triggerPaymentFeedback();
     document.getElementById("successOverlay").classList.add("active");
     localStorage.removeItem("checkout_payload");
