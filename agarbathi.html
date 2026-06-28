@@ -517,40 +517,7 @@
     // ==========================================
     // MODULE 1: DYNAMIC MULTI-IMAGE CAROUSEL SYNC
     // ==========================================
-    const newImagesUrl = "YOUR_NEW_IMAGES_DEPLOY_WEB_APP_URL_HERE";
-
-    fetch(newImagesUrl)
-    .then(response => response.json())
-    .then(payload => {
-      if(payload.result === "success" && payload.images) {
-        let machineImages = payload.images["Agarbathi Making Machine"] || payload.images["Agarbatti Making Machine"];
-        if(machineImages) {
-          let visibilityToggle = false;
-
-          if(machineImages.image1) {
-            document.getElementById("thumb-img-1").src = machineImages.image1;
-            document.getElementById("thumb-cell-1").style.display = "block";
-            visibilityToggle = true;
-          }
-          if(machineImages.image2) {
-            document.getElementById("thumb-img-2").src = machineImages.image2;
-            document.getElementById("thumb-cell-2").style.display = "block";
-            visibilityToggle = true;
-          }
-          if(machineImages.image3) {
-            document.getElementById("thumb-img-3").src = machineImages.image3;
-            document.getElementById("thumb-cell-3").style.display = "block";
-            visibilityToggle = true;
-          }
-
-          if(visibilityToggle) {
-            document.getElementById("slider-row-wrapper").style.display = "flex";
-          }
-        }
-      }
-    })
-    .catch(err => console.warn("Image system skipped. Native fallback active.", err));
-
+   
     // ==========================================
     // MODULE 2: PRICE PIPELINE ENGINE WITH DYNAMIC VARIANTS
     // ==========================================
