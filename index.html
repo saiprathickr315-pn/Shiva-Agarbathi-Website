@@ -376,12 +376,13 @@
         <h2>🔐 Unlock Full Access</h2>
         <p>Enter your details to view pricing, catalogue & machine specifications. We'll verify you instantly via OTP.</p>
         <form class="modal-form" id="registrationForm">
-          <input type="text" id="custName" placeholder="Your Full Name" required />
+          <input type="text" id="custName" placeholder="Your Full Name" required autocomplete="name" />
           <div class="phone-container">
             <span class="phone-prefix">+91</span>
-            <input type="tel" id="custMobile" placeholder="10-digit Mobile Number" maxlength="10" pattern="[6-9][0-9]{9}" required />
+            <input type="tel" id="custMobile" placeholder="10-digit Mobile Number" maxlength="10" pattern="[6-9][0-9]{9}" required autocomplete="tel" />
           </div>
-          <button type="submit" class="modal-submit">Send OTP →</button>
+          <div class="error-msg" id="regErrorMsg"></div>
+          <button type="submit" class="modal-submit" id="sendOtpBtn">Send OTP →</button>
         </form>
         <div id="loading-spinner">
           <div class="loader-text">Sending OTP...</div>
@@ -566,221 +567,304 @@
   </div>
 
   <script>
-   const scriptURL = 'https://script.google.com/macros/s/AKfycbyJeKCf7HVs5xqkC0h-lIriF0mcWx9N9eel3FFfLJQNXEuxFHvuiV0dAOQTJRBdgSUA/exec';
+    // ─── CONFIG ───────────────────────────────────────────────────────────────
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJeKCf7HVs5xqkC0h-lIriF0mcWx9N9eel3FFfLJQNXEuxFHvuiV0dAOQTJRBdgSUA/exec';
+
+    // ─── STATE ────────────────────────────────────────────────────────────────
     let countdownInterval = null;
+    // Store name & mobile globally so verify step can read them
+    let globalName   = '';
+    let globalMobile = '';
 
-    // ---- INTERCEPT ALL LINK CLICKS ----
-    // If not authenticated, block navigation and show modal
+    // ─── HELPERS ──────────────────────────────────────────────────────────────
+    function postToScript(payload) {
+      return fetch(SCRIPT_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body:    JSON.stringify(payload)
+      });
+    }
+
+    function showRegError(msg) {
+      const el = document.getElementById('regErrorMsg');
+      el.innerText = msg;
+      el.style.display = 'block';
+    }
+    function hideRegError() {
+      const el = document.getElementById('regErrorMsg');
+      el.style.display = 'none';
+    }
+
+    // ─── LINK INTERCEPT (block internal nav if not authenticated) ─────────────
     document.addEventListener('click', function(e) {
-      const isAuthenticated = localStorage.getItem('shriShiva_authenticated');
-      if (isAuthenticated) return; // already verified, allow everything
-
+      if (localStorage.getItem('shriShiva_authenticated')) return;
       const link = e.target.closest('a[href]');
       if (!link) return;
-
       const href = link.getAttribute('href');
-      // Allow external links (catalogue downloads etc) to pass through
       if (!href || href.startsWith('http') || href.startsWith('mailto') || href === '#') return;
-
-      // Block internal page navigation
       e.preventDefault();
       document.getElementById('lead-modal-overlay').classList.add('show');
     });
 
+    // ─── MOBILE MENU ──────────────────────────────────────────────────────────
     function toggleMobileMenu() {
-      document.getElementById("mobileNavMenu").classList.toggle("show");
+      document.getElementById('mobileNavMenu').classList.toggle('show');
     }
 
+    // ─── MODAL ────────────────────────────────────────────────────────────────
     function closeModal() {
       document.getElementById('lead-modal-overlay').classList.remove('show');
     }
 
+    // ─── AI ASSISTANT MENU ────────────────────────────────────────────────────
     function toggleAssistantMenu(event) {
       event.stopPropagation();
       document.getElementById('assistantDropdown').classList.toggle('show');
     }
-
-    document.addEventListener('click', () => {
+    document.addEventListener('click', function() {
       document.getElementById('assistantDropdown').classList.remove('show');
     });
 
+    // ─── OTP INPUT FOCUS SHIFT ────────────────────────────────────────────────
     function shiftOtpFocus(currentBox) {
       if (currentBox.value.length >= 1) {
-        let nextBox = currentBox.nextElementSibling;
-        if (nextBox && nextBox.classList.contains('otp-digit')) nextBox.focus();
+        const next = currentBox.nextElementSibling;
+        if (next && next.classList.contains('otp-digit')) next.focus();
       }
     }
-
     function handleOtpBackspace(currentBox, event) {
-      if (event.key === "Backspace") {
+      if (event.key === 'Backspace') {
         if (currentBox.value.length === 0) {
-          let prevBox = currentBox.previousElementSibling;
-          if (prevBox && prevBox.classList.contains('otp-digit')) {
-            prevBox.focus(); prevBox.value = "";
+          const prev = currentBox.previousElementSibling;
+          if (prev && prev.classList.contains('otp-digit')) {
+            prev.focus(); prev.value = '';
           }
-        } else { currentBox.value = ""; }
+        } else {
+          currentBox.value = '';
+        }
         event.preventDefault();
       }
     }
 
+    // ─── BACK TO REGISTRATION ─────────────────────────────────────────────────
     function backToRegistration() {
       document.getElementById('step-verification').style.display = 'none';
-      document.getElementById('step-registration').style.display = 'block';
-      document.getElementById('errorNotification').style.display = 'none';
+      document.getElementById('step-registration').style.display  = 'block';
+      document.getElementById('registrationForm').style.display   = 'block';
+      document.getElementById('loading-spinner').style.display    = 'none';
+      document.getElementById('errorNotification').style.display  = 'none';
+      hideRegError();
       if (countdownInterval) clearInterval(countdownInterval);
     }
 
+    // ─── RESEND COUNTDOWN ─────────────────────────────────────────────────────
     function startResendCountdown() {
-      const resendBtn = document.getElementById('resendBtn');
+      const btn = document.getElementById('resendBtn');
       let timeLeft = 60;
-      resendBtn.disabled = true;
-      resendBtn.innerText = `Resend in ${timeLeft}s`;
+      btn.disabled  = true;
+      btn.innerText = 'Resend in ' + timeLeft + 's';
       if (countdownInterval) clearInterval(countdownInterval);
-      countdownInterval = setInterval(() => {
+      countdownInterval = setInterval(function() {
         timeLeft--;
         if (timeLeft <= 0) {
           clearInterval(countdownInterval);
-          resendBtn.disabled = false;
-          resendBtn.innerText = "Resend OTP";
+          btn.disabled  = false;
+          btn.innerText = 'Resend OTP';
         } else {
-          resendBtn.innerText = `Resend in ${timeLeft}s`;
+          btn.innerText = 'Resend in ' + timeLeft + 's';
         }
       }, 1000);
     }
 
+    // ─── RESEND OTP ───────────────────────────────────────────────────────────
     function triggerOTPResend() {
-      const spinner = document.getElementById('loading-spinner-verify');
+      const spinner    = document.getElementById('loading-spinner-verify');
       const verifyForm = document.getElementById('verificationForm');
-      spinner.style.display = 'block';
-      verifyForm.style.display = 'none';
-      document.getElementById('errorNotification').style.display = 'none';
+      const errorEl    = document.getElementById('errorNotification');
 
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify({ action: "sendOTP", name: document.getElementById('custName').value, mobile: document.getElementById('custMobile').value }),
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-      })
-      .then(() => { spinner.style.display = 'none'; verifyForm.style.display = 'block'; startResendCountdown(); document.querySelectorAll('.otp-digit')[0].focus(); })
-      .catch(() => { spinner.style.display = 'none'; verifyForm.style.display = 'block'; startResendCountdown(); });
+      spinner.style.display    = 'block';
+      verifyForm.style.display = 'none';
+      errorEl.style.display    = 'none';
+
+      console.log('[SSAW] Resending OTP → name:', globalName, '| mobile:', globalMobile);
+
+      postToScript({ action: 'sendOTP', name: globalName, mobile: globalMobile })
+        .then(function() {
+          spinner.style.display    = 'none';
+          verifyForm.style.display = 'block';
+          startResendCountdown();
+          document.querySelectorAll('.otp-digit')[0].focus();
+        })
+        .catch(function(err) {
+          console.error('[SSAW] Resend fetch error:', err);
+          spinner.style.display    = 'none';
+          verifyForm.style.display = 'block';
+          startResendCountdown();
+        });
     }
 
+    // ─── GO TO CATALOG (auth-gated) ───────────────────────────────────────────
     function goToCatalog(machineCategory) {
-      const isAuthenticated = localStorage.getItem('shriShiva_authenticated');
-      if (!isAuthenticated) {
+      if (!localStorage.getItem('shriShiva_authenticated')) {
         document.getElementById('lead-modal-overlay').classList.add('show');
         return;
       }
-      window.location.href = "machine.html?name=" + encodeURIComponent(machineCategory);
+      window.location.href = 'machine.html?name=' + encodeURIComponent(machineCategory);
     }
 
-    // AUTO SCROLLER
+    // ─── REGISTRATION FORM SUBMIT ─────────────────────────────────────────────
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      hideRegError();
+
+      // Collect and validate
+      const nameVal   = document.getElementById('custName').value.trim();
+      const mobileVal = document.getElementById('custMobile').value.trim();
+
+      if (!nameVal) {
+        showRegError('Please enter your full name.');
+        return;
+      }
+      if (!/^[6-9][0-9]{9}$/.test(mobileVal)) {
+        showRegError('Please enter a valid 10-digit Indian mobile number.');
+        return;
+      }
+
+      // Save to globals so verify step and resend can access them
+      globalName   = nameVal;
+      globalMobile = mobileVal;
+
+      console.log('[SSAW] Sending OTP → name:', globalName, '| mobile:', globalMobile);
+
+      // Show spinner
+      document.getElementById('registrationForm').style.display = 'none';
+      document.getElementById('loading-spinner').style.display  = 'block';
+
+      postToScript({ action: 'sendOTP', name: globalName, mobile: globalMobile })
+        .then(function(res) {
+          console.log('[SSAW] sendOTP HTTP status:', res.status);
+          return res.text();
+        })
+        .then(function(text) {
+          console.log('[SSAW] sendOTP response body:', text);
+          document.getElementById('loading-spinner').style.display   = 'none';
+          document.getElementById('step-registration').style.display = 'none';
+          document.getElementById('step-verification').style.display = 'block';
+          startResendCountdown();
+          setTimeout(function() {
+            document.querySelectorAll('.otp-digit')[0].focus();
+          }, 100);
+        })
+        .catch(function(err) {
+          console.error('[SSAW] sendOTP fetch error:', err);
+          // Still advance to OTP step so user isn't stuck (WhatsApp may have sent anyway)
+          document.getElementById('loading-spinner').style.display   = 'none';
+          document.getElementById('step-registration').style.display = 'none';
+          document.getElementById('step-verification').style.display = 'block';
+          startResendCountdown();
+          setTimeout(function() {
+            document.querySelectorAll('.otp-digit')[0].focus();
+          }, 100);
+        });
+    });
+
+    // ─── VERIFICATION FORM SUBMIT ─────────────────────────────────────────────
+    document.getElementById('verificationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const spinner    = document.getElementById('loading-spinner-verify');
+      const verifyForm = document.getElementById('verificationForm');
+      const errorEl    = document.getElementById('errorNotification');
+
+      // Collect OTP digits
+      let combinedOTP = '';
+      document.querySelectorAll('.otp-digit').forEach(function(input) {
+        combinedOTP += input.value;
+      });
+
+      if (combinedOTP.length < 4) {
+        errorEl.innerText = 'Please enter all 4 digits of the OTP.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      console.log('[SSAW] Verifying OTP → mobile:', globalMobile, '| otp:', combinedOTP);
+
+      spinner.style.display    = 'block';
+      verifyForm.style.display = 'none';
+      errorEl.style.display    = 'none';
+
+      postToScript({ action: 'verifyOTP', name: globalName, mobile: globalMobile, userOTP: combinedOTP })
+        .then(function(res) { return res.text(); })
+        .then(function(text) {
+          console.log('[SSAW] verifyOTP response:', text);
+          spinner.style.display = 'none';
+
+          if (text.includes('VERIFIED') || text.includes('SUCCESS')) {
+            localStorage.setItem('shriShiva_authenticated', 'true');
+            localStorage.setItem('shriShiva_customerName',  globalName);
+            localStorage.setItem('shriShiva_customerMobile', globalMobile);
+            document.getElementById('lead-modal-overlay').classList.remove('show');
+          } else {
+            verifyForm.style.display  = 'block';
+            errorEl.innerText         = 'Invalid OTP. Please check your WhatsApp messages and try again.';
+            errorEl.style.display     = 'block';
+            document.querySelectorAll('.otp-digit').forEach(function(i) { i.value = ''; });
+            document.querySelectorAll('.otp-digit')[0].focus();
+          }
+        })
+        .catch(function(err) {
+          console.error('[SSAW] verifyOTP fetch error:', err);
+          spinner.style.display     = 'none';
+          verifyForm.style.display  = 'block';
+          errorEl.innerText         = 'Network error. Please check your connection and try again.';
+          errorEl.style.display     = 'block';
+        });
+    });
+
+    // ─── AUTO SCROLLER ────────────────────────────────────────────────────────
     const scroller = document.getElementById('automatedScroller');
     let scrollDirection = 1;
     let scrollerInterval;
     function startAutoScroll() {
-      scrollerInterval = setInterval(() => {
+      scrollerInterval = setInterval(function() {
         scroller.scrollLeft += scrollDirection;
         if (scroller.scrollLeft >= scroller.scrollWidth - scroller.clientWidth - 1) scrollDirection = -1;
         else if (scroller.scrollLeft <= 0) scrollDirection = 1;
       }, 30);
     }
-    scroller.addEventListener('mouseenter', () => clearInterval(scrollerInterval));
+    scroller.addEventListener('mouseenter', function() { clearInterval(scrollerInterval); });
     scroller.addEventListener('mouseleave', startAutoScroll);
-    scroller.addEventListener('touchstart', () => clearInterval(scrollerInterval), {passive: true});
-    scroller.addEventListener('touchend', startAutoScroll, {passive: true});
+    scroller.addEventListener('touchstart', function() { clearInterval(scrollerInterval); }, { passive: true });
+    scroller.addEventListener('touchend',   startAutoScroll, { passive: true });
     startAutoScroll();
 
-    // CAROUSEL
+    // ─── HERO CAROUSEL ────────────────────────────────────────────────────────
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
+    const dots   = document.querySelectorAll('.dot');
     function showSlide(index) {
-      slides.forEach(s => s.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
+      slides.forEach(function(s) { s.classList.remove('active'); });
+      dots.forEach(function(d)   { d.classList.remove('active'); });
       slides[index].classList.add('active');
       dots[index].classList.add('active');
       currentSlide = index;
     }
     function nextSlide() { showSlide((currentSlide + 1) % slides.length); }
-    function setSlide(index) { showSlide(index); clearInterval(sliderInterval); sliderInterval = setInterval(nextSlide, 4500); }
+    function setSlide(index) {
+      showSlide(index);
+      clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 4500);
+    }
     let sliderInterval = setInterval(nextSlide, 4500);
 
-    // ---- SHOW MODAL AFTER 7 SECONDS (only for new visitors) ----
-    window.addEventListener('DOMContentLoaded', () => {
-      const isAuthenticated = localStorage.getItem('shriShiva_authenticated');
-      if (!isAuthenticated) {
-        setTimeout(() => {
+    // ─── AUTO-SHOW MODAL AFTER 7s FOR NEW VISITORS ────────────────────────────
+    window.addEventListener('DOMContentLoaded', function() {
+      if (!localStorage.getItem('shriShiva_authenticated')) {
+        setTimeout(function() {
           document.getElementById('lead-modal-overlay').classList.add('show');
         }, 7000);
       }
-    });
-
-    // REGISTRATION FORM SUBMIT
-    document.getElementById('registrationForm').addEventListener('submit', e => {
-      e.preventDefault();
-      const spinner = document.getElementById('loading-spinner');
-      spinner.style.display = 'block';
-      document.getElementById('registrationForm').style.display = 'none';
-
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify({ action: "sendOTP", name: document.getElementById('custName').value, mobile: document.getElementById('custMobile').value }),
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-      })
-      .then(() => {
-        spinner.style.display = 'none';
-        document.getElementById('step-registration').style.display = 'none';
-        document.getElementById('step-verification').style.display = 'block';
-        startResendCountdown();
-        setTimeout(() => document.querySelectorAll('.otp-digit')[0].focus(), 100);
-      })
-      .catch(() => {
-        spinner.style.display = 'none';
-        document.getElementById('step-registration').style.display = 'none';
-        document.getElementById('step-verification').style.display = 'block';
-        startResendCountdown();
-        setTimeout(() => document.querySelectorAll('.otp-digit')[0].focus(), 100);
-      });
-    });
-
-    // OTP VERIFICATION FORM SUBMIT
-    document.getElementById('verificationForm').addEventListener('submit', e => {
-      e.preventDefault();
-      const spinner = document.getElementById('loading-spinner-verify');
-      const verifyForm = document.getElementById('verificationForm');
-      const errorNotice = document.getElementById('errorNotification');
-      spinner.style.display = 'block';
-      verifyForm.style.display = 'none';
-      errorNotice.style.display = 'none';
-
-      let combinedOTP = "";
-      document.querySelectorAll('.otp-digit').forEach(input => combinedOTP += input.value);
-
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify({ action: "verifyOTP", mobile: document.getElementById('custMobile').value, userOTP: combinedOTP }),
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-      })
-      .then(res => res.text())
-      .then(text => {
-        spinner.style.display = 'none';
-        if (text.includes("VERIFIED") || text.includes("SUCCESS")) {
-          localStorage.setItem('shriShiva_authenticated', 'true');
-          document.getElementById('lead-modal-overlay').classList.remove('show');
-        } else {
-          verifyForm.style.display = 'block';
-          errorNotice.innerText = "Invalid OTP. Please check your messages.";
-          errorNotice.style.display = 'block';
-          document.querySelectorAll('.otp-digit').forEach(input => input.value = "");
-          document.querySelectorAll('.otp-digit')[0].focus();
-        }
-      })
-      .catch(() => {
-        spinner.style.display = 'none';
-        verifyForm.style.display = 'block';
-        errorNotice.innerText = "Network connection failed. Try again.";
-        errorNotice.style.display = 'block';
-      });
     });
   </script>
 </body>
