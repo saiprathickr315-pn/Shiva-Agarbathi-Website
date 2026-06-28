@@ -31,140 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* --- LOCKED GATEWAY MODAL OVERLAY --- */
-    #lead-modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100vh;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 9999;
-      display: flex; justify-content: center; align-items: center;
-      opacity: 0; visibility: hidden;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
-    }
-    #lead-modal-overlay.show { opacity: 1; visibility: visible; }
-
-    .modal-content {
-      background: var(--card-bg);
-      border: 2px solid var(--accent-gold);
-      padding: 35px 30px; border-radius: 20px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      width: 90%; max-width: 420px;
-      text-align: center; position: relative; color: var(--text-light);
-      box-sizing: border-box;
-    }
-
-    .modal-content h2 { color: var(--accent-gold); margin-top: 0; font-size: 23px; font-weight: 700; }
-    .modal-content p { color: var(--text-muted); margin-bottom: 20px; font-size: 14px; line-height: 1.5; }
-
-    .phone-container {
-      display: flex;
-      align-items: center;
-      background: #0f172a;
-      border: 2px solid #334155;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      padding: 0 14px;
-      transition: border-color 0.3s;
-    }
-    .phone-container:focus-within { border-color: var(--accent-gold); }
-    .phone-prefix { color: var(--accent-gold); font-weight: 600; font-size: 15px; margin-right: 8px; user-select: none; }
-
-    .phone-container input {
-      border: none !important;
-      margin-bottom: 0 !important;
-      padding-left: 0 !important;
-      outline: none !important;
-      background: transparent !important;
-      box-shadow: none !important;
-    }
-
-    .modal-form input:not(.otp-digit) {
-      width: 100%; padding: 14px; margin-bottom: 16px;
-      border: 2px solid #334155; background: #0f172a;
-      color: var(--text-light); border-radius: 10px;
-      font-size: 15px; box-sizing: border-box; outline: none;
-      transition: border-color 0.3s;
-    }
-    .modal-form input:focus { border-color: var(--accent-gold); }
-
-    .otp-digit-container {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 15px 0 20px 0;
-    }
-
-    .otp-digit {
-      width: 52px; height: 54px;
-      text-align: center;
-      font-size: 22px; font-weight: 700;
-      color: var(--text-light);
-      background: #0f172a;
-      border: 2px solid #334155;
-      border-radius: 10px;
-      outline: none; box-sizing: border-box;
-      transition: all 0.2s ease;
-    }
-    .otp-digit:focus {
-      border-color: var(--accent-gold);
-      box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
-    }
-
-    .otp-utilities-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      font-size: 13px;
-      padding: 0 4px;
-    }
-    .change-num-btn {
-      color: var(--text-muted);
-      text-decoration: none; font-weight: 500;
-      transition: color 0.2s; cursor: pointer;
-    }
-    .change-num-btn:hover { color: var(--text-light); }
-
-    .resend-otp-btn {
-      color: var(--accent-gold);
-      text-decoration: none; font-weight: 600;
-      cursor: pointer; background: none; border: none;
-      padding: 0; font-family: inherit;
-    }
-    .resend-otp-btn:disabled { color: var(--text-muted); cursor: not-allowed; opacity: 0.6; }
-
-    .modal-submit {
-      width: 100%; background: var(--accent-gold); color: var(--bg-dark);
-      border: none; padding: 15px; font-size: 16px; font-weight: 700;
-      border-radius: 10px; cursor: pointer; transition: background 0.3s;
-    }
-    .modal-submit:hover { background: var(--accent-gold-hover); }
-
-    #loading-spinner, #loading-spinner-verify { display: none; margin-top: 25px; text-align: center; }
-    .loader-text { color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
-    .loader-bar-container { width: 100%; height: 4px; background: #334155; border-radius: 2px; overflow: hidden; position: relative; }
-    .loader-bar {
-      width: 40%; height: 100%; background: var(--accent-gold); border-radius: 2px;
-      position: absolute; left: -40%;
-      animation: techLoading 1.2s infinite linear;
-      box-shadow: 0 0 8px var(--accent-gold);
-    }
-    @keyframes techLoading {
-      0% { left: -40%; }
-      50% { left: 40%; width: 60%; }
-      100% { left: 100%; }
-    }
-
-    .error-msg { color: #ef4444; font-size: 13px; margin-top: 15px; display: none; font-weight: 600; }
-
-    .close-modal-btn {
-      position: absolute; top: 15px; right: 15px;
-      background: transparent; border: none;
-      color: #94a3b8; font-size: 28px; cursor: pointer; line-height: 1;
-    }
-    .close-modal-btn:hover { color: #f8fafc; }
-
     /* --- INLINE COMPACT ASSISTANT MENU --- */
     .ai-assistant-container {
       position: fixed; bottom: 25px; right: 25px; z-index: 9998;
@@ -366,58 +232,6 @@
 </head>
 <body>
 
-  <!-- ===== OTP GATEWAY MODAL ===== -->
-  <div id="lead-modal-overlay">
-    <div class="modal-content">
-      <button class="close-modal-btn" onclick="closeModal()">×</button>
-
-      <!-- STEP 1: NAME + PHONE -->
-      <div id="step-registration">
-        <h2>🔐 Unlock Full Access</h2>
-        <p>Enter your details to view pricing, catalogue & machine specifications. We'll verify you instantly via OTP.</p>
-        <form class="modal-form" id="registrationForm">
-          <input type="text" id="custName" placeholder="Your Full Name" required autocomplete="name" />
-          <div class="phone-container">
-            <span class="phone-prefix">+91</span>
-            <input type="tel" id="custMobile" placeholder="10-digit Mobile Number" maxlength="10" pattern="[6-9][0-9]{9}" required autocomplete="tel" />
-          </div>
-          <div class="error-msg" id="regErrorMsg"></div>
-          <button type="submit" class="modal-submit" id="sendOtpBtn">Send OTP →</button>
-        </form>
-        <div id="loading-spinner">
-          <div class="loader-text">Sending OTP...</div>
-          <div class="loader-bar-container"><div class="loader-bar"></div></div>
-        </div>
-      </div>
-
-      <!-- STEP 2: OTP VERIFICATION -->
-      <div id="step-verification" style="display:none;">
-        <h2>✅ Verify OTP</h2>
-        <p>Enter the 4-digit OTP sent to your mobile number.</p>
-        <form class="modal-form" id="verificationForm">
-          <div class="otp-digit-container">
-            <input type="tel" maxlength="1" class="otp-digit" oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-            <input type="tel" maxlength="1" class="otp-digit" oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-            <input type="tel" maxlength="1" class="otp-digit" oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-            <input type="tel" maxlength="1" class="otp-digit" oninput="shiftOtpFocus(this)" onkeydown="handleOtpBackspace(this, event)" />
-          </div>
-          <div class="otp-utilities-row">
-            <span class="change-num-btn" onclick="backToRegistration()">← Change Number</span>
-            <button type="button" class="resend-otp-btn" id="resendBtn" onclick="triggerOTPResend()">Resend OTP</button>
-          </div>
-          <button type="submit" class="modal-submit">Verify & Enter →</button>
-        </form>
-        <div id="loading-spinner-verify" style="display:none;">
-          <div class="loader-text">Verifying...</div>
-          <div class="loader-bar-container"><div class="loader-bar"></div></div>
-        </div>
-        <div class="error-msg" id="errorNotification"></div>
-      </div>
-
-    </div>
-  </div>
-  <!-- ===== END OTP MODAL ===== -->
-
   <div class="ai-assistant-container">
     <div class="ai-inline-menu" id="assistantDropdown">
       <button class="ai-menu-item" onclick="goToCatalog('Agarbathi Making Machine')">Agarbathi Making Machine <i class="fas fa-chevron-right"></i></button>
@@ -434,189 +248,141 @@
     </div>
   </div>
 
-  <div id="main-content">
-    <div class="navbar">
-      <div class="navbar-left"><img src="logo1.png" alt="Company Logo" onerror="this.style.display='none'"></div>
-      <div class="navbar-center"><h2>SHRI SHIVA AGARBARTHI WORKS</h2></div>
-      <div class="navbar-right">
-        <div><i class="fas fa-phone"></i> <strong>+91-9342426468</strong></div>
-        <div><i class="fas fa-receipt"></i> GST: <strong>29ABXPN1363M1ZS</strong></div>
-      </div>
+  <div class="navbar">
+    <div class="navbar-left"><img src="logo1.png" alt="Company Logo" onerror="this.style.display='none'"></div>
+    <div class="navbar-center"><h2>SHRI SHIVA AGARBARTHI WORKS</h2></div>
+    <div class="navbar-right">
+      <div><i class="fas fa-phone"></i> <strong>+91-9342426468</strong></div>
+      <div><i class="fas fa-receipt"></i> GST: <strong>29ABXPN1363M1ZS</strong></div>
     </div>
-
-    <div class="navbar-menu-wrapper">
-      <button class="hamburger-menu" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="navbar-menu" id="mobileNavMenu">
-        <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
-        <a href="track.html"><i class="fas fa-truck-loading"></i> Track Order Progress</a>
-      </div>
-    </div>
-
-    <div class="slider-section">
-      <div class="slider-container">
-        <div class="slide active">
-          <h2>Explore Complete Pricing & Spares Inventory</h2>
-          <p>Access our complete ecosystem. View current stock variants, machine replacement parts, consumables, and production metrics instantly.</p>
-          <div class="action-btn-group">
-            <div class="primary-row">
-              <a href="other-products.html" class="explore-button">Machine Store <i class="fas fa-chevron-right"></i></a>
-              <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
-            </div>
-            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
-          </div>
-        </div>
-        <div class="slide">
-          <h2>Premium Spares & Die-Tooling Stock</h2>
-          <p>Get authentic high-speed replacement parts, custom camphor rollers, and durable paper plate manufacturing mold matrices.</p>
-          <div class="action-btn-group">
-            <div class="primary-row">
-              <a href="other-products.html" class="explore-button">Visit Machine Store <i class="fas fa-chevron-right"></i></a>
-              <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
-            </div>
-            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
-          </div>
-        </div>
-        <div class="slide">
-          <h2>Bulk Industrial Export Solutions</h2>
-          <p>Sourcing lines built directly for global operations. Access direct factory-level commercial wholesale quote parameters now.</p>
-          <div class="action-btn-group">
-            <div class="primary-row">
-              <a href="other-products.html" class="explore-button">Machine Mart <i class="fas fa-chevron-right"></i></a>
-              <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
-            </div>
-            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
-          </div>
-        </div>
-      </div>
-      <div class="slider-dots">
-        <div class="dot active" onclick="setSlide(0)"></div>
-        <div class="dot" onclick="setSlide(1)"></div>
-        <div class="dot" onclick="setSlide(2)"></div>
-      </div>
-    </div>
-
-    <div class="horizontal-scroll-section">
-      <div class="scroll-heading"><i class="fas fa-industry"></i> Smart Machine Guide</div>
-      <div class="scroller-wrapper" id="automatedScroller">
-        <div class="machine-scroll-card" onclick="goToCatalog('Agarbathi Making Machine')">
-          <div class="img-container"><img src="in.jpg" alt="Agarbathi Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Agarbathi+Machine'"></div>
-          <h3>Agarbathi Making Machine</h3>
-        </div>
-        <div class="machine-scroll-card" onclick="goToCatalog('Camphor Making Machine')">
-          <div class="img-container"><img src="ca.png" alt="Camphor Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Camphor+Machine'"></div>
-          <h3>Camphor Making Machine</h3>
-        </div>
-        <div class="machine-scroll-card" onclick="goToCatalog('Cotton Wick Making Machine')">
-          <div class="img-container"><img src="co.jpg" alt="Cotton Wick Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Cotton+Wick+Machine'"></div>
-          <h3>Cotton Wick Making Machine</h3>
-        </div>
-        <div class="machine-scroll-card" onclick="goToCatalog('Sambrani cup making machine')">
-          <div class="img-container"><img src="https://5.imimg.com/data5/VS/JD/MY-2380553/sambrani-cup-making-machine-250x250.jpg" alt="Sambrani cup making machine"></div>
-          <h3>Sambrani Cup Systems</h3>
-        </div>
-        <div class="machine-scroll-card" onclick="goToCatalog('Powder Mixing Machines')">
-          <div class="img-container"><img src="mi.jpg" alt="Powder Mixing Machines" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Mixing+Machine'"></div>
-          <h3>Powder Mixing Units</h3>
-        </div>
-        <div class="machine-scroll-card" onclick="goToCatalog('Agarbatti Dryer Machines')">
-          <div class="img-container"><img src="dr.jpg" alt="Agarbatti Dryer Machines" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Dryer+Machine'"></div>
-          <h3>Industrial Heating Dryers</h3>
-        </div>
-        <div class="machine-scroll-card" onclick="goToCatalog('Paper Plate Making Machine')">
-          <div class="img-container"><img src="PAP.jpg" alt="Paper Plate Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Paper+Plate+Machine'"></div>
-          <h3>Paper Plate Machinery</h3>
-        </div>
-        <div class="machine-scroll-card" onclick="goToCatalog('Band Sealing Machine')">
-          <div class="img-container"><img src="ba.jpg" alt="Band Sealing Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Sealing+Machine'"></div>
-          <h3>High-Speed Band Sealing</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="engineered-banner-section">
-      <div class="engineered-card">
-        <div class="engineered-text-content">
-          <div class="engineered-tag">Engineering Pioneer</div>
-          <h2>India's First Engineered Production Standards</h2>
-          <p>Shri Shiva Agarbathi Works sets the benchmark for indigenous heavy machinery development. Our platforms integrate state-of-the-art micro-controllers and robust architectural metal structures designed for seamless high-speed round-the-clock factory floor performance.</p>
-        </div>
-        <div class="engineered-image-holder">
-          <img src="logo1.png" alt="Engineered Plant Equipment" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Premium+Machinery'">
-        </div>
-      </div>
-    </div>
-
-    <div class="jumbotron-custom">
-      <h1>Turnkey Industrial Plant Machinery Manufacturer</h1>
-      <p class="lead">We design, manufacture, and engineer high-output machinery lines. Our plants are field-tested and certified by deployment engineers for premium performance metrics.</p>
-      <div class="characteristics">
-        <div class="item"><i class="fas fa-cogs"></i><span>Trader - Wholesaler / Distributor</span></div>
-        <div class="item"><i class="fas fa-users"></i><span>Staff: 10 to 16 Plant Technicians</span></div>
-        <div class="item"><i class="fas fa-calendar-day"></i><span>Registered Plant Est: 01-05-2005</span></div>
-        <div class="item"><i class="fas fa-balance-scale"></i><span>Legal Status: Sole Proprietorship</span></div>
-      </div>
-    </div>
-
-    <div class="bottom-action-container">
-      <a href="other-products.html" class="explore-button">Browse Extended Catalogue</a>
-    </div>
-
-    <footer>© 2026 Shri Shiva Agarbathi Works. All rights reserved.</footer>
   </div>
 
+  <div class="navbar-menu-wrapper">
+    <button class="hamburger-menu" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="navbar-menu" id="mobileNavMenu">
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+      <a href="track.html"><i class="fas fa-truck-loading"></i> Track Order Progress</a>
+    </div>
+  </div>
+
+  <div class="slider-section">
+    <div class="slider-container">
+      <div class="slide active">
+        <h2>Explore Complete Pricing & Spares Inventory</h2>
+        <p>Access our complete ecosystem. View current stock variants, machine replacement parts, consumables, and production metrics instantly.</p>
+        <div class="action-btn-group">
+          <div class="primary-row">
+            <a href="other-products.html" class="explore-button">Machine Store <i class="fas fa-chevron-right"></i></a>
+            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
+          </div>
+          <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
+        </div>
+      </div>
+      <div class="slide">
+        <h2>Premium Spares & Die-Tooling Stock</h2>
+        <p>Get authentic high-speed replacement parts, custom camphor rollers, and durable paper plate manufacturing mold matrices.</p>
+        <div class="action-btn-group">
+          <div class="primary-row">
+            <a href="other-products.html" class="explore-button">Visit Machine Store <i class="fas fa-chevron-right"></i></a>
+            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
+          </div>
+          <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
+        </div>
+      </div>
+      <div class="slide">
+        <h2>Bulk Industrial Export Solutions</h2>
+        <p>Sourcing lines built directly for global operations. Access direct factory-level commercial wholesale quote parameters now.</p>
+        <div class="action-btn-group">
+          <div class="primary-row">
+            <a href="other-products.html" class="explore-button">Machine Mart <i class="fas fa-chevron-right"></i></a>
+            <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="download-catalogue-btn" target="_blank"><i class="fas fa-file-download"></i> Download Catalogue</a>
+          </div>
+          <a href="https://drive.google.com/file/d/1kzl_1-NrEnHPOVJ3-kLn30ddm6Im7rwr/view?usp=sharing" class="secondary-download-link" target="_blank"><i class="fas fa-arrow-alt-circle-down"></i> Download Our Catalogue</a>
+        </div>
+      </div>
+    </div>
+    <div class="slider-dots">
+      <div class="dot active" onclick="setSlide(0)"></div>
+      <div class="dot" onclick="setSlide(1)"></div>
+      <div class="dot" onclick="setSlide(2)"></div>
+    </div>
+  </div>
+
+  <div class="horizontal-scroll-section">
+    <div class="scroll-heading"><i class="fas fa-industry"></i> Smart Machine Guide</div>
+    <div class="scroller-wrapper" id="automatedScroller">
+      <div class="machine-scroll-card" onclick="goToCatalog('Agarbathi Making Machine')">
+        <div class="img-container"><img src="in.jpg" alt="Agarbathi Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Agarbathi+Machine'"></div>
+        <h3>Agarbathi Making Machine</h3>
+      </div>
+      <div class="machine-scroll-card" onclick="goToCatalog('Camphor Making Machine')">
+        <div class="img-container"><img src="ca.png" alt="Camphor Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Camphor+Machine'"></div>
+        <h3>Camphor Making Machine</h3>
+      </div>
+      <div class="machine-scroll-card" onclick="goToCatalog('Cotton Wick Making Machine')">
+        <div class="img-container"><img src="co.jpg" alt="Cotton Wick Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Cotton+Wick+Machine'"></div>
+        <h3>Cotton Wick Making Machine</h3>
+      </div>
+      <div class="machine-scroll-card" onclick="goToCatalog('Sambrani cup making machine')">
+        <div class="img-container"><img src="https://5.imimg.com/data5/VS/JD/MY-2380553/sambrani-cup-making-machine-250x250.jpg" alt="Sambrani cup making machine"></div>
+        <h3>Sambrani Cup Systems</h3>
+      </div>
+      <div class="machine-scroll-card" onclick="goToCatalog('Powder Mixing Machines')">
+        <div class="img-container"><img src="mi.jpg" alt="Powder Mixing Machines" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Mixing+Machine'"></div>
+        <h3>Powder Mixing Units</h3>
+      </div>
+      <div class="machine-scroll-card" onclick="goToCatalog('Agarbatti Dryer Machines')">
+        <div class="img-container"><img src="dr.jpg" alt="Agarbatti Dryer Machines" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Dryer+Machine'"></div>
+        <h3>Industrial Heating Dryers</h3>
+      </div>
+      <div class="machine-scroll-card" onclick="goToCatalog('Paper Plate Making Machine')">
+        <div class="img-container"><img src="PAP.jpg" alt="Paper Plate Making Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Paper+Plate+Machine'"></div>
+        <h3>Paper Plate Machinery</h3>
+      </div>
+      <div class="machine-scroll-card" onclick="goToCatalog('Band Sealing Machine')">
+        <div class="img-container"><img src="ba.jpg" alt="Band Sealing Machine" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Sealing+Machine'"></div>
+        <h3>High-Speed Band Sealing</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="engineered-banner-section">
+    <div class="engineered-card">
+      <div class="engineered-text-content">
+        <div class="engineered-tag">Engineering Pioneer</div>
+        <h2>India's First Engineered Production Standards</h2>
+        <p>Shri Shiva Agarbathi Works sets the benchmark for indigenous heavy machinery development. Our platforms integrate state-of-the-art micro-controllers and robust architectural metal structures designed for seamless high-speed round-the-clock factory floor performance.</p>
+      </div>
+      <div class="engineered-image-holder">
+        <img src="logo1.png" alt="Engineered Plant Equipment" onerror="this.src='https://placehold.co/600x400/0f172a/f59e0b?text=Premium+Machinery'">
+      </div>
+    </div>
+  </div>
+
+  <div class="jumbotron-custom">
+    <h1>Turnkey Industrial Plant Machinery Manufacturer</h1>
+    <p class="lead">We design, manufacture, and engineer high-output machinery lines. Our plants are field-tested and certified by deployment engineers for premium performance metrics.</p>
+    <div class="characteristics">
+      <div class="item"><i class="fas fa-cogs"></i><span>Trader - Wholesaler / Distributor</span></div>
+      <div class="item"><i class="fas fa-users"></i><span>Staff: 10 to 16 Plant Technicians</span></div>
+      <div class="item"><i class="fas fa-calendar-day"></i><span>Registered Plant Est: 01-05-2005</span></div>
+      <div class="item"><i class="fas fa-balance-scale"></i><span>Legal Status: Sole Proprietorship</span></div>
+    </div>
+  </div>
+
+  <div class="bottom-action-container">
+    <a href="other-products.html" class="explore-button">Browse Extended Catalogue</a>
+  </div>
+
+  <footer>© 2026 Shri Shiva Agarbathi Works. All rights reserved.</footer>
+
   <script>
-    // ─── CONFIG ───────────────────────────────────────────────────────────────
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJeKCf7HVs5xqkC0h-lIriF0mcWx9N9eel3FFfLJQNXEuxFHvuiV0dAOQTJRBdgSUA/exec';
-
-    // ─── STATE ────────────────────────────────────────────────────────────────
-    let countdownInterval = null;
-    // Store name & mobile globally so verify step can read them
-    let globalName   = '';
-    let globalMobile = '';
-
-    // ─── HELPERS ──────────────────────────────────────────────────────────────
-    function postToScript(payload) {
-      return fetch(SCRIPT_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body:    JSON.stringify(payload)
-      });
-    }
-
-    function showRegError(msg) {
-      const el = document.getElementById('regErrorMsg');
-      el.innerText = msg;
-      el.style.display = 'block';
-    }
-    function hideRegError() {
-      const el = document.getElementById('regErrorMsg');
-      el.style.display = 'none';
-    }
-
-    // ─── LINK INTERCEPT (block internal nav if not authenticated) ─────────────
-    document.addEventListener('click', function(e) {
-      if (localStorage.getItem('shriShiva_authenticated')) return;
-      const link = e.target.closest('a[href]');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('http') || href.startsWith('mailto') || href === '#') return;
-      e.preventDefault();
-      document.getElementById('lead-modal-overlay').classList.add('show');
-    });
-
-    // ─── MOBILE MENU ──────────────────────────────────────────────────────────
     function toggleMobileMenu() {
       document.getElementById('mobileNavMenu').classList.toggle('show');
     }
 
-    // ─── MODAL ────────────────────────────────────────────────────────────────
-    function closeModal() {
-      document.getElementById('lead-modal-overlay').classList.remove('show');
-    }
-
-    // ─── AI ASSISTANT MENU ────────────────────────────────────────────────────
     function toggleAssistantMenu(event) {
       event.stopPropagation();
       document.getElementById('assistantDropdown').classList.toggle('show');
@@ -625,204 +391,11 @@
       document.getElementById('assistantDropdown').classList.remove('show');
     });
 
-    // ─── OTP INPUT FOCUS SHIFT ────────────────────────────────────────────────
-    function shiftOtpFocus(currentBox) {
-      if (currentBox.value.length >= 1) {
-        const next = currentBox.nextElementSibling;
-        if (next && next.classList.contains('otp-digit')) next.focus();
-      }
-    }
-    function handleOtpBackspace(currentBox, event) {
-      if (event.key === 'Backspace') {
-        if (currentBox.value.length === 0) {
-          const prev = currentBox.previousElementSibling;
-          if (prev && prev.classList.contains('otp-digit')) {
-            prev.focus(); prev.value = '';
-          }
-        } else {
-          currentBox.value = '';
-        }
-        event.preventDefault();
-      }
-    }
-
-    // ─── BACK TO REGISTRATION ─────────────────────────────────────────────────
-    function backToRegistration() {
-      document.getElementById('step-verification').style.display = 'none';
-      document.getElementById('step-registration').style.display  = 'block';
-      document.getElementById('registrationForm').style.display   = 'block';
-      document.getElementById('loading-spinner').style.display    = 'none';
-      document.getElementById('errorNotification').style.display  = 'none';
-      hideRegError();
-      if (countdownInterval) clearInterval(countdownInterval);
-    }
-
-    // ─── RESEND COUNTDOWN ─────────────────────────────────────────────────────
-    function startResendCountdown() {
-      const btn = document.getElementById('resendBtn');
-      let timeLeft = 60;
-      btn.disabled  = true;
-      btn.innerText = 'Resend in ' + timeLeft + 's';
-      if (countdownInterval) clearInterval(countdownInterval);
-      countdownInterval = setInterval(function() {
-        timeLeft--;
-        if (timeLeft <= 0) {
-          clearInterval(countdownInterval);
-          btn.disabled  = false;
-          btn.innerText = 'Resend OTP';
-        } else {
-          btn.innerText = 'Resend in ' + timeLeft + 's';
-        }
-      }, 1000);
-    }
-
-    // ─── RESEND OTP ───────────────────────────────────────────────────────────
-    function triggerOTPResend() {
-      const spinner    = document.getElementById('loading-spinner-verify');
-      const verifyForm = document.getElementById('verificationForm');
-      const errorEl    = document.getElementById('errorNotification');
-
-      spinner.style.display    = 'block';
-      verifyForm.style.display = 'none';
-      errorEl.style.display    = 'none';
-
-      console.log('[SSAW] Resending OTP → name:', globalName, '| mobile:', globalMobile);
-
-      postToScript({ action: 'sendOTP', name: globalName, mobile: globalMobile })
-        .then(function() {
-          spinner.style.display    = 'none';
-          verifyForm.style.display = 'block';
-          startResendCountdown();
-          document.querySelectorAll('.otp-digit')[0].focus();
-        })
-        .catch(function(err) {
-          console.error('[SSAW] Resend fetch error:', err);
-          spinner.style.display    = 'none';
-          verifyForm.style.display = 'block';
-          startResendCountdown();
-        });
-    }
-
-    // ─── GO TO CATALOG (auth-gated) ───────────────────────────────────────────
     function goToCatalog(machineCategory) {
-      if (!localStorage.getItem('shriShiva_authenticated')) {
-        document.getElementById('lead-modal-overlay').classList.add('show');
-        return;
-      }
       window.location.href = 'machine.html?name=' + encodeURIComponent(machineCategory);
     }
 
-    // ─── REGISTRATION FORM SUBMIT ─────────────────────────────────────────────
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      hideRegError();
-
-      // Collect and validate
-      const nameVal   = document.getElementById('custName').value.trim();
-      const mobileVal = document.getElementById('custMobile').value.trim();
-
-      if (!nameVal) {
-        showRegError('Please enter your full name.');
-        return;
-      }
-      if (!/^[6-9][0-9]{9}$/.test(mobileVal)) {
-        showRegError('Please enter a valid 10-digit Indian mobile number.');
-        return;
-      }
-
-      // Save to globals so verify step and resend can access them
-      globalName   = nameVal;
-      globalMobile = mobileVal;
-
-      console.log('[SSAW] Sending OTP → name:', globalName, '| mobile:', globalMobile);
-
-      // Show spinner
-      document.getElementById('registrationForm').style.display = 'none';
-      document.getElementById('loading-spinner').style.display  = 'block';
-
-      postToScript({ action: 'sendOTP', name: globalName, mobile: globalMobile })
-        .then(function(res) {
-          console.log('[SSAW] sendOTP HTTP status:', res.status);
-          return res.text();
-        })
-        .then(function(text) {
-          console.log('[SSAW] sendOTP response body:', text);
-          document.getElementById('loading-spinner').style.display   = 'none';
-          document.getElementById('step-registration').style.display = 'none';
-          document.getElementById('step-verification').style.display = 'block';
-          startResendCountdown();
-          setTimeout(function() {
-            document.querySelectorAll('.otp-digit')[0].focus();
-          }, 100);
-        })
-        .catch(function(err) {
-          console.error('[SSAW] sendOTP fetch error:', err);
-          // Still advance to OTP step so user isn't stuck (WhatsApp may have sent anyway)
-          document.getElementById('loading-spinner').style.display   = 'none';
-          document.getElementById('step-registration').style.display = 'none';
-          document.getElementById('step-verification').style.display = 'block';
-          startResendCountdown();
-          setTimeout(function() {
-            document.querySelectorAll('.otp-digit')[0].focus();
-          }, 100);
-        });
-    });
-
-    // ─── VERIFICATION FORM SUBMIT ─────────────────────────────────────────────
-    document.getElementById('verificationForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const spinner    = document.getElementById('loading-spinner-verify');
-      const verifyForm = document.getElementById('verificationForm');
-      const errorEl    = document.getElementById('errorNotification');
-
-      // Collect OTP digits
-      let combinedOTP = '';
-      document.querySelectorAll('.otp-digit').forEach(function(input) {
-        combinedOTP += input.value;
-      });
-
-      if (combinedOTP.length < 4) {
-        errorEl.innerText = 'Please enter all 4 digits of the OTP.';
-        errorEl.style.display = 'block';
-        return;
-      }
-
-      console.log('[SSAW] Verifying OTP → mobile:', globalMobile, '| otp:', combinedOTP);
-
-      spinner.style.display    = 'block';
-      verifyForm.style.display = 'none';
-      errorEl.style.display    = 'none';
-
-      postToScript({ action: 'verifyOTP', name: globalName, mobile: globalMobile, userOTP: combinedOTP })
-        .then(function(res) { return res.text(); })
-        .then(function(text) {
-          console.log('[SSAW] verifyOTP response:', text);
-          spinner.style.display = 'none';
-
-          if (text.includes('VERIFIED') || text.includes('SUCCESS')) {
-            localStorage.setItem('shriShiva_authenticated', 'true');
-            localStorage.setItem('shriShiva_customerName',  globalName);
-            localStorage.setItem('shriShiva_customerMobile', globalMobile);
-            document.getElementById('lead-modal-overlay').classList.remove('show');
-          } else {
-            verifyForm.style.display  = 'block';
-            errorEl.innerText         = 'Invalid OTP. Please check your WhatsApp messages and try again.';
-            errorEl.style.display     = 'block';
-            document.querySelectorAll('.otp-digit').forEach(function(i) { i.value = ''; });
-            document.querySelectorAll('.otp-digit')[0].focus();
-          }
-        })
-        .catch(function(err) {
-          console.error('[SSAW] verifyOTP fetch error:', err);
-          spinner.style.display     = 'none';
-          verifyForm.style.display  = 'block';
-          errorEl.innerText         = 'Network error. Please check your connection and try again.';
-          errorEl.style.display     = 'block';
-        });
-    });
-
-    // ─── AUTO SCROLLER ────────────────────────────────────────────────────────
+    // AUTO SCROLLER
     const scroller = document.getElementById('automatedScroller');
     let scrollDirection = 1;
     let scrollerInterval;
@@ -836,10 +409,10 @@
     scroller.addEventListener('mouseenter', function() { clearInterval(scrollerInterval); });
     scroller.addEventListener('mouseleave', startAutoScroll);
     scroller.addEventListener('touchstart', function() { clearInterval(scrollerInterval); }, { passive: true });
-    scroller.addEventListener('touchend',   startAutoScroll, { passive: true });
+    scroller.addEventListener('touchend', startAutoScroll, { passive: true });
     startAutoScroll();
 
-    // ─── HERO CAROUSEL ────────────────────────────────────────────────────────
+    // CAROUSEL
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     const dots   = document.querySelectorAll('.dot');
@@ -857,15 +430,6 @@
       sliderInterval = setInterval(nextSlide, 4500);
     }
     let sliderInterval = setInterval(nextSlide, 4500);
-
-    // ─── AUTO-SHOW MODAL AFTER 7s FOR NEW VISITORS ────────────────────────────
-    window.addEventListener('DOMContentLoaded', function() {
-      if (!localStorage.getItem('shriShiva_authenticated')) {
-        setTimeout(function() {
-          document.getElementById('lead-modal-overlay').classList.add('show');
-        }, 7000);
-      }
-    });
   </script>
 </body>
 </html>
