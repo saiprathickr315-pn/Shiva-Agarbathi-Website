@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard | Shri Shiva Agarbathi Works</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  :root{
+    --black:#000;--ink:#0a0a0a;--s1:#111;--s2:#1c1c1e;--s3:#2c2c2e;
+    --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.13);
+    --text:#f5f5f7;--muted:#86868b;--muted2:#aeaeb2;
+    --orange:#FF9500;--orange2:#FF6000;--o-dim:rgba(255,149,0,.1);
+    --r:16px;--r-lg:24px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--text);min-height:100vh}
+  .topbar{
+    position:sticky;top:0;z-index:50;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);padding:18px 28px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  }
+  .topbar h1{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:-.5px}
+  .topbar h1 span{color:var(--orange);font-style:italic}
+  .top-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .pin-input{
+    background:var(--s2);border:1.5px solid var(--border2);color:var(--text);
+    font-size:13.5px;padding:9px 14px;border-radius:50px;outline:none;width:160px;
+  }
+  .pin-input:focus{border-color:var(--orange)}
+  .btn{
+    background:var(--orange);color:#000;border:none;font-weight:700;font-size:13.5px;
+    padding:9px 20px;border-radius:50px;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;
+  }
+  .btn:hover{background:#ffad33}
+  .btn-outline{
+    background:var(--s2);color:var(--text);border:1px solid var(--border2);
+    font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:50px;cursor:pointer;
+    transition:.2s;font-family:'Inter',sans-serif;
+  }
+  .btn-outline:hover{background:var(--s3)}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 28px 80px}
+
+  .gate{
+    max-width:380px;margin:14vh auto;background:var(--s2);border:1px solid var(--border2);
+    border-radius:var(--r-lg);padding:40px 32px;text-align:center;
+  }
+  .gate h2{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:8px}
+  .gate p{color:var(--muted);font-size:13.5px;margin-bottom:24px}
+  .gate .pin-input{width:100%;margin-bottom:14px;text-align:center;font-size:16px;letter-spacing:2px}
+  .gate .btn{width:100%}
+  .gate-err{color:#ff453a;font-size:12.5px;margin-top:10px;min-height:16px}
+
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+  .stat-card{
+    background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:22px;
+  }
+  .stat-n{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--orange)}
+  .stat-l{font-size:12px;color:var(--muted);margin-top:6px;font-weight:500;letter-spacing:.3px}
+
+  .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px;justify-content:space-between}
+  .search-box{
+    background:var(--s2);border:1.5px solid var(--border);border-radius:50px;
+    padding:9px 18px;display:flex;align-items:center;gap:8px;flex:1;min-width:200px;max-width:320px;
+  }
+  .search-box input{background:none;border:none;outline:none;color:var(--text);font-size:13.5px;width:100%}
+  .search-box i{color:var(--muted);font-size:12px}
+  select.fi{
+    background:var(--s2);border:1.5px solid var(--border);color:var(--text);
+    font-size:13px;padding:9px 14px;border-radius:50px;outline:none;font-family:'Inter',sans-serif;
+  }
+
+  table{width:100%;border-collapse:collapse;background:var(--s2);border-radius:var(--r);overflow:hidden}
+  thead th{
+    text-align:left;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);
+    padding:14px 18px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02);
+  }
+  tbody td{padding:14px 18px;font-size:13.5px;border-bottom:1px solid var(--border)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(255,149,0,.04)}
+  .badge{
+    display:inline-block;padding:3px 11px;border-radius:50px;font-size:11.5px;font-weight:600;
+  }
+  .badge.verified{background:rgba(48,209,88,.12);color:#30d158}
+  .badge.attempt{background:rgba(255,149,0,.12);color:var(--orange)}
+  .empty{text-align:center;padding:60px 20px;color:var(--muted)}
+  .empty i{font-size:28px;margin-bottom:12px;display:block;opacity:.4}
+  .table-wrap{overflow-x:auto;border-radius:var(--r)}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:#30d158;display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .last-updated{font-size:11.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- PIN GATE -->
+<div class="gate" id="gate">
+  <h2>Admin Access</h2>
+  <p>Enter your admin PIN to view login records.</p>
+  <input class="pin-input" id="pinInput" type="password" placeholder="Admin PIN" autocomplete="off">
+  <button class="btn" onclick="unlock()">Unlock Dashboard</button>
+  <div class="gate-err" id="gateErr"></div>
+</div>
+
+<!-- DASHBOARD (hidden until unlocked) -->
+<div id="dashboard" style="display:none">
+  <div class="topbar">
+    <h1>Login <span>Dashboard</span></h1>
+    <div class="top-actions">
+      <span class="last-updated" id="lastUpdated"><span class="live-dot"></span>Live</span>
+      <button class="btn-outline" onclick="exportCSV()"><i class="fas fa-download"></i> Export CSV</button>
+      <button class="btn-outline" onclick="lock()"><i class="fas fa-lock"></i> Lock</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-n" id="statTotal">0</div><div class="stat-l">Total Logins</div></div>
+      <div class="stat-card"><div class="stat-n" id="statToday">0</div><div class="stat-l">Today</div></div>
+      <div class="stat-card"><div class="stat-n" id="statWeek">0</div><div class="stat-l">This Week</div></div>
+      <div class="stat-card"><div class="stat-n" id="statVerified">0</div><div class="stat-l">Verified</div></div>
+    </div>
+
+    <div class="controls">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input id="searchInput" placeholder="Search by name or phone…" oninput="renderTable()">
+      </div>
+      <select class="fi" id="statusFilter" onchange="renderTable()">
+        <option value="">All statuses</option>
+        <option value="verified">Verified</option>
+        <option value="attempt">Attempt</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Phone</th><th>Method</th><th>Status</th><th>Date</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div class="empty" id="emptyState" style="display:none">
+        <i class="fas fa-inbox"></i>No login records found.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const BACKEND_URL = 'https://YOUR-BACKEND-SERVICE.onrender.com'; // ← set this after deploying the backend
+const POLL_MS = 12000;
+
+let pin = '';
+let allRecords = [];
+let pollTimer = null;
+
+function unlock(){
+  const val = document.getElementById('pinInput').value.trim();
+  if(!val){ showGateErr('Enter a PIN.'); return }
+  pin = val;
+  document.getElementById('gateErr').textContent = '';
+  testPin();
+}
+
+function showGateErr(msg){ document.getElementById('gateErr').textContent = msg; }
+
+async function testPin(){
+  try{
+    const r = await fetch(BACKEND_URL+'/api/logins/stats', { headers:{ 'x-admin-pin': pin } });
+    if(r.status === 401){ showGateErr('Incorrect PIN.'); return }
+    if(!r.ok){ showGateErr('Could not reach server.'); return }
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    sessionStorage.setItem('ssaw_admin_pin', pin);
+    loadAll();
+    if(pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(loadAll, POLL_MS);
+  }catch{
+    showGateErr('Network error. Check connection.');
+  }
+}
+
+function lock(){
+  pin = '';
+  sessionStorage.removeItem('ssaw_admin_pin');
+  if(pollTimer) clearInterval(pollTimer);
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('gate').style.display = 'block';
+  document.getElementById('pinInput').value = '';
+}
+
+async function loadAll(){
+  await Promise.all([loadStats(), loadRecords()]);
+  document.getElementById('lastUpdated').innerHTML =
+    '<span class="live-dot"></span>Updated ' + new Date().toLocaleTimeString('en-IN');
+}
+
+async function loadStats(){
+  try{
+    const r = await fetch(BACKEND_URL+'/api/logins/stats', { headers:{ 'x-admin-pin': pin } });
+    if(!r.ok) return;
+    const s = await r.json();
+    document.getElementById('statTotal').textContent = s.total ?? 0;
+    document.getElementById('statToday').textContent = s.today ?? 0;
+    document.getElementById('statWeek').textContent = s.thisWeek ?? 0;
+    document.getElementById('statVerified').textContent = s.verified ?? 0;
+  }catch(e){ console.error('stats fetch failed', e) }
+}
+
+async function loadRecords(){
+  try{
+    const r = await fetch(BACKEND_URL+'/api/logins', { headers:{ 'x-admin-pin': pin } });
+    if(!r.ok) return;
+    const data = await r.json();
+    allRecords = data.records || [];
+    renderTable();
+  }catch(e){ console.error('logins fetch failed', e) }
+}
+
+function renderTable(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const statusF = document.getElementById('statusFilter').value;
+
+  let rows = allRecords.filter(r=>{
+    const matchesQ = !q || (r.name||'').toLowerCase().includes(q) || (r.phone||'').includes(q);
+    const matchesStatus = !statusF || r.status === statusF;
+    return matchesQ && matchesStatus;
+  });
+
+  const tbody = document.getElementById('tbody');
+  const empty = document.getElementById('emptyState');
+
+  if(rows.length === 0){
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  tbody.innerHTML = rows.map(r=>{
+    const date = r.created_at ? new Date(r.created_at).toLocaleString('en-IN') : '—';
+    const statusClass = r.status === 'verified' ? 'verified' : 'attempt';
+    return `<tr>
+      <td>${escapeHtml(r.name||'—')}</td>
+      <td>+91${escapeHtml(r.phone||'')}</td>
+      <td>${escapeHtml(r.method||'—')}</td>
+      <td><span class="badge ${statusClass}">${escapeHtml(r.status||'—')}</span></td>
+      <td>${date}</td>
+    </tr>`;
+  }).join('');
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function exportCSV(){
+  if(allRecords.length === 0){ alert('No records to export.'); return }
+  const header = ['Name','Phone','Method','Status','Date'];
+  const rows = allRecords.map(r => [
+    r.name||'', '+91'+(r.phone||''), r.method||'', r.status||'',
+    r.created_at ? new Date(r.created_at).toLocaleString('en-IN') : ''
+  ]);
+  const csv = [header, ...rows].map(row =>
+    row.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')
+  ).join('\n');
+  const blob = new Blob([csv], { type:'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `ssaw-logins-${Date.now()}.csv`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* auto-unlock if PIN already in this session */
+(function init(){
+  const saved = sessionStorage.getItem('ssaw_admin_pin');
+  if(saved){
+    pin = saved;
+    document.getElementById('pinInput').value = saved;
+    testPin();
+  }
+})();
+
+document.getElementById('pinInput').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') unlock();
+});
+</script>
+</body>
+</html>
