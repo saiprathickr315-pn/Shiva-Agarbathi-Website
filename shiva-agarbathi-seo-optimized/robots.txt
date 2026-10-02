@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /track.html
+Disallow: /appointment.html
+
+Sitemap: https://shivaagarbathi.com/sitemap.xml
