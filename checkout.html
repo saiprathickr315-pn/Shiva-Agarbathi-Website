@@ -127,6 +127,7 @@
     border-radius:30px; margin:-4px 0 14px; width:fit-content; font-weight:600;
   }
   .verified-badge.show{ display:flex; }
+  .verified-badge.unverified{ color:var(--gold); background:rgba(245,185,66,0.1); border-color:rgba(245,185,66,0.3); }
 
   .locate-btn{
     width:100%; padding:13px; border-radius:14px; border:1px dashed rgba(245,185,66,0.4);
@@ -186,6 +187,27 @@
   }
   @keyframes successPulseGlow{ 70%{ box-shadow:0 0 0 24px rgba(61,220,151,0);} 100%{ box-shadow:0 0 0 0 rgba(61,220,151,0);} }
   .success-inner-card p.muted{ color:var(--text-mid); font-size:15.5px; margin:18px 0; line-height:1.6; }
+
+  /* ---- Maintenance modal ---- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(5,7,12,0.85); backdrop-filter:blur(6px);
+    z-index:10000; display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal-box{
+    max-width:430px; width:100%; background:var(--panel); border:1px solid rgba(245,185,66,0.35);
+    border-radius:22px; padding:32px; text-align:center; animation:float-in .4s cubic-bezier(.16,1,.3,1) both;
+    box-shadow:0 30px 60px rgba(0,0,0,0.6);
+  }
+  .modal-icon{ font-size:38px; color:var(--gold); margin-bottom:14px; }
+  .modal-box h3{ font-size:20px; margin-bottom:10px; }
+  .modal-box p{ color:var(--text-mid); font-size:14px; line-height:1.6; margin-bottom:22px; }
+  .modal-actions{ display:flex; gap:10px; }
+  .modal-actions button{
+    flex:1; padding:14px; border-radius:14px; font-weight:700; font-size:14px; cursor:pointer; border:none;
+  }
+  .modal-cancel{ background:rgba(255,255,255,0.06); color:var(--text-mid); border:1px solid var(--panel-edge) !important; }
+  .modal-continue{ background:linear-gradient(135deg,var(--gold),#d97706); color:var(--void); }
 </style>
 </head>
 <body>
@@ -263,6 +285,19 @@
   </div>
 </div>
 
+<!-- OTP maintenance popup -->
+<div class="modal-overlay" id="maintModal">
+  <div class="modal-box">
+    <div class="modal-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+    <h3>OTP Server Under Maintenance</h3>
+    <p>Our WhatsApp OTP service is temporarily unavailable. You can continue with your order — your number will be recorded and our team will verify it when they call you.</p>
+    <div class="modal-actions">
+      <button type="button" class="modal-cancel" id="maintCancel">Cancel</button>
+      <button type="button" class="modal-continue" id="maintContinue">Continue</button>
+    </div>
+  </div>
+</div>
+
 <div class="success-screen-overlay" id="successOverlay">
   <div class="success-inner-card">
     <div class="success-checkmark-circle"><i class="fas fa-check"></i></div>
@@ -302,8 +337,11 @@ document.getElementById("gstAmount").innerText = "₹" + gstTotal.toLocaleString
 document.getElementById("totalAmount").innerText = "₹" + grandTotal.toLocaleString('en-IN', {maximumFractionDigits:0});
 
 /* ---------------- WHATSAPP OTP VERIFICATION ---------------- */
-const WA_BASE_URL = "https://whatsapp-api-usxe.onrender.com/api/send/text";
-const WA_API_KEY = "wag_1bc556ec998e4ead837cf83635ee2e7d";
+const OTP_MAINTENANCE = true;   // <-- set to false when the WhatsApp API is working again
+let verificationStatus = "VERIFIED";
+
+const WA_BASE_URL = "https://whatsapp-api-2-u3bq.onrender.com//api/send/text";
+const WA_API_KEY = "wag_fa3ab31470654fdfbdcf63fcdd1cbec1";
 
 let generatedOtp = null;
 let isPhoneVerified = false;
@@ -320,6 +358,7 @@ const submitBtn = document.getElementById("submitBtn");
 const lockHint = document.getElementById("lockHint");
 const resendLink = document.getElementById("resendOtpLink");
 const resendTimerEl = document.getElementById("resendTimer");
+const maintModal = document.getElementById("maintModal");
 
 function normalizePhone(raw) {
   const digits = raw.toString().replace(/\D/g, "");
@@ -378,12 +417,43 @@ function startResendCooldown() {
   }, 1000);
 }
 
-verifyBtn.addEventListener("click", sendOtp);
+/* Verify button: shows maintenance popup while OTP_MAINTENANCE is true */
+verifyBtn.addEventListener("click", () => {
+  if (OTP_MAINTENANCE) {
+    const rawPhone = phoneInputEl.value.replace(/\D/g, "");
+    if (rawPhone.length !== 10) {
+      phoneInputEl.style.borderColor = "var(--danger)";
+      return;
+    }
+    phoneInputEl.style.borderColor = "";
+    maintModal.classList.add("show");
+  } else {
+    sendOtp();
+  }
+});
+
+document.getElementById("maintCancel").addEventListener("click", () => {
+  maintModal.classList.remove("show");
+});
+
+document.getElementById("maintContinue").addEventListener("click", () => {
+  maintModal.classList.remove("show");
+  verificationStatus = "UNVERIFIED (OTP server maintenance)";
+  isPhoneVerified = true;               // allows the order to go through
+  phoneInputEl.disabled = true;
+  verifyBtn.style.display = "none";
+  verifiedBadge.innerHTML = '<i class="fas fa-circle-info"></i> Number Recorded';
+  verifiedBadge.classList.add("unverified", "show");
+  submitBtn.disabled = false;
+  lockHint.style.display = "none";
+});
+
 resendLink.addEventListener("click", () => { if (!resendLink.classList.contains("disabled")) sendOtp(); });
 
 confirmOtpBtn.addEventListener("click", () => {
   if (otpInput.value.trim() === generatedOtp && generatedOtp !== null) {
     isPhoneVerified = true;
+    verificationStatus = "VERIFIED";
     otpBox.classList.remove("show");
     verifiedBadge.classList.add("show");
     phoneInputEl.disabled = true;
@@ -603,7 +673,7 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
 
   const apiKey = "U1wLZs9Z2hMk";
   const ownerPhone = "919342426468";
-  const ownerMsg = encodeURIComponent(`📦 *NEW ORDER RECEIVED*\nName: ${name}\nPhone: ${buyerPhone}\nMachine: ${machine}\nTotal (incl. GST): ${grandTotalText}\nAddress: ${address1Val}, ${address2Val}, ${pin}, ${stateVal}`);
+  const ownerMsg = encodeURIComponent(`📦 *NEW ORDER RECEIVED*\nName: ${name}\nPhone: ${buyerPhone}\nPhone Verification: ${verificationStatus}\nMachine: ${machine}\nTotal (incl. GST): ${grandTotalText}\nAddress: ${address1Val}, ${address2Val}, ${pin}, ${stateVal}`);
   const buyerMsg = encodeURIComponent(`✅ *Order Confirmed!*\nHi ${name}, thank you for choosing us! We have received your order for *${machine}*. Total: ${grandTotalText} (incl. GST). Our team will contact you within 2 hours.`);
 
   const formData = new FormData();
@@ -615,6 +685,7 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
   formData.append("state", stateVal);
   formData.append("machineName", machine);
   formData.append("machinePrice", grandTotalText);
+  formData.append("verificationStatus", verificationStatus);
 
   try {
     await Promise.all([
