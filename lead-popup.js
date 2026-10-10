@@ -1,12 +1,13 @@
 /* SSAW lead popup
-   Shows once per visitor, 4 seconds after they start browsing.
+   Shows once per visitor, 15-20 seconds after they start browsing.
    Saves name + mobile + machine to the same Google Sheet as contactseller.html.
    Add before </body>:  <script src="lead-popup.js" defer></script>            */
 (function () {
   "use strict";
 
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbzVDEV4lvmLzBthfeYvd8ek4C0ynbKqZzfMATrLqMxHepgZ8l545ZxTGpSBCuI-_Yy0GA/exec";
-  var MIN_DELAY = 4000, MAX_DELAY = 4000;     // popup appears after exactly 4 seconds
+  var AW_CONV = "AW-18501526181/YOUR_CONVERSION_LABEL"; // paste your Google Ads conversion label here
+  var MIN_DELAY = 15000, MAX_DELAY = 20000;   // popup appears somewhere between 15 and 20 seconds
   var MAX_WAIT = 8000;                        // never keep the visitor waiting longer than this on submit
   var KEY = "ssaw_lead_popup_done";           // remembered in the visitor's browser
 
@@ -204,6 +205,10 @@
       busy = false;
       if (res === "ok") {
         $("lp-dp").textContent = "Thank you, " + d.name.split(" ")[0] + ". Our team will contact you within 2 hours.";
+        try { if (window.gtag && !d.bot) {
+          if (AW_CONV.indexOf("YOUR_") === -1) gtag("event", "conversion", { send_to: AW_CONV, value: 1.0, currency: "INR" });
+          gtag("event", "generate_lead", { method: "popup" });
+        } } catch (e) { }
         view("lp-done-v");
         last = null;
       } else {
@@ -212,7 +217,7 @@
     });
   }
 
-  /* ---------- timer: 4 s of the visitor actually looking at the page ---------- */
+  /* ---------- timer: 15-20 s of the visitor actually looking at the page ---------- */
   var delay = MIN_DELAY + Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1));
   var elapsed = 0, tick = 500, shown = false;
   var timer = setInterval(function () {
