@@ -60,45 +60,20 @@ img{max-width:100%}
 
 /* hero */
 .hero{background:var(--peach);border-bottom:1px solid var(--peach-line);padding:26px 0 34px}
-.crumbs{font-size:13px;color:var(--muted);margin-bottom:18px}
-.crumbs a{color:var(--muted)}
-.crumbs a:hover{color:var(--accent)}
-.crumbs span.sep{margin:0 7px}
-.pill{display:inline-block;background:#fff;border:1px solid var(--peach-line);border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:600;color:var(--accent-dark)}
 .heading{font-weight:800;font-size:clamp(30px,4.3vw,50px);line-height:1.12;letter-spacing:-.01em;margin:14px 0 12px;color:var(--text)}
 .heading span{color:var(--accent)}
-.lead{max-width:680px;margin:0 0 18px;color:var(--muted);font-size:15px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;color:var(--text)}
-.chip i{color:var(--accent);margin-right:6px}
-
-/* slim header on machine pages: heading only */
 .hero-slim{padding:22px 0 20px}
 .hero-slim .heading{margin:0}
 .subheading-model{display:none!important}
 
-/* facts strip */
-.facts{background:#fff;border-bottom:1px solid var(--line)}
-.facts .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.fact{padding:15px 20px;border-left:1px solid var(--line)}
-.fact:first-child{border-left:0;padding-left:0}
-.fact b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.fact span{font-size:14.5px;font-weight:600}
-
 /* page structure */
 .container{max-width:1240px;margin:0 auto;padding:22px 28px 48px}
-.subheading-model{display:none;font-size:13px;font-weight:600;color:var(--accent-dark);margin:0 0 14px}
 .product-section{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:32px;align-items:start}
 .product-media-block,.product-details{min-width:0}
 
 /* images */
-.main-image-viewport{background:var(--imgbg);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:zoom-in}
+.main-image-viewport{background:var(--imgbg);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:zoom-in;min-height:240px}
 .main-image-viewport img{width:100%;max-height:420px;object-fit:contain;mix-blend-mode:multiply;transition:opacity .2s}
-.product-gallery-slider{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.slider-thumb{width:72px;height:56px;border:1px solid var(--line);border-radius:8px;background:var(--imgbg);overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.slider-thumb img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
-.slider-thumb:hover{border-color:var(--accent)}
-.slider-thumb.active-thumb{border:2px solid var(--accent)}
 .spare-gallery-title{font-size:14px;font-weight:700;margin:6px 0 10px}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
 .gallery-thumb-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s}
@@ -108,12 +83,12 @@ img{max-width:100%}
 .gallery-thumb-card p{margin:7px 2px 0;font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
 
 /* cards */
-.overview-card,.spec-group-box,.legal-terms-card,.legal-terms-box,.brochure-download-strip,.product-module-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:18px}
-.overview-card h3,.legal-terms-card h3,.legal-terms-box h4,.brochure-download-strip h3{margin:0 0 12px;font-size:18px;font-weight:700;color:var(--text)}
+.overview-card,.spec-group-box,.legal-terms-card,.brochure-download-strip{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:18px}
+.overview-card h3,.legal-terms-card h3,.brochure-download-strip h3{margin:0 0 12px;font-size:18px;font-weight:700;color:var(--text)}
 .overview-card p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
 .overview-card p strong{color:var(--text)}
 .spec-group-box h4{margin:0 0 12px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
-.spec-group-box h4 i,.legal-terms-box h4 i,.section-title i,.table-section-title i{color:var(--accent)}
+.spec-group-box h4 i{color:var(--accent)}
 .spec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
 .spec-item{font-size:13.5px;color:var(--muted);padding:9px 0;border-bottom:1px solid var(--line)}
 .spec-item strong{color:var(--text);font-weight:600}
@@ -144,37 +119,25 @@ img{max-width:100%}
 .cs-mail{display:inline-block;margin-top:10px;font-size:13px;font-weight:600}
 .cs-meta{margin-top:10px;padding-top:10px;border-top:1px solid var(--peach-line);font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 16px}
 
-/* tables */
-.section-title,.table-section-title,.video-console-unit h3,.faq h2{font-size:27px;font-weight:700;line-height:1.25;margin:40px 0 16px;color:var(--text);display:flex;align-items:center;gap:10px}
-.table-section-title{font-size:18px;margin:26px 0 12px}
-.table-responsive-wrapper,.table-responsive{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:18px}
-table{width:100%;border-collapse:collapse;min-width:520px}
-th{background:var(--peach)!important;color:var(--text)!important;text-align:left;font-size:12.5px;font-weight:700;padding:11px 14px;border-bottom:1px solid var(--peach-line)}
-td{font-size:13.5px;color:var(--muted);padding:11px 14px;border-bottom:1px solid var(--line)}
-td strong{color:var(--text)}
-tr:last-child td{border-bottom:0}
-.badge-size-highlight,.badge-gold{display:inline-block;background:var(--peach);border:1px solid var(--peach-line);border-radius:6px;padding:2px 9px;font-size:12.5px;font-weight:600;color:var(--accent-dark)}
-.machine-badge{display:inline-block;background:#6b5b4b;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:4px;margin-bottom:10px}
-.product-module-card{padding:22px;margin-bottom:24px}
-.product-module-card h2{font-size:22px;font-weight:700;margin:0 0 6px}
+/* section titles */
+.section-title,.video-console-unit h3,.faq h2{font-size:27px;font-weight:700;line-height:1.25;margin:40px 0 16px;color:var(--text);display:flex;align-items:center;gap:10px}
 
 /* video */
 .video-console-unit{margin-top:34px}
 .video-console-unit h3{margin-top:0}
-.video-flex-row,.video-matrix-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-.video-card-frame,.video-frame-box{aspect-ratio:16/9;height:auto;max-width:none;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#1b1612}
-.video-card-frame iframe,.video-frame-box iframe,.video-frame-box video{width:100%;height:100%;border:0;display:block}
-.video-frame-box:only-child{max-width:640px}
+.video-flex-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.video-card-frame{aspect-ratio:16/9;height:auto;max-width:none;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#1b1612}
+.video-card-frame iframe{width:100%;height:100%;border:0;display:block}
 
 /* brochure and terms */
 .brochure-download-strip{margin-top:30px}
 .brochure-download-strip p{margin:0 0 14px!important;font-size:14px!important;color:var(--muted)!important}
 .btn-brochure{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:8px;padding:11px 18px;font-size:14px;font-weight:600}
 .btn-brochure:hover{background:var(--accent-dark);border-color:var(--accent-dark);color:#fff}
-.legal-terms-card,.legal-terms-box{margin-top:30px}
-.legal-terms-list,.terms-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 28px}
-.legal-terms-list li,.terms-list li{position:relative;padding-left:16px;font-size:13px;color:var(--muted);line-height:1.55}
-.legal-terms-list li::before,.terms-list li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.legal-terms-card{margin-top:30px}
+.legal-terms-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 28px}
+.legal-terms-list li{position:relative;padding-left:16px;font-size:13px;color:var(--muted);line-height:1.55}
+.legal-terms-list li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
 
 p[style]{color:var(--muted)!important}
 
@@ -212,10 +175,9 @@ p[style]{color:var(--muted)!important}
 
 /* mobile action bar */
 .sticky-mobile-action-bar{display:none;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px;gap:10px;z-index:1500}
-.m-btn-scroll-variants,.m-stagnant-jump-btn,.m-call{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;padding:12px 14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
-.m-btn-scroll-variants,.m-stagnant-jump-btn{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.m-btn-scroll-variants,.m-call{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;padding:12px 14px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.m-btn-scroll-variants{background:var(--accent);color:#fff;border:1px solid var(--accent)}
 .m-call{background:#fff;color:var(--accent);border:1px solid var(--accent)}
-.mobile-scroll-trigger{display:none}
 
 @media (max-width:900px){
   .nav-links{display:none}
@@ -233,22 +195,16 @@ p[style]{color:var(--muted)!important}
   .topstrip .left{display:none}
   .topstrip .wrap{justify-content:center}
   .hero-slim{padding:16px 0 14px}
-  .facts .wrap{grid-template-columns:repeat(2,1fr)}
-  .fact{padding:12px 14px}
-  .fact:nth-child(odd){border-left:0;padding-left:0}
-  .fact:nth-child(n+3){border-top:1px solid var(--line)}
-  .section-title,.table-section-title,.video-console-unit h3,.faq h2{font-size:22px}
-  .table-section-title{font-size:17px}
+  .section-title,.video-console-unit h3,.faq h2{font-size:22px}
   .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .spec-grid,.legal-terms-list,.terms-list{grid-template-columns:1fr}
+  .spec-grid,.legal-terms-list{grid-template-columns:1fr}
   .variant-pill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .video-flex-row,.video-matrix-grid{grid-template-columns:1fr}
-  .overview-card,.spec-group-box,.legal-terms-card,.legal-terms-box,.brochure-download-strip,.product-module-card{padding:16px}
+  .video-flex-row{grid-template-columns:1fr}
+  .overview-card,.spec-group-box,.legal-terms-card,.brochure-download-strip{padding:16px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:24px;padding-top:30px}
   .footer-copy{padding-bottom:78px}
   .seller-band .btn{width:100%}
   .sticky-mobile-action-bar{display:flex}
-  .mobile-scroll-trigger{display:flex;align-items:center;justify-content:center;gap:8px;position:fixed;left:16px;right:16px;bottom:12px;z-index:1500;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:13px 16px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .2s}
 }
 @media (max-width:480px){
   .footer-grid{grid-template-columns:1fr}
@@ -260,52 +216,33 @@ p[style]{color:var(--muted)!important}
 <div class="topstrip"><div class="wrap"><div class="left"><i class="fas fa-location-dot"></i>Bengaluru, Karnataka &middot; Delivery across India</div><div class="right"><a href="tel:+919342426468"><i class="fas fa-phone"></i>+91-9342426468</a><a href="track.html"><i class="fas fa-truck"></i>Track Order</a></div></div></div>
 <header class="navbar"><div class="wrap"><a class="navbar-brand" href="index.html"><img src="logo1.png" alt="Shri Shiva Agarbathi Works logo"><span>Shri Shiva Agarbathi Works<small>SSAW &middot; Bengaluru</small></span></a><nav class="nav-links" aria-label="Main"><a href="index.html">Home</a><a href="other-products.html">All Machines</a><a href="machine.html">Machinery Guide</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><a class="btn btn-sm" href="index.html">Sign In</a><a class="btn btn-sm btn-outline" href="contact.html">Register as Seller</a></div></div></header>
 <section class="hero hero-slim"><div class="wrap"><h1 class="heading" id="main-product-title"><span>Long Cotton Wick</span> Making Machine</h1></div></section>
-  <section class="faq"><div class="wrap"><h2>Frequently Asked Questions</h2>
-<details><summary>How can I get the price of the Long Cotton Wick Making Machine?</summary><p>The price depends on the model and your requirement. Call +91-9342426468, send a WhatsApp message or email shivamachinerysales@gmail.com and we will share the best price.</p></details>
-<details><summary>Where is Shri Shiva Agarbathi Works located?</summary><p>We are in Bengaluru, Karnataka, and have been in business since 2005. Our hours are 9:00 AM to 5:00 PM.</p></details>
-<details><summary>Do you deliver across India?</summary><p>Yes. We deliver across India. Transport charges are extra and depend on the distance to your factory. Standard delivery is 15 to 30 business days from the advance payment.</p></details>
-<details><summary>What are the payment terms and taxes?</summary><p>75% advance is required and the balance is paid before loading. GST at 18% applies. Our GST number is 29ABXPN1363M1ZS.</p></details></div></section>
-<section class="seller-band"><div class="wrap"><div><h2>Sell your machines with SSAW</h2><p>Run a machinery business? Register as a seller and reach buyers across India.</p></div><a class="btn btn-primary" href="contact.html">Register as Seller</a></div></section>
-<footer class="footer"><div class="wrap"><div class="footer-grid"><div><div class="footer-brand">Shri Shiva Agarbathi Works (SSAW)</div><p>Machinery manufacturer in Bengaluru, Karnataka. Established 2005.</p><p>GST: 29ABXPN1363M1ZS</p></div><div><h4>Machines</h4><a href="agarbathi.html">Agarbatti Making Machine</a><a href="dhoop.html">Dhoopbatti Making Machine</a><a href="cotton.html">Camphor Making Machine</a><a href="cottonwick.html">Cotton Wick Making Machine</a><a href="sambrani.html">Sambrani Cup Making Machine</a><a href="dryer.html">Dryer Machine With Heater</a><a href="shifter.html">Vibro Shifter Machine</a><a href="blister.html">Blister Pouch Sealing Machine</a><a href="plate.html">Plate Making Machines</a></div><div><h4>Quick Links</h4><a href="index.html">Home</a><a href="other-products.html">All Machines</a><a href="machine.html">Machinery Guide</a><a href="track.html">Track Order</a><a href="contact.html">Contact Us</a></div><div><h4>Contact</h4><a href="tel:+919342426468">+91-9342426468</a><a href="mailto:shivamachinerysales@gmail.com">shivamachinerysales@gmail.com</a><p>Bengaluru, Karnataka, India</p><p>9:00 AM to 5:00 PM</p><p>Delivery across India</p></div></div><div class="footer-copy">&copy; 2026 Shri Shiva Agarbathi Works (SSAW). All rights reserved.</div></div></footer>
-
-<div class="sticky-mobile-action-bar" id="mobile-sticky-dock">
-    <a class="m-call" href="tel:+919342426468"><i class="fas fa-phone"></i> Call</a>
-    <a class="m-btn-scroll-variants" href="contactseller.html?machine=cottonwick">
-      <i class="fas fa-phone-volume"></i> Contact Seller
-    </a>
-  </div>
-
-  
 
   <div class="container">
-    
+
     <div class="subheading-model" id="variant-subheading">Model: Selected variant</div>
 
     <div class="product-section">
       <div class="product-media-block">
-        <div class="main-image-viewport">
-          <img src="https://5.imimg.com/data5/SELLER/Default/2022/5/XH/KD/MX/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" id="main-product-image" alt="Long Cotton Wick Making Machine">
+        <div class="main-image-viewport" onclick="openLightbox(document.getElementById('main-product-image').src)">
+          <img src="https://5.imimg.com/data5/SELLER/Default/2022/5/XH/KD/MX/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" id="main-product-image" alt="Long Cotton Wick Making Machine" referrerpolicy="no-referrer">
         </div>
-        
-        <div class="gallery-grid">
+
+        <div class="spare-gallery-title">Product Visual Gallery</div>
+        <div class="gallery-grid" id="gallery-grid">
           <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
-            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/5/XH/KD/MX/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Cotton Wick Machine 1"></div>
+            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/5/XH/KD/MX/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Long Cotton Wick Machine - main production unit" referrerpolicy="no-referrer"></div>
             <p>Main Production Unit</p>
           </div>
           <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
-            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/5/XH/KD/MX/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Cotton Wick Machine 2"></div>
-            <p>Processing Alignment</p>
-          </div>
-          <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
-            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/5/UP/AY/WD/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Cotton Wick Machine 3"></div>
+            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/5/UP/AY/WD/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Long Cotton Wick Machine - integrated cutter box" referrerpolicy="no-referrer"></div>
             <p>Integrated Cutter Box</p>
           </div>
           <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
-            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/5/AB/HM/HD/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Cotton Wick Machine 4"></div>
+            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/5/AB/HM/HD/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Long Cotton Wick Machine - heavy duty frame" referrerpolicy="no-referrer"></div>
             <p>Heavy Duty Frame</p>
           </div>
           <div class="gallery-thumb-card" onclick="openLightbox(this.querySelector('img').src)">
-            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/6/YE/LD/UR/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Cotton Wick Machine 5"></div>
+            <div class="imgbox"><img src="https://5.imimg.com/data5/SELLER/Default/2022/6/YE/LD/UR/2380553/long-cotton-wick-making-machine-with-cutter-machine-500x500.jpeg" alt="Long Cotton Wick Machine - wick precision cutter" referrerpolicy="no-referrer"></div>
             <p>Wick Precision Cutter</p>
           </div>
         </div>
@@ -315,7 +252,7 @@ p[style]{color:var(--muted)!important}
         <div class="overview-card" id="pricing-selection-card">
           <h3>Product Overview</h3>
           <p><strong>Cotton Processing:</strong> Designed to produce uniform, high-quality long cotton wicks ranging from 1" to 4" inches in length. Perfect for industrial scale outputs with manual feeding or automatic cutting configurations.</p>
-          
+
           <div class="variant-selector-wrapper" id="variant-selector-section">
             <div class="variant-lbl">Select Machine Option: <span id="active-variant-indicator">Loading Models...</span></div>
             <div class="variant-pill-grid" id="variant-dynamic-container"></div>
@@ -367,7 +304,7 @@ p[style]{color:var(--muted)!important}
 
         <div class="spec-group-box">
           <h4><i class="fas fa-info-circle"></i> Technical System Notes</h4>
-          <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.6;"> Available in multiple processing configurations. Fully-automated iterations come paired directly with a high-speed automatic cutting assembly. Runs on regular home power networks. For custom inquiries, please reference direct line connection: <strong>9342426468</strong>.</p>
+          <p style="font-size: 13px; margin: 0; line-height: 1.6;"> Available in multiple processing configurations. Fully-automated iterations come paired directly with a high-speed automatic cutting assembly. Runs on regular home power networks. For custom inquiries, please reference direct line connection: <strong>9342426468</strong>.</p>
         </div>
       </div>
     </div>
@@ -390,7 +327,7 @@ p[style]{color:var(--muted)!important}
     <div class="brochure-download-strip">
       <h3>Product Brochure</h3>
       <p>Download the specification sheet for this machine.</p>
-      <a href="https://pdf.indiamart.com/impdf/15384350088/MY-2380553/long-cotton-wick-making-machine-with-cutter-machine.pdf" target="_blank" class="btn-brochure">
+      <a href="https://pdf.indiamart.com/impdf/15384350088/MY-2380553/long-cotton-wick-making-machine-with-cutter-machine.pdf" target="_blank" rel="noopener" class="btn-brochure">
         <i class="fas fa-file-pdf"></i> Download Brochure
       </a>
     </div>
@@ -413,9 +350,24 @@ p[style]{color:var(--muted)!important}
     </div>
   </div>
 
-  <div class="lightbox" id="modal-viewport">
+  <section class="faq"><div class="wrap"><h2>Frequently Asked Questions</h2>
+<details><summary>How can I get the price of the Long Cotton Wick Making Machine?</summary><p>The price depends on the model and your requirement. Call +91-9342426468, send a WhatsApp message or email shivamachinerysales@gmail.com and we will share the best price.</p></details>
+<details><summary>Where is Shri Shiva Agarbathi Works located?</summary><p>We are in Bengaluru, Karnataka, and have been in business since 2005. Our hours are 9:00 AM to 5:00 PM.</p></details>
+<details><summary>Do you deliver across India?</summary><p>Yes. We deliver across India. Transport charges are extra and depend on the distance to your factory. Standard delivery is 15 to 30 business days from the advance payment.</p></details>
+<details><summary>What are the payment terms and taxes?</summary><p>75% advance is required and the balance is paid before loading. GST at 18% applies. Our GST number is 29ABXPN1363M1ZS.</p></details></div></section>
+<section class="seller-band"><div class="wrap"><div><h2>Sell your machines with SSAW</h2><p>Run a machinery business? Register as a seller and reach buyers across India.</p></div><a class="btn btn-primary" href="contact.html">Register as Seller</a></div></section>
+<footer class="footer"><div class="wrap"><div class="footer-grid"><div><div class="footer-brand">Shri Shiva Agarbathi Works (SSAW)</div><p>Machinery manufacturer in Bengaluru, Karnataka. Established 2005.</p><p>GST: 29ABXPN1363M1ZS</p></div><div><h4>Machines</h4><a href="agarbathi.html">Agarbatti Making Machine</a><a href="dhoop.html">Dhoopbatti Making Machine</a><a href="cotton.html">Camphor Making Machine</a><a href="cottonwick.html">Cotton Wick Making Machine</a><a href="sambrani.html">Sambrani Cup Making Machine</a><a href="dryer.html">Dryer Machine With Heater</a><a href="shifter.html">Vibro Shifter Machine</a><a href="blister.html">Blister Pouch Sealing Machine</a><a href="plate.html">Plate Making Machines</a></div><div><h4>Quick Links</h4><a href="index.html">Home</a><a href="other-products.html">All Machines</a><a href="machine.html">Machinery Guide</a><a href="track.html">Track Order</a><a href="contact.html">Contact Us</a></div><div><h4>Contact</h4><a href="tel:+919342426468">+91-9342426468</a><a href="mailto:shivamachinerysales@gmail.com">shivamachinerysales@gmail.com</a><p>Bengaluru, Karnataka, India</p><p>9:00 AM to 5:00 PM</p><p>Delivery across India</p></div></div><div class="footer-copy">&copy; 2026 Shri Shiva Agarbathi Works (SSAW). All rights reserved.</div></div></footer>
+
+  <div class="sticky-mobile-action-bar" id="mobile-sticky-dock">
+    <a class="m-call" href="tel:+919342426468"><i class="fas fa-phone"></i> Call</a>
+    <a class="m-btn-scroll-variants" href="contactseller.html?machine=cottonwick">
+      <i class="fas fa-phone-volume"></i> Contact Seller
+    </a>
+  </div>
+
+  <div class="lightbox" id="modal-viewport" onclick="if(event.target===this)closeLightbox()">
     <span class="close-trigger" onclick="closeLightbox()">&times;</span>
-    <img id="modal-image-source" src="" alt="Enlarged photo of Long Cotton Wick Making Machine">
+    <img id="modal-image-source" src="" alt="Enlarged photo of Long Cotton Wick Making Machine" referrerpolicy="no-referrer">
   </div>
 
   <script>
@@ -440,35 +392,23 @@ p[style]{color:var(--muted)!important}
     function enablePurchaseWorkflow() {
       const buyBtn = document.getElementById("buy-now-btn");
       const cartBtn = document.getElementById("add-cart-btn");
-      
+
       if (buyBtn && cartBtn) {
         buyBtn.disabled = false;
         buyBtn.innerHTML = `<i class="fas fa-bolt"></i> Order Now`;
-        
+
         cartBtn.disabled = false;
         cartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i> Add to Cart`;
       }
     }
 
-    // TARGETED SMOOTH MOBILE SCROLL ROUTINE
-    function scrollToVariantsSection() {
-      const targetElement = document.getElementById("variant-selector-section");
-      if (targetElement) {
-        targetElement.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center'
-        });
-      }
-    }
-
-    // LIVE PRICE & VARIANT PARSER PIPELINE 
+    // LIVE PRICE & VARIANT PARSER PIPELINE
     fetch("https://script.google.com/macros/s/AKfycbya-5GK0ZeTZfdJQQQYsUMklxEcNtcMSzEUYMd6fj7_8dDQoBmkhllxqdM5d8kepPHQIA/exec")
     .then(response => response.json())
     .then(data => {
       if(data.result === "success") {
         let sheetPrices = data.data;
-        
-        // Exact Spreadsheet Row Match Keys for Cotton Wick Machines
+
         const matchingKeys = [
           "Cotton Wick Making Machine",
           "Long Cotton Wick Making Machine"
@@ -501,7 +441,7 @@ p[style]{color:var(--muted)!important}
 
     function renderAmazonStyleVariants(variants) {
       const container = document.getElementById("variant-dynamic-container");
-      container.innerHTML = ""; 
+      container.innerHTML = "";
 
       variants.forEach((variant, index) => {
         const pill = document.createElement("div");
@@ -509,7 +449,7 @@ p[style]{color:var(--muted)!important}
         if(index === 0) pill.className += " active";
 
         const formattedPrice = isNaN(variant.price) ? variant.price : "₹" + Number(variant.price).toLocaleString('en-IN');
-        
+
         pill.innerHTML = `
           <span class="v-title">${variant.name}</span>
           <span class="v-p-lbl">${formattedPrice}</span>
@@ -534,14 +474,14 @@ p[style]{color:var(--muted)!important}
       const labelDock = document.getElementById("price-dock-label");
 
       const formattedPrice = isNaN(variant.price) ? variant.price : "₹ " + Number(variant.price).toLocaleString('en-IN');
-      
+
       activeSelectedProduct = `Long Cotton Wick Making Machine (${variant.name})`;
       activeSelectedPriceText = formattedPrice;
 
       priceTag.innerText = formattedPrice;
       indicator.innerText = variant.name;
       labelDock.innerText = `Real-time ${variant.name} Price`;
-      
+
       subheading.innerText = `Model: ${variant.name}`;
       subheading.style.display = "block";
 
@@ -554,6 +494,39 @@ p[style]{color:var(--muted)!important}
       activeSelectedPriceText = "Quote on Call";
       enablePurchaseWorkflow();
     }
+  </script>
+
+  <script>
+    /* IMAGE SAFETY: if a photo fails to load, drop that gallery tile; if the main photo fails, use the next working one, else a clean placeholder. */
+    (function () {
+      var PLACEHOLDER = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="420" viewBox="0 0 600 420"><rect width="600" height="420" fill="#f6f2eb"/><g fill="none" stroke="#d9560b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="190" y="150" width="220" height="110" rx="10"/><path d="M190 260v30h220v-30M240 150v-30h120v30"/></g><text x="300" y="335" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#2a2622">Long Cotton Wick Making Machine</text><text x="300" y="365" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#7a7268">Call +91-9342426468 for photos</text></svg>');
+      var main = document.getElementById("main-product-image");
+      var tiles = document.querySelectorAll("#gallery-grid .gallery-thumb-card");
+
+      function useNextGood() {
+        for (var i = 0; i < tiles.length; i++) {
+          var im = tiles[i].querySelector("img");
+          if (tiles[i].style.display !== "none" && im && im.complete && im.naturalWidth > 0) { main.src = im.src; return; }
+        }
+        main.onerror = null;
+        main.src = PLACEHOLDER;
+      }
+
+      tiles.forEach(function (t) {
+        var im = t.querySelector("img");
+        im.addEventListener("error", function () {
+          t.style.display = "none";
+          if (main.getAttribute("data-failed")) useNextGood();
+        });
+      });
+      main.addEventListener("error", function () {
+        main.setAttribute("data-failed", "1");
+        useNextGood();
+      });
+      // an image that already failed before this script ran
+      if (main.complete && main.naturalWidth === 0) { main.setAttribute("data-failed", "1"); setTimeout(useNextGood, 1200); }
+    })();
   </script>
 
   <script>
