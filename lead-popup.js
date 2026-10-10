@@ -6,7 +6,7 @@
   "use strict";
 
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbzVDEV4lvmLzBthfeYvd8ek4C0ynbKqZzfMATrLqMxHepgZ8l545ZxTGpSBCuI-_Yy0GA/exec";
-  var AW_CONV = "AW-18501526181/YOUR_CONVERSION_LABEL"; // paste your Google Ads conversion label here
+  var AW_CONV = "AW-18501526181/ttRqCIPB8JcdEKXFm_ZE"; // Google Ads form-lead label
   var MIN_DELAY = 15000, MAX_DELAY = 20000;   // popup appears somewhere between 15 and 20 seconds
   var MAX_WAIT = 8000;                        // never keep the visitor waiting longer than this on submit
   var KEY = "ssaw_lead_popup_done";           // remembered in the visitor's browser
