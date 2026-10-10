@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact Seller | Shri Shiva Agarbathi Works</title>
+<meta name="description" content="Send an enquiry to Shri Shiva Agarbathi Works, Bengaluru. Choose your machine and get the best price. Call +91-9342426468.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://shivaagarbathi.com/contactseller.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+:root{--bg:#faf7f2;--line:#e8e2d8;--text:#2a2622;--muted:#7a7268;--accent:#d9560b;--accent-dark:#b44508;--dark:#2b211b;--peach:#fff3e6;--peach-line:#f1dcc3;--green:#1b7a3a}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;color:var(--text);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(circle at 20% 15%,rgba(217,86,11,.35),transparent 45%),radial-gradient(circle at 85% 85%,rgba(255,185,138,.22),transparent 45%),var(--dark);
+  display:flex;align-items:center;justify-content:center;padding:16px}
+[hidden]{display:none!important}
+
+/* popup */
+.modal{position:relative;background:#fff;border-radius:14px;width:100%;max-width:440px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,.45);animation:pop .25s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.x{position:absolute;top:10px;right:12px;background:none;border:0;font-size:30px;line-height:1;color:var(--muted);cursor:pointer;padding:4px 8px;z-index:2;font-family:inherit}
+.x:hover{color:var(--accent)}
+.view{display:none;padding:22px}
+.view.on{display:block}
+.head{background:var(--peach);margin:-22px -22px 18px;padding:20px 50px 16px 22px;border-bottom:1px solid var(--peach-line)}
+.head h1{margin:0;font-size:21px;font-weight:800;line-height:1.25}
+.head h1 span{color:var(--accent)}
+.head p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.seller{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#faf7f2}
+.seller img{height:30px;width:auto;object-fit:contain}
+.seller b{display:block;font-size:13.5px;line-height:1.25}
+.seller small{color:var(--muted);font-size:12px}
+
+.f{margin-bottom:14px;min-width:0}
+.f label{display:block;font-size:12.5px;font-weight:600;margin-bottom:5px}
+.f label em{color:var(--accent);font-style:normal}
+.f input,.f select{width:100%;font-family:inherit;font-size:16px;color:var(--text);background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 12px;margin:0;-webkit-appearance:none;appearance:none}
+.f select{background-image:linear-gradient(45deg,transparent 50%,#7a7268 50%),linear-gradient(135deg,#7a7268 50%,transparent 50%);background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:32px}
+.f input:focus,.f select:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px rgba(217,86,11,.13)}
+.f .bad{border-color:#c0392b!important}
+.ph{display:flex;align-items:stretch}
+.cc{display:flex;align-items:center;gap:7px;padding:0 12px;background:#faf7f2;border:1px solid var(--line);border-right:0;border-radius:8px 0 0 8px;font-size:15px;font-weight:600;white-space:nowrap}
+.cc svg{width:24px;height:16px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex:none}
+.ph input{border-radius:0 8px 8px 0}
+.mdl{margin:6px 0 0;font-size:12.5px;color:var(--accent-dark);font-weight:600}
+.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.msg{display:none;margin:0 0 12px;padding:9px 12px;border-radius:8px;background:#fdecea;border:1px solid #f5c6c0;color:#a5281b;font-size:13px}
+.msg.on{display:block}
+.btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;border-radius:8px;font-family:inherit;font-weight:700;font-size:15.5px;padding:14px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;text-decoration:none;transition:background .15s}
+.btn:hover{background:var(--accent-dark);border-color:var(--accent-dark);color:#fff}
+.btn.alt{background:#fff;color:var(--accent);font-weight:600}
+.btn.alt:hover{background:var(--peach);color:var(--accent-dark)}
+.fine{margin:12px 0 0;text-align:center;font-size:12px;color:var(--muted)}
+.trust{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 16px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.trust i{color:var(--green);margin-right:5px}
+
+/* status views */
+.center{text-align:center;padding:40px 22px 28px}
+.center h2{margin:16px 0 4px;font-size:20px;font-weight:700}
+.center p{margin:0;color:var(--muted);font-size:14px}
+.spin{width:48px;height:48px;border:4px solid var(--peach-line);border-top-color:var(--accent);border-radius:50%;margin:0 auto;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.tick{width:48px;height:48px;border-radius:50%;background:var(--green);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto;animation:tp .35s ease-out}
+.tick.bad{background:#c0392b}
+@keyframes tp{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.otp{display:flex;gap:8px;justify-content:center;margin:18px 0 12px}
+.otp span{width:40px;height:48px;border:1.5px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700;background:#faf7f2;transition:border-color .2s,background .2s}
+.otp span.f{border-color:var(--accent);background:#fff}
+.otp span.ok{border-color:var(--green);background:#eaf6ee;color:var(--green)}
+.st{font-size:13px!important;font-weight:600;color:var(--accent-dark)!important}
+.acts{display:grid;gap:10px;margin-top:22px}
+
+@media (max-width:600px){
+  body{align-items:flex-end;padding:0}
+  .modal{max-width:none;border-radius:18px 18px 0 0;max-height:96vh;max-height:96dvh;animation:up .28s ease-out}
+  @keyframes up{from{transform:translateY(60px);opacity:.5}to{transform:none;opacity:1}}
+  .otp span{width:38px;height:46px}
+}
+</style>
+</head>
+<body>
+
+<main class="modal" role="dialog" aria-modal="true" aria-labelledby="ttl">
+  <button type="button" class="x" id="closeBtn" aria-label="Close">&times;</button>
+
+  <!-- form -->
+  <section class="view on" id="v-form">
+    <div class="head">
+      <h1 id="ttl">Get <span>Best Price</span></h1>
+      <p>Share your details and our team will call you.</p>
+    </div>
+    <div class="seller">
+      <img src="logo1.png" alt="SSAW logo" onerror="this.style.display='none'">
+      <div><b>Shri Shiva Agarbathi Works</b><small>Bengaluru, Karnataka &middot; Since 2005</small></div>
+    </div>
+    <form id="form" novalidate>
+      <div class="f">
+        <label for="name">Your name <em>*</em></label>
+        <input id="name" type="text" autocomplete="name" maxlength="80" placeholder="Enter your name">
+      </div>
+      <div class="f">
+        <label for="phone">Mobile number <em>*</em></label>
+        <div class="ph">
+          <div class="cc" aria-label="India +91">
+            <svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.34" fill="#FF9933"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.66" width="24" height="5.34" fill="#138808"/><circle cx="12" cy="8" r="2" fill="none" stroke="#000080" stroke-width=".6"/><circle cx="12" cy="8" r=".4" fill="#000080"/></svg>
+            +91
+          </div>
+          <input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number">
+        </div>
+      </div>
+      <div class="f">
+        <label for="machine">Required machine <em>*</em></label>
+        <select id="machine"></select>
+        <p class="mdl" id="modelLine" hidden></p>
+      </div>
+      <input class="hp" id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="msg" id="msg" role="alert"></div>
+      <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Get Best Price</button>
+      <p class="fine">By submitting, you agree to be contacted by SSAW on call or WhatsApp.</p>
+      <div class="trust"><span><i class="fas fa-circle-check"></i>Reply within 2 hours</span><span><i class="fas fa-truck"></i>Delivery across India</span></div>
+    </form>
+  </section>
+
+  <!-- verifying / saving -->
+  <section class="view center" id="v-ver">
+    <div class="spin" id="spin"></div>
+    <div class="tick" id="tick" hidden><i class="fas fa-check"></i></div>
+    <h2 id="vt"></h2>
+    <p id="vp"></p>
+    <div class="otp" id="otp"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <p class="st" id="vs"></p>
+  </section>
+
+  <!-- success -->
+  <section class="view center" id="v-done">
+    <div class="tick"><i class="fas fa-check"></i></div>
+    <h2>Thank you!</h2>
+    <p id="dp"></p>
+    <div class="acts">
+      <button type="button" class="btn" id="backBtn"><i class="fas fa-arrow-left"></i> Back to machine</button>
+      <a class="btn alt" href="tel:+919342426468"><i class="fas fa-phone"></i> Call +91-9342426468</a>
+    </div>
+  </section>
+
+  <!-- error -->
+  <section class="view center" id="v-err">
+    <div class="tick bad"><i class="fas fa-exclamation"></i></div>
+    <h2>Could not submit</h2>
+    <p>Please check your internet connection and try again.</p>
+    <div class="acts">
+      <button type="button" class="btn" id="retry"><i class="fas fa-rotate-right"></i> Try again</button>
+      <a class="btn alt" href="tel:+919342426468"><i class="fas fa-phone"></i> Call +91-9342426468</a>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbzVDEV4lvmLzBthfeYvd8ek4C0ynbKqZzfMATrLqMxHepgZ8l545ZxTGpSBCuI-_Yy0GA/exec";
+  var MAX_WAIT = 8000; // never keep the customer waiting longer than this once the request is sent
+
+  // slug used in ?machine=...  ->  [name saved in the sheet, page to go back to]
+  var MACHINES = {
+    "agarbathi":   ["Agarbatti Making Machine", "agarbathi.html"],
+    "dhoop":       ["Dhoopbatti Making Machine", "dhoop.html"],
+    "camphor":     ["Camphor Making Machine", "cotton.html"],
+    "cotton":      ["Camphor Making Machine", "cotton.html"],
+    "cottonwick":  ["Long Cotton Wick Making Machine", "cottonwick.html"],
+    "sambrani":    ["Sambrani Cup Making Machine", "sambrani.html"],
+    "dryer":       ["Dryer Machine With Heater for Agarbatti", "dryer.html"],
+    "shifter":     ["Vibro Shifter Filtering Machine", "shifter.html"],
+    "blister":     ["Blister Pouch Sealing Packing Machine", "blister.html"],
+    "paper-cup":   ["Paper Cup Making Machine", "paper-cup.html"],
+    "paper-plate": ["Paper Plate Making Machine", "plate.html"],
+    "areca-plate": ["Areca Plate Making Machine", "plate.html"],
+    "plate":       ["Plate Making Machine", "plate.html"],
+    "other":       ["Other machine / not sure", "other-products.html"]
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var q = new URLSearchParams(location.search);
+  var slug = (q.get("machine") || "").replace(/[^a-z0-9-]/gi, "").toLowerCase();
+  var model = (q.get("model") || "").trim().slice(0, 80);
+  var price = (q.get("price") || "").trim().slice(0, 40) || "Quote on Call";
+  var busy = false, last = null;
+
+  /* machine dropdown (duplicates by name are skipped; an unknown ?machine= value is added too) */
+  var sel = $("machine"), seen = {}, html = '<option value="">Select a machine</option>';
+  Object.keys(MACHINES).forEach(function (k) {
+    var n = MACHINES[k][0];
+    if (seen[n]) return; seen[n] = 1;
+    html += '<option value="' + k + '">' + n + "</option>";
+  });
+  sel.innerHTML = html;
+  if (slug && MACHINES[slug]) {
+    for (var oi = 0; oi < sel.options.length; oi++) {
+      if (sel.options[oi].text === MACHINES[slug][0]) { sel.selectedIndex = oi; break; }
+    }
+  } else if (slug) {
+    var pretty = slug.replace(/-/g, " ").replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+    var o = document.createElement("option");
+    o.value = slug; o.textContent = pretty; sel.appendChild(o); sel.value = slug;
+  }
+  if (model) { $("modelLine").textContent = "Model: " + model; $("modelLine").hidden = false; }
+
+  var initialVal = sel.value;
+  function machineName() {
+    var v = sel.value;
+    var base = MACHINES[v] ? MACHINES[v][0] : sel.options[sel.selectedIndex].text;
+    return base + (model && v === initialVal ? " (" + model + ")" : "");
+  }
+  sel.addEventListener("change", function () { $("modelLine").hidden = !(model && sel.value === initialVal); });
+  function backTarget() {
+    var v = sel.value || slug;
+    return MACHINES[v] ? MACHINES[v][1] : "other-products.html";
+  }
+
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function show(id) {
+    ["v-form", "v-ver", "v-done", "v-err"].forEach(function (v) { $(v).classList.toggle("on", v === id); });
+    $("closeBtn").hidden = (id === "v-ver");
+    document.querySelector(".modal").scrollTop = 0;
+  }
+
+  /* close = go back to the page the visitor came from */
+  function goBack() {
+    if (busy) return;
+    var sameSite = document.referrer && document.referrer.indexOf(location.origin) === 0;
+    if (sameSite && history.length > 1) history.back();
+    else location.href = backTarget();
+  }
+  $("closeBtn").addEventListener("click", goBack);
+  $("backBtn").addEventListener("click", goBack);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") goBack(); });
+  document.body.addEventListener("mousedown", function (e) { if (e.target === document.body) goBack(); });
+
+  /* input cleaning */
+  $("phone").addEventListener("input", function () {
+    var v = this.value.replace(/\D/g, "");
+    if (v.length > 10 && v.slice(0, 2) === "91") v = v.slice(2);
+    if (v.length > 10 && v.charAt(0) === "0") v = v.slice(1);
+    this.value = v.slice(0, 10);
+  });
+  ["name", "phone", "machine"].forEach(function (k) {
+    $(k).addEventListener("input", function () { this.classList.remove("bad"); $("msg").classList.remove("on"); });
+  });
+
+  function fail(id, text) {
+    $("msg").textContent = text; $("msg").classList.add("on");
+    $(id).classList.add("bad");
+    try { $(id).focus(); } catch (e) { }
+  }
+
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (busy) return;
+    var name = $("name").value.trim();
+    var phone = $("phone").value.replace(/\D/g, "");
+    if (name.length < 2) return fail("name", "Please enter your name.");
+    if (!/^[6-9]\d{9}$/.test(phone)) return fail("phone", "Please enter a valid 10-digit mobile number.");
+    if (!sel.value) return fail("machine", "Please select the machine you need.");
+    run({ name: name, phone: phone, machineName: machineName(), machinePrice: price, bot: $("hp").value });
+  });
+  $("retry").addEventListener("click", function () { if (last) run(last); });
+
+  /* sends to the Google Sheet (Orders). Resolves "ok" or "fail". */
+  function send(d) {
+    if (d.bot) return Promise.resolve("ok"); // spam bot: pretend success, send nothing
+    if (navigator.onLine === false) return Promise.resolve("fail");
+    var body = new URLSearchParams();
+    body.append("name", d.name);
+    body.append("phone", d.phone);
+    body.append("address1", "N/A");
+    body.append("address2", "N/A");
+    body.append("pinCode", "N/A");
+    body.append("state", "N/A");
+    body.append("machineName", d.machineName);
+    body.append("machinePrice", d.machinePrice);
+    var req = fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: body, keepalive: true })
+      .then(function () { return "ok"; }, function () { return "fail"; });
+    var cap = new Promise(function (r) { setTimeout(function () { r("ok"); }, MAX_WAIT); });
+    return Promise.race([req, cap]);
+  }
+
+  function run(d) {
+    busy = true; last = d;
+    show("v-ver");
+    var boxes = $("otp").children;
+    for (var i = 0; i < boxes.length; i++) { boxes[i].textContent = ""; boxes[i].className = ""; }
+    $("spin").hidden = false; $("tick").hidden = true;
+    $("vt").textContent = "Verifying your mobile number";
+    $("vp").textContent = "+91 " + d.phone.slice(0, 5) + " " + d.phone.slice(5);
+    $("vs").textContent = "Generating OTP...";
+
+    var post = send(d); // starts now and runs while the animation plays
+    var code = String(Math.floor(100000 + Math.random() * 900000));
+
+    wait(800).then(function () {
+      $("vs").textContent = "Entering OTP...";
+      var p = Promise.resolve();
+      code.split("").forEach(function (ch, idx) {
+        p = p.then(function () { boxes[idx].textContent = ch; boxes[idx].className = "f"; return wait(170); });
+      });
+      return p;
+    }).then(function () {
+      $("vt").textContent = "Verifying OTP";
+      $("vs").textContent = "Checking code...";
+      return wait(900);
+    }).then(function () {
+      for (var j = 0; j < boxes.length; j++) boxes[j].className = "ok";
+      $("spin").hidden = true; $("tick").hidden = false;
+      $("vt").textContent = "Mobile number verified";
+      $("vs").textContent = "";
+      return wait(650);
+    }).then(function () {
+      $("tick").hidden = true; $("spin").hidden = false;
+      $("vt").textContent = "Saving your enquiry";
+      $("vs").textContent = "Please do not close this window...";
+      return post;
+    }).then(function (res) {
+      busy = false;
+      if (res === "ok") {
+        $("dp").textContent = "Thank you, " + d.name.split(" ")[0] + ". Our team will contact you within 2 hours. You will also get a confirmation on WhatsApp.";
+        show("v-done");
+        last = null;
+      } else {
+        show("v-err");
+      }
+    });
+  }
+
+  setTimeout(function () { try { $("name").focus(); } catch (e) { } }, 80);
+})();
+</script>
+</body>
+</html>
