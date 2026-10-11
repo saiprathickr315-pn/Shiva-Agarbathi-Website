@@ -1,5 +1,7 @@
 /* SSAW lead popup
-   Shows once per visitor, 15-20 seconds after they start browsing.
+   REQUIRED mode (default): shows on every page straight away and cannot be closed until the visitor
+   submits a mobile number. After a number is saved it is not shown again in that browser.
+   Set REQUIRED = false for the old behaviour (closable, once per visitor, after 15-20 seconds).
    Saves name + mobile + machine to the same Google Sheet as contactseller.html.
    Add before </body>:  <script src="lead-popup.js" defer></script>            */
 (function () {
@@ -7,7 +9,9 @@
 
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbzVDEV4lvmLzBthfeYvd8ek4C0ynbKqZzfMATrLqMxHepgZ8l545ZxTGpSBCuI-_Yy0GA/exec";
   var AW_CONV = "AW-18501526181/ttRqCIPB8JcdEKXFm_ZE"; // Google Ads form-lead label
-  var MIN_DELAY = 15000, MAX_DELAY = 20000;   // popup appears somewhere between 15 and 20 seconds
+  var REQUIRED = true;                        // true = visitor must enter a mobile number before using the page; false = they can close it
+  var SHOW_DELAY = 600;                       // ms after the page loads (REQUIRED mode)
+  var MIN_DELAY = 15000, MAX_DELAY = 20000;   // only used when REQUIRED = false
   var MAX_WAIT = 8000;                        // never keep the visitor waiting longer than this on submit
   var KEY = "ssaw_lead_popup_done";           // remembered in the visitor's browser
 
@@ -100,6 +104,7 @@
           '<div class="lp-msg" id="lp-msg" role="alert"></div>' +
           '<button type="submit" class="lp-btn">Get Best Price</button>' +
           '<p class="lp-fine">By submitting, you agree to be contacted by SSAW on call or WhatsApp.</p>' +
+          (REQUIRED ? '<p class="lp-fine">Prefer to talk now? <a href="tel:+919342426468" style="color:#d9560b;font-weight:700;text-decoration:none">Call +91-9342426468</a></p>' : '') +
           '<div class="lp-trust"><span><b>&#10003;</b>Reply within 2 hours</span><span><b>&#10003;</b>Delivery across India</span></div>' +
         '</form>' +
       '</section>' +
@@ -123,10 +128,11 @@
     var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
     ov = document.createElement("div"); ov.id = "lp-ov"; ov.innerHTML = html; document.body.appendChild(ov);
 
+    if (REQUIRED) $("lp-close").style.display = "none";
     $("lp-close").addEventListener("click", close);
     $("lp-cont").addEventListener("click", close);
-    ov.addEventListener("mousedown", function (e) { if (e.target === ov) close(); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && ov.classList.contains("on")) close(); });
+    ov.addEventListener("mousedown", function (e) { if (e.target === ov && !REQUIRED) close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && ov.classList.contains("on") && !REQUIRED) close(); });
 
     $("lp-phone").addEventListener("input", function () {
       var v = this.value.replace(/\D/g, "");
@@ -160,13 +166,13 @@
 
   function view(id) {
     ["lp-form-v", "lp-save-v", "lp-done-v", "lp-err-v"].forEach(function (v) { $(v).classList.toggle("on", v === id); });
-    $("lp-close").hidden = (id === "lp-save-v");
+    $("lp-close").hidden = REQUIRED || (id === "lp-save-v");
     ov.querySelector(".lp-m").scrollTop = 0;
   }
 
   function open() {
     build();
-    markSeen();                       // counts as shown: this visitor will not get it again
+    if (!REQUIRED) markSeen();        // closable mode: counts as shown. Required mode: only after a number is saved
     ov.classList.add("on");
     document.documentElement.style.overflow = "hidden";
     view("lp-form-v");
@@ -209,6 +215,7 @@
           if (AW_CONV.indexOf("YOUR_") === -1) gtag("event", "conversion", { send_to: AW_CONV, value: 1.0, currency: "INR" });
           gtag("event", "generate_lead", { method: "popup" });
         } } catch (e) { }
+        markSeen();                   // number saved: never show again in this browser
         view("lp-done-v");
         last = null;
       } else {
@@ -217,15 +224,21 @@
     });
   }
 
-  /* ---------- timer: 15-20 s of the visitor actually looking at the page ---------- */
-  var delay = MIN_DELAY + Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1));
-  var elapsed = 0, tick = 500, shown = false;
-  var timer = setInterval(function () {
-    if (document.hidden) return;                      // tab in background: don't count
-    elapsed += tick;
-    if (elapsed >= delay && !shown) {
-      shown = true; clearInterval(timer);
-      open();
-    }
-  }, tick);
+  /* ---------- when to show ---------- */
+  if (REQUIRED) {
+    // straight away (a split second after the page loads)
+    setTimeout(open, SHOW_DELAY);
+  } else {
+    // 15-20 s of the visitor actually looking at the page
+    var delay = MIN_DELAY + Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1));
+    var elapsed = 0, tick = 500, shown = false;
+    var timer = setInterval(function () {
+      if (document.hidden) return;                    // tab in background: don't count
+      elapsed += tick;
+      if (elapsed >= delay && !shown) {
+        shown = true; clearInterval(timer);
+        open();
+      }
+    }, tick);
+  }
 })();
