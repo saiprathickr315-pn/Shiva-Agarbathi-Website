@@ -24,3 +24,8 @@ UPDATE 2:
 - The price selector (Select Machine Option) is fed by your Google Sheet. To show the 5 new models there too,
   add them as rows in that sheet. The model cards on the page are separate and already live.
 - img/ holds 4 photos. The 5th photo has another company's name watermarked on it (SIGMATE... ENGINEERING) - not used.
+
+UPDATE 3:
+- reviews-data.js is a copy of reviews.json so reviews also show when you open the page from your PC.
+  The live site reads reviews.json. After you edit reviews.json, ask me to refresh reviews-data.js (or copy the content across).
+- admin.html was not in the zip, so it was NOT changed. Send it to add the offers password.

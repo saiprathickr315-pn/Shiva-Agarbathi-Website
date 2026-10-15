@@ -69,6 +69,7 @@
   }
 
   function build(data) {
+    if (document.querySelector(".ssaw-rv")) return;
     if (!data || !Array.isArray(data.reviews)) return;
     var list = data.reviews.filter(function (r) {
       return r && typeof r.text === "string" && r.text.trim() && typeof r.name === "string" && r.name.trim() && r.rating >= 1 && r.rating <= 5;
@@ -145,7 +146,7 @@
 
   function load() {
     var url = SCRIPT && SCRIPT.src ? new URL("reviews.json", SCRIPT.src).href : "reviews.json";
-    fetch(url, { cache: "default" }).then(function (r) { return r.ok ? r.json() : null; }).then(build).catch(function () { });
+    fetch(url, { cache: "default" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { build(d || window.SSAW_REVIEWS); }).catch(function () { build(window.SSAW_REVIEWS); });
   }
   if ("requestIdleCallback" in window) requestIdleCallback(load, { timeout: 2500 });
   else setTimeout(load, 600);
