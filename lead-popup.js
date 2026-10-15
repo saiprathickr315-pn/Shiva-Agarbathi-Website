@@ -9,9 +9,15 @@
 
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbzVDEV4lvmLzBthfeYvd8ek4C0ynbKqZzfMATrLqMxHepgZ8l545ZxTGpSBCuI-_Yy0GA/exec";
   var AW_CONV = "AW-18501526181/ttRqCIPB8JcdEKXFm_ZE"; // Google Ads form-lead label
-  var REQUIRED = true;                        // true = visitor must enter a mobile number before using the page; false = they can close it
+  var FORCE_REQUIRED_FOR_ALL = false;          // true = popup cannot be closed for any visitor (old behaviour)
+  var DELAY_ORGANIC = 10000;                  // ms before the closable popup shows for organic / direct visitors
+  function adsVisitor() {                     // true for visitors who arrived from a Google ad (remembered for the session)
+    var q = location.search, fromAd = /[?&](gclid|gbraid|wbraid)=/i.test(q) || /[?&]utm_source=google/i.test(q) || /[?&]utm_medium=(cpc|ppc)/i.test(q);
+    try { if (fromAd) sessionStorage.setItem("ssaw_ads", "1"); return sessionStorage.getItem("ssaw_ads") === "1"; } catch (e) { return fromAd; }
+  }
+  var REQUIRED = FORCE_REQUIRED_FOR_ALL || adsVisitor();   // ads visitors must enter a number; others can close it
   var SHOW_DELAY = 600;                       // ms after the page loads (REQUIRED mode)
-  var MIN_DELAY = 15000, MAX_DELAY = 20000;   // only used when REQUIRED = false
+  var MIN_DELAY = DELAY_ORGANIC, MAX_DELAY = DELAY_ORGANIC;
   var MAX_WAIT = 8000;                        // never keep the visitor waiting longer than this on submit
   var KEY = "ssaw_lead_popup_done";           // remembered in the visitor's browser
 
@@ -104,6 +110,7 @@
           '<div class="lp-msg" id="lp-msg" role="alert"></div>' +
           '<button type="submit" class="lp-btn">Get Best Price</button>' +
           '<p class="lp-fine">By submitting, you agree to be contacted by SSAW on call or WhatsApp.</p>' +
+          '<p class="lp-fine">One call from our team, no repeated calls. Your number is never shared or sold.</p>' +
           (REQUIRED ? '<p class="lp-fine">Prefer to talk now? <a href="tel:+919342426468" style="color:#d9560b;font-weight:700;text-decoration:none">Call +91-9342426468</a></p>' : '') +
           '<div class="lp-trust"><span><b>&#10003;</b>Reply within 2 hours</span><span><b>&#10003;</b>Delivery across India</span></div>' +
         '</form>' +

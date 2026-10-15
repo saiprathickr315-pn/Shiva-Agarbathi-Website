@@ -1,0 +1,319 @@
+{
+  "_help": [
+    "Fill ONLY with real Google reviews copied exactly as written. Never invent, edit or merge reviews.",
+    "Keys starting with an underscore are notes and are ignored by the website.",
+    "summary.rating and summary.count: type the real numbers shown on your Google Maps profile (for example 4.8 and 100). Leave null to hide them.",
+    "machines: use any of agarbathi, dhoop, camphor, cottonwick, sambrani, dryer, shifter, blister, paper-cup, plate. Add one ONLY if the review really talks about that machine. Leave [] for general reviews.",
+    "date: use the date or the text Google shows, e.g. 2026-08-14 or '2 months ago'.",
+    "ownerReply: your reply from Google, or null."
+  ],
+  "business": {
+    "name": "Shri Shiva Agarbathi Works",
+    "city": "Bengaluru, Karnataka",
+    "since": 2005
+  },
+  "summary": {
+    "source": "Google",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://maps.app.goo.gl/wf2cxZ4oiLghxbbz6"
+  },
+  "_example_not_shown": {
+    "id": "r001",
+    "name": "Reviewer name exactly as on Google",
+    "rating": 5,
+    "date": "2026-08-14",
+    "text": "The review text exactly as written by the customer.",
+    "language": "en",
+    "machines": [
+      "agarbathi"
+    ],
+    "ownerReply": null,
+    "featured": false
+  },
+  "reviews": [
+    {
+      "id": "r001",
+      "name": "saiprathick r",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "Very good support overall good experience and product works better till now and after sales is good",
+      "language": "en",
+      "machines": [],
+      "ownerReply": "Your feedback motivates our entire team. Thank you for being a valued part of our growth.",
+      "featured": true
+    },
+    {
+      "id": "r002",
+      "name": "Sudhakar Shetty",
+      "rating": 5,
+      "date": "3 months ago",
+      "text": "I have purchased camphor machine and long wick making machine it is good quality and service and company MD sir is very openly person I will requirement these company is good in all the manner",
+      "language": "en",
+      "machines": [
+        "camphor",
+        "cottonwick"
+      ],
+      "ownerReply": "Thank you for your valuable feedback! We’re happy you’re satisfied with our machines, quality, and service. Your trust in Sri Shiva Agarbathi Works means a lot to us. 🙏",
+      "featured": true
+    },
+    {
+      "id": "r003",
+      "name": "Sreenivas Murthy",
+      "rating": 5,
+      "date": "2 months ago",
+      "text": "Recently purchased a agarbati machine\nGood performance\nGood service",
+      "language": "en",
+      "machines": [
+        "agarbathi"
+      ],
+      "ownerReply": null,
+      "featured": true
+    },
+    {
+      "id": "r004",
+      "name": "Crazy Gaja",
+      "rating": 5,
+      "date": "2 months ago",
+      "text": "Manual 6 cavity cup making machine I have purchased it’s good and also they referred me for raw materials in wholesale price sir has supported me very well thanking you sir for your cooperation",
+      "language": "en",
+      "machines": [],
+      "ownerReply": "Thank you for choosing our 6-cavity cup making machine! We’re happy that our raw material guidance and support were helpful. We truly appreciate your trust in Sri Shiva Agarbathi Works.",
+      "featured": false
+    },
+    {
+      "id": "r005",
+      "name": "Pruthvik janya Pruthvi",
+      "rating": 5,
+      "date": "2 months ago",
+      "text": "Good product and service very friendly sir will explain clearly about the products\nI liked to reffer others also thanking you sir for your corporation",
+      "language": "en",
+      "machines": [],
+      "ownerReply": "Thank you for your kind words and trust! We’re glad you had a great experience with our products and service. Your recommendation means a lot to us! 🙏",
+      "featured": false
+    },
+    {
+      "id": "r006",
+      "name": "Saravana jr",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "It very good place to buy agarbatti sticks making machine and campor manufacturing machine",
+      "language": "en",
+      "machines": [
+        "agarbathi",
+        "camphor"
+      ],
+      "ownerReply": "Thanking you for your review",
+      "featured": false
+    },
+    {
+      "id": "r007",
+      "name": "Mahadev Nalini",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "I have purchased camphor machine and long wick making machine its is good and quality work\nIt was very nice to do business with these company",
+      "language": "en",
+      "machines": [
+        "camphor",
+        "cottonwick"
+      ],
+      "ownerReply": "Thank you for trusting us. Your kind review encourages us to keep doing our best.",
+      "featured": false
+    },
+    {
+      "id": "r008",
+      "name": "Arjun S",
+      "rating": 5,
+      "date": "3 months ago",
+      "text": "We have taken long wick making machine its is in good quality and products",
+      "language": "en",
+      "machines": [
+        "cottonwick"
+      ],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r009",
+      "name": "Girish N Girish N",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "Good quality camphoor machine it's worth for money",
+      "language": "en",
+      "machines": [
+        "camphor"
+      ],
+      "ownerReply": "We’re delighted to hear that you are satisfied with our machinery. Your trust motivates us to innovate and serve better!",
+      "featured": false
+    },
+    {
+      "id": "r010",
+      "name": "Venkatesh Sha",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "I have purchased paper plate making machine\nService and quality of the machine is good\nRaghu sir will guide the right way to do bussiness",
+      "language": "en",
+      "machines": [
+        "plate"
+      ],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r011",
+      "name": "Bheema Bheema",
+      "rating": 5,
+      "date": "2 months ago",
+      "text": "I have purchased paper plate machine its good in quality and your service is also too good it's worth for money",
+      "language": "en",
+      "machines": [
+        "plate"
+      ],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r012",
+      "name": "Santosh Bhonsley",
+      "rating": 5,
+      "date": "2 months ago",
+      "text": "Recently purchased machinery for our factory,Best machinery under roof,\nOne stop for your services of agarbhati machinery..",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r013",
+      "name": "Lakshman Prajapath",
+      "rating": 5,
+      "date": "3 months ago",
+      "text": "I have purchase batti machine. It's a good quality, good services and best product",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r014",
+      "name": "Prabhakar B",
+      "rating": 5,
+      "date": "3 months ago",
+      "text": "Good products and having good knowledge about the products . The service is excellent.",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r015",
+      "name": "Ranga Swamy",
+      "rating": 5,
+      "date": "3 months ago",
+      "text": "Good service\nAnd machine is good quality",
+      "language": "en",
+      "machines": [],
+      "ownerReply": "we're thrilled you loved our service we truly appreciate your support and look forward to serving you again",
+      "featured": false
+    },
+    {
+      "id": "r016",
+      "name": "Arya Stark",
+      "rating": 5,
+      "date": "3 months ago",
+      "text": "The service was very good and affordable.\nHe have lot of knowledge about machines and he will solve the problem related to machines in a very good way. You can visit Sri Shiva Agarbatti Works for quick and good service of the machine.",
+      "language": "en",
+      "machines": [],
+      "ownerReply": "sir thanking you for your feedback and it's very happy to see that your are happy with our service",
+      "featured": false
+    },
+    {
+      "id": "r017",
+      "name": "Rishi's kitchen",
+      "rating": 5,
+      "date": "2 years ago",
+      "text": "Best quality .....best performance machine by shiva agarabatti...... They give costumers all information with clarity to startup the business..... Very importantly affordable price on machines ....... Demo and service also good...... They reach the product very safely to doorstep .....⭐⭐⭐⭐⭐❤️",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r018",
+      "name": "Avinash N",
+      "rating": 5,
+      "date": "3 years ago",
+      "text": "I must say that the knowledge and the experience of Sri Shiva Agarbati works is stupendous. Down to earth, with importance given to the slightest of details, I definitely recommend Sri Shiva Agarbati works to people who want to start their own agarbatti business",
+      "language": "en",
+      "machines": [],
+      "ownerReply": "Your satisfaction is our greatest reward. Thank you for your wonderful review.",
+      "featured": false
+    },
+    {
+      "id": "r019",
+      "name": "Pratap yadav g",
+      "rating": 5,
+      "date": "2 years ago",
+      "text": "Good Machine and he gave a proper guidance to startup the new business, service was good",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r020",
+      "name": "TIGER ROCKY",
+      "rating": 5,
+      "date": "3 years ago",
+      "text": "Super and very good talking to Raghu sir very well guided and supportive with our newly started business...... thank you so much for ur support and guidance sir ..... once again thank you so much 🙏🏻🙏🏻🙏🏻 sir",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r021",
+      "name": "MASILAMANI GOVIND",
+      "rating": 5,
+      "date": "9 months ago",
+      "text": "Agarbathi spares are very very good quality and reasonable price.",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r022",
+      "name": "Divi A",
+      "rating": 5,
+      "date": "10 months ago",
+      "text": "Good machine and service worth for money",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r023",
+      "name": "Lucky Bambino",
+      "rating": 5,
+      "date": "3 months ago",
+      "text": "Good good product and good services as a best quality machine",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    },
+    {
+      "id": "r024",
+      "name": "SAI PRATHICK R",
+      "rating": 5,
+      "date": "2026-10-14",
+      "text": "GOOD PRODUCTS REASONABLE PRICE",
+      "language": "en",
+      "machines": [],
+      "ownerReply": null,
+      "featured": false
+    }
+  ]
+}

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://shivaagarbathi.com/</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/other-products.html</loc><lastmod>2026-10-02</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://shivaagarbathi.com/</loc><lastmod>2026-10-13</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/other-products.html</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://shivaagarbathi.com/contact.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/agarbathi.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/dhoop.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/cotton.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/cottonwick.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/sambrani.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/dryer.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/plate.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/agarbathi.html</loc><lastmod>2026-10-15</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://shivaagarbathi.com/agarbathi.html"/><xhtml:link rel="alternate" hreflang="kn" href="https://shivaagarbathi.com/kn/agarbatti-machine.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://shivaagarbathi.com/agarbathi.html"/></url>
+  <url><loc>https://shivaagarbathi.com/dhoop.html</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/cotton.html</loc><lastmod>2026-10-15</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://shivaagarbathi.com/cotton.html"/><xhtml:link rel="alternate" hreflang="kn" href="https://shivaagarbathi.com/kn/camphor-machine.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://shivaagarbathi.com/cotton.html"/></url>
+  <url><loc>https://shivaagarbathi.com/cottonwick.html</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/sambrani.html</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/dryer.html</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/plate.html</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://shivaagarbathi.com/shifter.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/blister.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://shivaagarbathi.com/paper-cup.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/blister.html</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://shivaagarbathi.com/paper-cup.html</loc><lastmod>2026-10-15</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://shivaagarbathi.com/paper-cup.html"/><xhtml:link rel="alternate" hreflang="kn" href="https://shivaagarbathi.com/kn/paper-cup-machine.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://shivaagarbathi.com/paper-cup.html"/></url>
+  <url><loc>https://shivaagarbathi.com/kn/agarbatti-machine.html</loc><lastmod>2026-10-13</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://shivaagarbathi.com/agarbathi.html"/><xhtml:link rel="alternate" hreflang="kn" href="https://shivaagarbathi.com/kn/agarbatti-machine.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://shivaagarbathi.com/agarbathi.html"/></url>
+  <url><loc>https://shivaagarbathi.com/kn/camphor-machine.html</loc><lastmod>2026-10-13</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://shivaagarbathi.com/cotton.html"/><xhtml:link rel="alternate" hreflang="kn" href="https://shivaagarbathi.com/kn/camphor-machine.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://shivaagarbathi.com/cotton.html"/></url>
+  <url><loc>https://shivaagarbathi.com/kn/paper-cup-machine.html</loc><lastmod>2026-10-13</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://shivaagarbathi.com/paper-cup.html"/><xhtml:link rel="alternate" hreflang="kn" href="https://shivaagarbathi.com/kn/paper-cup-machine.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://shivaagarbathi.com/paper-cup.html"/></url>
 </urlset>
